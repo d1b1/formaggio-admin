@@ -1,0 +1,121 @@
+.ui-autocomplete { position: absolute; cursor: default;z-index:10000 !important;}
+
+#groupSearchBox {
+  margin-top: 10px;
+}
+
+.position-center {
+	text-align: center;
+	.form-group {
+		position: relative;
+		width: 90%;
+		left: 50%;
+		margin-left: -45%;
+	}
+}
+
+.control-label {
+	width: 300px;
+	margin-left: -200px;
+}
+
+// Move the profile pic and desc over and closer together
+@media (min-width: 992px) {
+	.profile-desk {
+		margin-left: -45px;
+	}
+	.profile-pic, .profile-desk {
+		position: relative;
+		left: -40px;
+	}
+}
+
+.move-left-team {
+	margin-left: -24px;
+}
+
+.move-right-team {
+	margin-right: -8px;
+}
+
+.dependentBody {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	form {
+		width: 95%;
+		margin-left: 15%;
+		margin-right: auto;
+	}
+}
+
+.wk-progress div {
+  margin-left: -15px;
+}
+
+#compensation .form-group:nth-child(2) {
+  margin-top: 22px;
+  margin-bottom: 8px;
+}
+
+.error-profilepic {
+	color: tomato;
+}
+
+.fa-eye {
+	margin-right: 4px;
+}
+
+.memberProductImg {
+  margin-top: 2px;
+  max-height: 60px;
+  max-width:70px;
+}
+
+.memberProfilePage .sttng h2 {
+  text-align: center !important;
+}
+
+#profilePicBox {
+  padding-bottom: 0px !important;
+}
+
+#profilePic {
+  padding-top: 3px;
+}
+
+.profile-information .profile-desk span,.profile-information .profile-desk p {
+    padding-bottom:10px !important;
+}
+
+#profileInfoNotes {
+  margin-top: -15px;
+}
+
+.sendMemberEmail .select2-choice {
+  margin-left: 5px !important;
+}
+
+.userLock {
+  margin-right: -15px;
+  margin-top: -18px;
+  padding-bottom: 6px;
+}
+
+.memberHeaderButtons {
+
+}
+
+.statusSelect {
+  margin-left: 4px;
+}
+
+.activityLogItem .arrow {
+  margin-left: 3px;
+}
+
+.enrollProduct {
+  margin-top: 8px;
+  margin-left: 5px;
+}

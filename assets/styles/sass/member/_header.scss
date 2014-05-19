@@ -1,0 +1,13 @@
+.navbar {
+  padding : 20px;
+}
+//comment
+.navbar-nav > li > a {
+  color: $formaggio-dark-blue;
+  &:hover{
+    border-top : $formaggio-blue 1px solid;
+    border-bottom : $formaggio-blue 1px solid;
+    color: $formaggio-dark-blue;
+    background-color : $shopping-background;
+  }
+}

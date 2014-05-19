@@ -1,0 +1,38 @@
+.review { 
+  background-color : $shopping-checkout-blue-light;
+  padding: 5px 15px;
+  float: left;
+  width: 100%;
+  .review-left-container {
+    float: left;
+    width: 50%;
+  }
+  .review-right-container {
+    float: right;
+    text-align: right;
+    margin-top: 6px;
+    &.edit-cart {
+      margin-top: 25px !important;
+    }
+  }
+  hr {
+    margin: 10px;
+    border-top: 1px solid $shopping-soft-gray-blue;
+  }
+}
+.review-header {
+  background-color : $shopping-checkout-blue-dark;
+  padding: 2px 15px;
+  text-transform: uppercase;
+  float: left;
+  width: 100%;
+  h4 {
+    font-size: 16px;
+    color: $shopping-dark-blue;
+  }
+}
+
+#form-container {
+  background-color: $shopping-checkout-blue-dark;
+  padding: 5px 15px;
+}

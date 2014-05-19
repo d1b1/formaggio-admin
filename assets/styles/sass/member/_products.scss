@@ -1,0 +1,131 @@
+.products-box.blue-border {
+  width: 100%;
+  padding: 10px;
+  margin-top: 2px;
+  background-color: $shopping-soft-gray-blue;
+}
+#products-container {
+  .products-box {
+    padding: 15px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    height: 100%;
+    width: 100%;
+    background-color: $shopping-soft-gray-blue;
+
+    h4 {
+      font-weight: 700;
+      font-size: 16px;
+      text-transform: uppercase;
+    }
+
+  }
+  .panel {
+    background-color :  $shopping-soft-gray-blue;
+    .panel-title span {
+      color: $formaggio-blue;
+    }
+  }
+  & > .header {
+
+    .row {
+      margin : 0px;
+
+    }
+    padding: 5px 10px;
+    background-color: $shopping-dark-blue;
+    h3 {
+      margin-top: 10px;
+      color: white;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    p {
+      margin-left: 15px;
+      width : 80%;
+      color : white;
+    }
+    .costs {
+      font-size: 20px;
+      color: white;
+      margin-top: 10px;
+      }
+  }
+
+  .tile {
+    float: left;
+    margin-right:6px;
+    margin-top: 6px;
+    background-color: $shopping-soft-gray-blue;
+    height: 315px;
+    width: 315px;
+    padding: 20px;
+    text-align: center;
+    background-size: cover;
+    position: relative;
+    img {
+      width: 100px;
+      margin: 0px;
+      padding-left: 10px;
+    }
+    &:hover:after {
+      opacity: 0;
+    }
+    .tile-link {
+      color: white;
+      margin-top: 10px;
+    }
+    &:after {
+      opacity:1;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    }
+  }
+  .tile-with-image{
+    text-align: left;
+    padding: 6px;
+    z-index: -100;
+  }
+  .tile-overlay {
+    float: left;
+    background-color: rgba(11,60,73,0.7);
+    width: inherit;
+    text-align: left;
+    margin-left: -20px;
+    padding: 5px 10px;
+    color: white;
+    z-index: 10;
+    height: 110px;
+    position: absolute;
+    bottom: 0px;
+    button {
+      margin-top: -15px;
+      margin-right: -4px;
+    }
+
+  }
+  .tile-overlay-left {
+    float:left;
+    width: 140px;
+    font-size: 12px;
+    font-weight: normal;
+    strong {
+      font-size: 14px;
+    }
+  }
+  .tile-overlay-right {
+    float:right;
+    padding-top: 15px;
+  }
+  .tile:hover {
+    background-color: $shopping-soft-gray-bluer;
+  }
+}
+
+.tile:nth-child(even) {
+  margin-right: 0px !important;
+}
+
+.product-form {
+  margin: 20px;
+}

@@ -1,0 +1,58 @@
+#sidebar {
+  background-color : $formaggio-dark-blue
+}
+//sidebar toggle
+.sidebar-toggle-box  {
+  background : $formaggio-blue;
+  &:hover,.toggle-right-box:hover {
+    background : $formaggio-soft-blue;
+    border: 1px solid #CCCCCC
+  }
+}
+
+#nav-accordion > li {
+
+  > ul > li {
+    background-color: $formaggio-darker-blue;
+
+    & a {
+      color: #ffffff;
+
+    }
+    a.active{
+        position: relative;
+    }
+    //sidebar triangle thinger
+    a.active:before, a.active:after {
+      content: ' ';
+      height: 0;
+      position: absolute;
+      width: 0;
+      border: 12px solid transparent;
+    }
+    a.active:before {
+      border-right-color: #f1f2f7;
+      position: absolute;
+      top: 10px;
+      left: 220px;
+      z-index: 2;
+    }
+
+
+    a:hover {
+      background-color: $formaggio-darkest-blue !important;
+      color: #ffffff !important;
+    }
+
+  }
+
+  > a {
+    color: #ffffff;
+    background-color: $formaggio-dark-blue;
+  }
+  > a.active {
+    background-color: $formaggio-darker-blue;
+    color: $formaggio-blue;
+
+  }
+}

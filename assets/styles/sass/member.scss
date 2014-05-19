@@ -1,0 +1,148 @@
+// Formaggio dark blue
+#formaggio-dark-blue: #0d596d;
+#formaggio-darker-blue: #083c4a;
+#formaggio-darkest-blue: #06303b;
+// Formaggio red
+#formaggio-red: #ad3b4a;
+#formaggio-soft-red: #d57f8e;
+#formaggio-light-red: #f1dee0;
+// Formaggio orange
+#formaggio-orange: #de7f38;
+#formaggio-soft-orange: #f2a976;
+#formaggio-light-orange: #f8e7dd;
+// Formaggio yellow
+#formaggio-yellow: #fbdf53;
+#formaggio-soft-yellow: #fbd787;
+#formaggio-light-yellow: #fff3e1;
+// Formaggio red
+#formaggio-green: #83a243;
+#formaggio-soft-green: #b3c375;
+#formaggio-light-green: #eaf2df;
+// Formaggio blue
+#formaggio-blue: #5db9d1;
+#formaggio-soft-blue: #7fcee1;
+#formaggio-light-blue: #e3f3f6;
+// Formaggio purple
+#formaggio-purple: #915682;
+#formaggio-soft-purple: #bb9cad;
+#formaggio-light-purple: #ebe0ef;
+
+// these shopping colors are fucking out of control
+
+$shopping-soft-gray: #8B8B8B;
+$shopping-light-gray: #e4e4e4;
+$shopping-background: #F7FDFF;
+
+$shopping-light-blue-text: #63B9CF;
+$shopping-light-blue-background: #DFF1F5;
+$shopping-light-gray-blue: #E8F0F2;
+
+$shopping-soft-gray-blue: #D9E7EA;
+$shopping-soft-gray-bluer: #D3E8EC;
+$shopping-checkout-blue-light: #EDF6F8;
+$shopping-checkout-blue-dark: #DCEAED;
+
+$shopping-soft-blue-text: #A5D8E4;
+$shopping-soft-blue-background: #EAF7FA;
+
+$shopping-darkest-blue: #0B2E39;
+$shopping-dark-blue: #1B586D;
+
+$shopping-button-dark-blue-text: #58ACC1;
+$shopping-button-dark-blue-background: #0B3C49;
+$shopping-button-primary-blue-background: #58ACC1;
+
+$shopping-button-green-background: #4EA34C;
+$shopping-button-gray-background: #999999;
+
+$shopping-doctor-button-background: #DCE6F5;
+$shopping-doctor-button-text: #739CDB;
+// #58ACC1
+// #0B3C49
+
+
+@import 'bourbon';
+// _sidebar.scss
+@import 'bootstrap.css';
+@import 'bootstrap-datepicker/datepicker.css';
+@import 'jquery-ui/jquery-ui-1.10.1.custom.css';
+@import 'select2/select2.css';
+@import 'slick/slick.css';
+@import 'DT_bootstrap.css';
+@import 'font-awesome/font-awesome.scss';
+
+@import 'arrows';
+@import 'member/member-partials.scss';
+
+#cartPopover {
+  position: absolute;
+  top: 55px;
+  width: 400px;
+  z-index: 10294810928401;
+  left: 750px;
+  background: $shopping-background;
+  padding: 20px;
+  border: 1px solid $shopping-checkout-blue-dark;
+}
+
+.logo {
+  background-image: url('/images/logo-mh-horiz-blue-shadow.png');
+  float: left;
+  padding: 15px 103px;
+  font-size: 19px;
+  line-height: 29px;
+  margin-top: 5px;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  background-color: $shopping-background;
+}
+h1, h2, h3, h4, h5, h6{
+  font-family: 'Lato', sans-serif;
+}
+.container-center {
+  margin: 0 auto;
+  width : 1000px;
+}
+
+a {
+  color: $formaggio-soft-blue;
+}
+
+i {
+  vertical-align:0% !important;
+}
+a:hover {
+  color: black;
+  text-decoration: underline;
+}
+
+hr {
+  border-top: 1px solid $formaggio-blue;
+}
+.blue-border {
+  border: solid 1px $formaggio-blue;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.text-align-right {
+  text-align: right;
+}
+
+.text-align-center {
+  text-align: center;
+}
+.panel-heading span {
+    font-size: 22px;
+}
+a.clickable {
+  color: inherit;
+}
+a.clickable:hover {
+  text-decoration:none;
+}
+.datepicker{z-index:1151;}

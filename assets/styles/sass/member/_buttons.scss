@@ -1,0 +1,65 @@
+.shopping-button {
+  text-transform: uppercase;
+  border: 2px solid $shopping-button-dark-blue-text;
+  color: $shopping-button-dark-blue-text;
+  background-color: $shopping-button-dark-blue-background;
+  padding: 10px;
+  font-weight: 400;
+
+  &:hover {
+    color: white;
+    border-color: white;
+    background-color: $shopping-button-primary-blue-background;
+
+  }
+}
+.shopping-button-primary {
+  @extend .shopping-button;
+  color: white;
+  border-color: white;
+  background-color: $shopping-button-green-background;
+  &:hover {
+    background-color: $formaggio-green;
+  }
+}
+
+.remove-from-cart:hover {
+  background-color: $formaggio-red !important;
+
+}
+
+.shopping-button-info {
+  @extend .shopping-button;
+  color: white;
+  border-color: white;
+  background-color: $shopping-button-primary-blue-background;
+  &:hover {
+    background-color: $formaggio-soft-blue;
+  }
+}
+
+.shopping-button-default {
+  @extend .shopping-button;
+  color: white !important;
+  border-color: white !important;
+  background-color: $shopping-button-gray-background !important;
+  &:hover {
+    background-color: $shopping-soft-gray !important;
+  }
+}
+
+.shopping-button-large {
+    padding: 15px;
+    font-size: 20px;
+    font-weight: 700;
+}
+.shopping-button-small {
+    padding: 7px;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.muted-button-primary {
+  background-color: $shopping-doctor-button-background !important;
+  color: $shopping-doctor-button-text !important;
+}

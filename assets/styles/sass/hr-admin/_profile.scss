@@ -1,0 +1,93 @@
+// Move the profile pic and desc over and closer together
+@media (min-width: 992px) {
+  .profile-desk {
+    margin-left: -40px;
+  }
+  .profile-pic, .profile-desk {
+    position: relative;
+    left: -40px;
+  }
+}
+
+.profile-email-button {
+  background: #f6f6f6;
+  text-align: center;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  line-height: 39px;
+  float: left;
+  font-size: 20px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+.profile-information .profile-pic .profileImg {
+  width: 120px;
+  height: 120px;
+  border-radius:50%;
+  -webkit-border-radius:50%;
+  border:10px solid #f1f2f7;
+  margin-top: 0px;
+}
+.profile-email-button:hover {
+  color: $formaggio-blue;
+}
+
+#gender, #payPer, .memberSelectBox {
+  width: 100px;
+}
+
+.memberInputBox {
+  width: 200px;
+}
+
+// member products
+.familyProductPanel {
+  height: 620px;
+  border: 1px solid #C2C2C2;
+}
+
+.productPanelHeader {
+  min-height: 90px;
+  padding-top: 6px;
+}
+
+.familyProductImg {
+  width: 200px;
+  height: 57px;
+  margin-top: 7px;
+  margin-right: 16px;
+  border-radius: 0px;
+}
+
+.familyProductPanel .price {
+  margin-top: 40px;
+}
+
+// dummy width- will be replaced with real progress bars
+.progress-bar-success {
+  width: 100%;
+}
+.progress-bar-danger {
+  width: 30%;
+}
+
+// member employment
+textarea {
+  resize: none;
+}
+
+// snapshot
+.snapshot {
+
+}
+
+.errorMessage {
+  border: 2px solid $formaggio-red;
+  border-radius: 8px;
+}
+
+.addDependent, .backToDependents {
+  margin-top:-7px;
+}

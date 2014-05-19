@@ -1,0 +1,34 @@
+#confirmModal {
+  font-family: 'Lato', sans-serif;
+  
+  .modal-header {
+    border-bottom : 0px;
+    padding: 10px 30px;
+  }
+  .modal-content {
+    border-radius: 0px;
+    background-color: $shopping-light-gray-blue;
+  }
+  .modal-body {
+    padding: 10px 30px;
+  }
+  h3 { 
+    font-style : italic;
+
+  }
+  .modal-buttons {
+    margin-left: -3px;
+    width: 50%;
+  }
+  #confirmModalNoLabel {
+    @extend .shopping-button;
+  }
+  #confirmModalYesLabel {
+    @extend .shopping-button;
+  }
+  .modal-footer {
+    border-top : 0px;
+    padding: 0px;
+
+  }
+}

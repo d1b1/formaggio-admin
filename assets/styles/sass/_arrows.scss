@@ -1,0 +1,150 @@
+.arrows {
+  color : $shopping-background;
+  margin-left: 140px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+
+  a{
+      text-decoration: none;
+      color: $shopping-soft-gray;
+      text-transform: uppercase;
+  }
+  button {
+    background: $shopping-light-gray;
+    border:0;
+    font-weight:bold;
+    cursor:pointer;
+    position:relative;
+    padding:0px 50px 0px 15px;
+    width: 230px;
+    height: 60px;
+    vertical-align: top;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    font-size: 18px;
+    padding-left: 50px;
+    
+    &:before {
+      content:'';
+      border-top: 30px $shopping-light-gray solid;
+      border-bottom: 30px $shopping-light-gray solid;
+      border-left: 15px #F7FDFF solid;
+      position:absolute;
+      top:0;
+      left:0;
+    }
+    &:after {
+      content:'';
+      border-top: 30px $shopping-background solid;
+      border-bottom: 30px $shopping-background solid;
+      border-left: 15px $shopping-light-gray solid;
+      position: absolute;
+      position:absolute;
+      top:0;
+      right:0;
+    }
+  }
+
+
+
+  .current {
+    background: $shopping-light-blue-background;
+    a {
+      color: $shopping-light-blue-text;
+    }
+    &:before {
+      border-top:30px $shopping-light-blue-background solid;
+      border-bottom:30px $shopping-light-blue-background solid;
+    }
+    &:after {
+      border-left: 15px solid $shopping-light-blue-background;
+    }
+  }
+
+  .completed {
+      background: $shopping-soft-blue-background;
+      a {
+        color: $shopping-soft-blue-text;
+      }
+      &:before {
+        border-top:30px $shopping-soft-blue-background solid;
+        border-bottom:30px $shopping-soft-blue-background solid;
+      }
+      &:after {
+        border-left: 15px solid $shopping-soft-blue-background;
+      }
+  }
+  
+  .first:before {
+    border-top:0;
+    border-bottom:0;
+  }
+
+  .last:after {
+    border-top:0;
+    border-bottom:0;
+  }
+
+}
+
+
+.progress-arrows {
+  color : $shopping-background;
+  a{
+    text-decoration: none;
+    color: $shopping-soft-gray;
+  }
+ 
+  button {
+    background: $shopping-light-gray;
+    color: $shopping-soft-gray;
+    border: 0;
+    cursor: pointer;
+    position: relative;
+    padding: 0px 30px 0px 30px;
+    width: 300px;
+    height: 45px;
+    vertical-align: top;
+    margin-top: 10px;
+    font-size: 18px;
+    text-align: left;
+    strong {
+      margin-right: 20px;
+    }
+      
+  }
+  .completed {
+      background: $shopping-soft-blue-background;
+      padding-left: 15px;
+   
+      a,i {
+        color: $shopping-soft-blue-text;
+      }
+      i {
+        margin-left: -10px;
+        margin-right: 5px;
+      }
+      
+      &:after {
+        border-left: 20px solid $shopping-soft-blue-background;
+      }
+  }
+  .current{
+    background: $shopping-light-blue-background;
+    a {
+      color: $shopping-light-blue-text;
+    }
+    width: 320px;
+    &:after {
+      content:'';
+      border-top: 23px $shopping-background solid;
+      border-bottom: 24px $shopping-background solid;
+      border-left: 20px $shopping-light-blue-background solid;
+      position: absolute;
+      position:absolute;
+      top:0;
+      right:0;
+    }
+  }
+    
+}

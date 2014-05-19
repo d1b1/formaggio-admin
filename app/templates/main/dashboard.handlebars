@@ -1,0 +1,181 @@
+<div class="row">
+
+  <div class="col-md-3">
+    <div class="mini-stat clearfix">
+      <span class="mini-stat-icon orange"><i class="fa fa-users"></i></span>
+      <div class="mini-stat-info">
+        <span>201</span>
+        Members Enrolled
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="mini-stat clearfix">
+      <span class="mini-stat-icon tar"><i class="fa fa-flag"></i></span>
+      <div class="mini-stat-info">
+        <span>3</span>
+        Open Enrollments
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="mini-stat clearfix">
+      <span class="mini-stat-icon pink"><i class="fa fa-exclamation-circle"></i></span>
+      <div class="mini-stat-info">
+        <span>9</span>
+        Advocate Requests
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="mini-stat clearfix">
+      <span class="mini-stat-icon green"><i class="fa fa-inbox"></i></span>
+      <div class="mini-stat-info">
+        <span>2</span>
+        Pending Tasks
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <!--notification start-->
+    <section class="panel">
+      <header class="panel-heading">
+        Notification <span class="tools pull-right">
+        <a href="javascript:;" class="fa fa-chevron-down"></a>
+        <a href="javascript:;" class="fa fa-cog"></a>
+        <a href="javascript:;" class="fa fa-times"></a>
+      </span>
+    </header>
+    <div class="panel-body">
+      <div class="alert alert-info clearfix">
+        <span class="alert-icon"><i class="fa fa-question"></i></span>
+        <div class="notification-info">
+          <ul class="clearfix notification-meta">
+            <li class="pull-left notification-sender"><span><a href="#">Kevin Malone</a></span> sent a request to the Health Advocate </li>
+            <li class="pull-right notification-time">32 min ago</li>
+          </ul>
+          <p>
+            Question about benefits
+          </p>
+        </div>
+      </div>
+      <div class="alert alert-danger">
+        <span class="alert-icon"><i class="fa fa-plus-square"></i></span>
+        <div class="notification-info">
+          <ul class="clearfix notification-meta">
+            <li class="pull-left notification-sender"><span><a href="#">Dwight Schrute</a></span> selected plans </li>
+            <li class="pull-right notification-time">7 Hours Ago</li>
+          </ul>
+          <p>
+            Selected Oxford Health Plan
+          </p>
+        </div>
+      </div>
+      <div class="alert alert-success ">
+        <span class="alert-icon"><i class="fa fa-comments-o"></i></span>
+        <div class="notification-info">
+          <ul class="clearfix notification-meta">
+            <li class="pull-left notification-sender">You sent 5 message that were read</li>
+            <li class="pull-right notification-time">1 day ago</li>
+          </ul>
+          <p>
+            <a href="#">Dwight Schrute, Kelly Kapoor, Jim Halpert</a> and <a href="#">3 others</a>
+          </p>
+        </div>
+      </div>
+      <div class="alert alert-warning ">
+        <span class="alert-icon"><i class="fa fa-bell-o"></i></span>
+        <div class="notification-info">
+          <ul class="clearfix notification-meta">
+            <li class="pull-left notification-sender">Update from Formagg.io</li>
+            <li class="pull-right notification-time">5 Days Ago</li>
+          </ul>
+          <p>
+            New features added! Read more.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--notification end-->
+</div>
+
+<div class="col-md-3">
+  <section class="panel">
+    <div class="panel-body">
+      <div class="top-stats-panel">
+        <div class="gauge-canvas">
+          <h4 class="widget-h">Deductible Spending</h4>
+          <canvas width=160 height=100 id="gauge"></canvas>
+        </div>
+        <ul class="gauge-meta clearfix">
+          <li id="gauge-textfield" class="pull-left gauge-value"></li>
+          <li class="pull-right gauge-title">$100,000</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="col-md-3">
+  <section class="panel">
+    <div class="panel-body">
+      <div class="top-stats-panel">
+        <div class="daily-visit">
+          <h4 class="widget-h">Monthly Visitors</h4>
+          <div id="daily-visit-chart" style="width:100%; height: 100px; display: block">
+
+          </div>
+          <ul class="chart-meta clearfix">
+            <li class="pull-left visit-chart-value">104</li>
+            <li class="pull-right visit-chart-title"><i class="fa fa-arrow-up"></i> 15%</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="col-md-3">
+  <section class="panel">
+    <div class="panel-body">
+      <div class="top-stats-panel">
+        <h4 class="widget-h">Top Cheeses</h4>
+        <div class="sm-pie">
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="col-md-3">
+  <section class="panel">
+    <div class="panel-body">
+      <div class="top-stats-panel">
+        <h4 class="widget-h">Advocate Requests</h4>
+        <div class="bar-stats">
+          <ul class="progress-stat-bar clearfix">
+            <li data-percent="50%"><span class="progress-stat-percent pink" style="height: 50%"></span></li>
+            <li data-percent="90%"><span class="progress-stat-percent" style="height: 30%"></span></li>
+            <li data-percent="70%"><span class="progress-stat-percent yellow-b" style="height: 20%"></span></li>
+          </ul>
+          <ul class="bar-legend">
+            <li><span class="bar-legend-pointer pink"></span> Doctor</li>
+            <li><span class="bar-legend-pointer green"></span> Benefits</li>
+            <li><span class="bar-legend-pointer yellow-b"></span> Claims</li>
+          </ul>
+          <div class="daily-sales-info">
+            <span class="sales-count">242 </span> <span class="sales-label">Requests Submitted</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

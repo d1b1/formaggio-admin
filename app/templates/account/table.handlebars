@@ -1,0 +1,68 @@
+<div class="row">
+  <div class="col-md-12">
+      <!--breadcrumbs start -->
+      <ul class="breadcrumb">
+          <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+          <li class="active"><i class="fa fa-group"></i> Acounts</li>
+      </ul>
+      <!--breadcrumbs end -->
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+      <section class="panel">
+        <div class="panel-body">
+          <div class="col-md-12">
+            <div class="col-md-4">
+              Go To :
+              <input type="text" placeholder=" Search" id="textSearchBox" class="inline-search search"name="searchTeam">
+            </div>
+            <div class="col-md-8 advanced-search-tab">
+              <a href="javascript:void(0)">Advanced Search <span class="fa fa-chevron-down"></span></a>
+            </div>
+            <div class="col-md-1">
+              <a href="#vendor/new" class="btn btn-primary addNewButton">Add New Account <i class="fa fa-plus"></i></a>
+            </div>
+          </div>
+          <div class="row">
+            <div class="advanced-search-body" style="display:none"></div>
+          </div>
+        </div>
+      </section>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <section class="panel">
+      <header class="panel-heading tab-bg-dark-navy-blue ">
+          <ul class="nav nav-tabs" id="membersTabs">
+          </ul>
+      </header>
+      <div class="panel-body">
+      <div class="adv-table">
+        <div class="data-table-header">
+          <div class="col-md-4">
+            <select name="adjustPerPage" class="adjustPerPage">
+              <option value="1">1</option>
+              <option value="5">5</option>
+              <option value="10" selected="selected">10</option>
+              <option value="20">20</option>
+              <option value="50">50</option>
+            </select>
+            <label for="adjustPerPage">Records Per Page</label>
+          </div>
+
+        </div>
+        <table class="display table table-bordered table-striped dataTable">
+          <thead>
+            <th width="25%">Name</th>
+            <th width-"15%">Email</th>
+            <th width="20%">Options</th>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+    </div>
+
+  </div>

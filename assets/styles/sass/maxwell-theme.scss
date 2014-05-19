@@ -1,0 +1,150 @@
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: Lato;
+}
+
+.right-side-accordion .terques-bg, .slimScrollBar, .brand, ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
+  background-color: transparent !important;
+  border-right: 1px solid #CCC;
+}
+
+ul.sidebar-menu li ul.sub li a:hover,ul.sidebar-menu li ul.sub li.active a ,ul.sidebar-menu li a.active, ul.sidebar-menu li a:hover, ul.sidebar-menu li a:focus,ul.sidebar-menu li a.active i,ul.sidebar-menu li a:hover i,ul.sidebar-menu li a:focus i{
+  color: $formaggio-blue;
+}
+
+.data-table-header {
+  margin: 10px;
+  height: 40px;
+}
+
+.pagination > li > a:hover, .pagination > li > span:hover, .pagination > li > a:focus, .pagination > li > span:focus {
+  background-color:  $formaggio-soft-blue;
+  color: #fff;
+}
+.inline-search {
+  height: 35px;
+  width: 180px;
+}
+
+.advanced-search-tab {
+  padding: 7px;
+  width: 130px;
+
+  &.selected {
+    padding: 7px 7px 45px 7px;
+    border-radius: 10px 10px 0 0;
+    color: #FFFFFF;
+    background-color: $formaggio-blue;
+    width: 130px;
+
+    a {
+      color: #FFFFFF;
+    }
+
+  }
+
+}
+
+.advanced-search-body {
+  padding: 0px 40px 15px 40px;
+  background-color:  $formaggio-blue;
+  color: #FFFFFF;
+  margin-top: 40px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 10px;
+}
+
+// Top nav icon color and size
+.top-nav {
+  li.dropdown, li:nth-child(1) {
+    margin-top: 2px;
+  }
+  .dropdown-toggle {
+    height: 31px;
+    padding: 0 8px !important;
+  }
+  i.fa {
+    color: $formaggio-grey;
+    height: 24px;
+    padding: 3px;
+    font-size: 22px;
+  }
+  .fa-bars-parent {
+    background-color: $formaggio-blue;
+    width: 32px;
+    height: 32px;
+    .fa-bars {
+      color: #767676;
+      background-color: rgba(0,0,0,0);
+      position: relative;
+      bottom: 2px;
+      right: 1px;
+      &:hover {
+        background-color: rgba(0,0,0,0);
+        transform: translate(1px, 1px);
+        -webkit-transform: translate(1px, 1px);
+        -moz-transform: translate(1px, 1px);
+      }
+    }
+    &:hover {
+      background-color: $formaggio-soft-blue;
+    }
+  }
+}
+
+// correct btn-compose color
+.btn-compose:hover {
+  background-color: $formaggio-soft-blue;
+}
+
+.modal-header {
+  height: 55px;
+
+  h3 {
+    margin-top: -1px;
+  }
+}
+
+.modal-footer {
+  height: 55px;
+
+  button {
+    margin-top: -8px;
+  }
+}
+
+.bg-terques {
+  background: $formaggio-blue !important;
+}
+.bg-soft-blue {
+  background: $formaggio-soft-blue !important;
+}
+.bg-red {
+    background: $formaggio-red !important;
+}
+.bg-purple {
+    background: $formaggio-purple !important;
+}
+.bg-soft-purple {
+  background: $formaggio-soft-purple !important;
+}
+.bg-green {
+    background: $formaggio-green !important;
+}
+.bg-yellow {
+    background: $formaggio-yellow !important;
+}
+.bg-blue {
+    background: $formaggio-blue !important;
+}
+
+#confirmModalTitle {
+  margin-left: 5px;
+}
+
+.modalBtns {
+  margin-left: auto;
+  margin-right: auto;
+  width: 30%;
+}

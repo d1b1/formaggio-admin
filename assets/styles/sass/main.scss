@@ -1,0 +1,54 @@
+//formaggio dark blue
+$formaggio-dark-blue: #0d596d;
+$formaggio-darker-blue: #083c4a;
+$formaggio-darkest-blue: #06303b;
+//formaggio red
+$formaggio-red: #ad3b4a;
+$formaggio-soft-red: #d57f8e;
+$formaggio-light-red: #f1dee0;
+//formaggio orange
+$formaggio-orange: #de7f38;
+$formaggio-soft-orange: #f2a976;
+$formaggio-light-orange: #f8e7dd;
+//formaggio yellow
+$formaggio-yellow: #fbdf53;
+$formaggio-soft-yellow: #fbd787;
+$formaggio-light-yellow: #fff3e1;
+//formaggio red
+$formaggio-green: #83a243;
+$formaggio-soft-green: #b3c375;
+$formaggio-light-green: #eaf2df;
+//formaggio blue
+$formaggio-blue: #5db9d1;
+$formaggio-soft-blue: #7fcee1;
+$formaggio-light-blue: #e3f3f6;
+//formaggio purple
+$formaggio-purple: #915682;
+$formaggio-soft-purple: #bb9cad;
+$formaggio-light-purple: #ebe0ef;
+//formaggio grey
+$formaggio-grey: #bbb;
+@import 'bourbon';
+@import 'bootstrap.css';
+@import 'bootstrap-datepicker/datepicker.css';
+@import 'bootstrap-reset.css';
+//
+@import 'style.css';
+@import 'jquery-ui/jquery-ui-1.10.1.custom.css';
+@import 'select2/select2.css';
+@import 'jsoneditor/jsoneditor.css';
+
+@import 'style-responsive.css';
+@import 'DT_bootstrap.css';
+@import 'formaggio-theme.scss';
+
+@import 'hr-admin/team';
+@import 'sidebar';
+@import 'right-sidebar';
+@import 'hr-admin/profile';
+@import 'hr-admin/tasks';
+@import 'hr-admin/products';
+@import 'hr-admin/communications';
+@import 'hr-admin/widgets';
+
+@import 'font-awesome/font-awesome.scss';

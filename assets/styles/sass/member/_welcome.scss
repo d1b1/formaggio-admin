@@ -1,0 +1,34 @@
+#welcomeModalBody {
+  height: 100%;
+  .modal-body {
+    height: 400px;
+    overflow: scroll;
+  }
+}
+
+#welcomeModalDialog {
+  width: 800px;
+  height: 500px;
+}
+#welcomeAdvancedModalBody {
+  height: 100%;
+  .modal-body {
+    height: 400px;
+    overflow: scroll;
+  }
+  .modal-header {
+    padding: 0px;
+  }
+  .arrows button {
+    width: 200px;
+    font-size: 14px;
+    padding-left: 40px;
+  }
+  .arrows {
+    margin-left: 50px;
+  }
+}
+
+#welcomeAdvancedModalDialog {
+  width: 900px;
+}

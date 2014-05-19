@@ -1,0 +1,24 @@
+// tasks views
+
+.createNewTask {
+  margin-right: 20px;
+  &.selected {
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+  }
+}
+
+.add-task-body {
+  padding: 18px 40px 15px 40px;
+  background-color:  $formaggio-blue;
+  color: #FFFFFF;
+  margin-top: -20px;
+  margin-left: 10px;
+  margin-right: 35px;
+  border-radius: 5px;
+  border-top-right-radius: 0px;
+}
+
+.tasksSection .dataTables_paginate {
+  margin-top: -57px !important;
+}
