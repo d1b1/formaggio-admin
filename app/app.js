@@ -17,7 +17,6 @@ $.ajaxSetup({
     cache: false,
     statusCode: {
       401: function () {
-        console.log('API URL:', this.type, this.contentType, this.url);
         window.location.href='#login';
         window.location.reload();
       }
