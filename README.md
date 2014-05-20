@@ -21,8 +21,10 @@ obsession. Its an attempt to map the artisan cheeses of the world. The API
 is build using node.js, express.js, passport and Mongo.
 
 ### Related Projects
- * [Infinite Cheese Board](http://blog.happypath.ws/formaggio-infinite-scroll) (used AirBnb Infinity.js)
- * [Simple Search](http://blog.happypath.ws/formaggio-search) Simple Backbone.js
+ * [Infinite Cheese Board](http://blog.happypath.ws/formaggio-infinite-scroll) - (used AirBnb Infinity.js)
+ * [Simple Search](http://blog.happypath.ws/formaggio-search) - Simple Backbone.js
  each tool.
- * [Google Maps Integration](http://formaggio.divshot.io) Simple maps integration
+ * [Google Maps Integration](http://formaggio.divshot.io) - Simple maps integration
  hosted on divshot.io
+ * [GeoJSON Maps](https://github.com/d1b1/geojson-makers) - Static set of GEOJson
+ files available on github.
