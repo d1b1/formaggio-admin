@@ -17,22 +17,18 @@ module.exports = Backbone.Router.extend({
       this.Layout = new Resources.Layout();
       this.collection = new Data.Collections.Accounts();
 
-      this.layoutName = 'accounts';
+      this.AccountList = this.Layout.setView('accountlist', new Resources.Views.List( { collection: this.collection }));
+      this.AccountDetail = this.Layout.setView('accountdetail', new Resources.Views.Detail());
     },
     list : function () {
-      this.Layout.setView(this.layoutName, new Resources.Views.List( { collection: this.collection }));
-      this.Layout.getView(this.layoutName).render();
+      this.AccountList.render();
     },
     detail : function (id) {
-      var model = new Data.Models.Account({ id: id });
-
-      this.Layout.setView(this.layoutName, new Resources.Views.Detail( { model: model }));
-      this.Layout.getView(this.layoutName).id = id;
-      this.Layout.getView(this.layoutName).render();
+      this.AccountDetail.model = new Data.Models.Account({ id: id });
+      this.AccountDetail.render();
     },
     new: function () {
-      var model = new Data.Models.Account();
-      this.Layout.setView('new', new Resources.Views.Detail( { model: model } ));
-      this.Layout.getView('new').render();
+      this.AccountDetail.model = new Data.Models.Account();
+      this.AccountDetail.render();
     }
   });

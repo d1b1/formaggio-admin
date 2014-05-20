@@ -23,7 +23,7 @@ module.exports = function( opts ) {
   Module.Views.List = Backbone.Layout.extend({
     el: '#main-content',
     __name__: 'Account-ListView',
-    sType: '',
+    template: TplService.Account.Table,
     initialize: function () {
       var self = this;
 
@@ -42,7 +42,7 @@ module.exports = function( opts ) {
     },
     gotoAddNewRoute: function(e) {
       e.preventDefault();
-      Backbone.history.navigate('account/new', { trigger: true });
+      Backbone.history.navigate('accounts/new', { trigger: true });
     },
     toggleAdvancedSearch: function(e) {
       // TODO: Move this somewhere else.
@@ -143,21 +143,26 @@ module.exports = function( opts ) {
     },
     afterRender: function() {
       var self = this;
-      
       this.originalUsersState = _.extend({}, this.collection.state);
       this.originalUsersQueryParams = _.extend({},this.collection.queryParams);
-
-      $('.wrapper').html(TplService.Account.Table());
 
       this.collection.fetch({
         success: function(){
           app.setupPage();
-
           $('.adv-table').find('.adjustPerPage').change(function(e){
             self.adjustPerPage(e);
           });
         }
       });
+    }
+  });
+
+  Module.Views.Header = Backbone.Layout.extend({
+    template: TplService.Account.Header,
+    serialize: function() {
+      return {
+        model: this.model.toJSON()
+      };
     }
   });
 
@@ -245,18 +250,17 @@ module.exports = function( opts ) {
   });
 
   Module.Views.Detail = Backbone.Layout.extend({
-    el: '#main-content .wrapper',
+    el: '#main-content',
     sType: '',
     __name__: 'Account-Detail-DetailView',
     template: TplService.Account.Wrapper,
     initialize : function () {
       var self = this;
       self.tabs = {};
-      self.model = new DashboardData.Models.Account({ id: this.id });
     },
     events : {
-      'click .saveButton' : 'save',
-      'click .tab': 'changeTabs'
+      'click .saveButton': 'save',
+      'click .accountTab': 'changeTabs'
     },
     unload : function() {
       this.unbind();
@@ -268,14 +272,22 @@ module.exports = function( opts ) {
     },
     afterRender : function () {
       var self = this;
-      self.model.fetch({
-        success: function() {
-          self.tabs.formTabContainer = self.insertView('#formTabContainer', new Module.Views.EditForm( { model: self.model }));
-          self.tabs.JSONTabContainer = self.insertView('#JSONTabContainer', new Module.Views.JSONEditor( { model: self.model }));
-          self.tabs.formTabContainer.render();
-          self.model.trigger('change');
-        }
-      });
+      this.tabs.formHeader = self.insertView('.formHeader', new Module.Views.Header( { model: self.model }));
+      this.tabs.formTabContainer = self.insertView('#formTabContainer', new Module.Views.EditForm( { model: self.model }));
+      this.tabs.JSONTabContainer = self.insertView('#JSONTabContainer', new Module.Views.JSONEditor( { model: self.model }));
+
+      if (self.model.isNew()) {
+        self.tabs.formTabContainer.render();
+        self.tabs.formHeader.render();
+      } else {
+        self.model.fetch({
+          success: function() {
+            self.tabs.formTabContainer.render();
+            self.tabs.formHeader.render();
+            self.model.trigger('change');
+          }
+        });
+      }
       app.setupPage();
     }
   });

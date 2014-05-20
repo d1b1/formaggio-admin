@@ -23,7 +23,7 @@ module.exports = function( opts ) {
   Module.Views.List = Backbone.Layout.extend({
     el: '#main-content',
     __name__: 'Cheese-ListView',
-    sType: '',
+    template: TplService.Cheese.Table,
     initialize: function () {
       var self = this;
 
@@ -144,12 +144,8 @@ module.exports = function( opts ) {
     },
     afterRender: function() {
       var self = this;
-
-      this.collection = new DashboardData.Collections.Cheeses();
       this.originalUsersState = _.extend({}, this.collection.state);
       this.originalUsersQueryParams = _.extend({},this.collection.queryParams);
-
-      $('.wrapper').html(TplService.Cheese.Table());
 
       this.collection.fetch({
         success: function(){
@@ -247,7 +243,7 @@ module.exports = function( opts ) {
   });
 
   Module.Views.Detail = Backbone.Layout.extend({
-    el: '#main-content .wrapper',
+    el: '#main-content',
     sType: '',
     __name__: 'Cheese-Detail-DetailView',
     template: TplService.Cheese.Wrapper,
@@ -278,78 +274,6 @@ module.exports = function( opts ) {
           self.model.trigger('change');
         }
       });
-      app.setupPage();
-    }
-  });
-
-  Module.Views.NewForm = Backbone.View.extend({
-    el: '#main-content',
-    sType: '',
-    __name__: 'Market-Template-NewForm',
-    initialize: function() {
-      var self = this;
-      this.model = new DashboardData.Models.Cheese();
-
-      self.model.on('change', function() {
-        if (self.model.isValid()) {
-          self.$el.find('.saveButton').removeClass('btn-default').addClass('btn-primary');
-        } else {
-          self.$el.find('.saveButton').removeClass('btn-primary').addClass('btn-default');
-        }
-      });
-    },
-    events: {
-      'click .saveButton' : 'save',
-      'change input.form-control': 'inputChanged',
-      'change textarea.form-control': 'selectChanged',
-      'change select.form-control': 'selectChanged'
-    },
-    inputChanged: function(evt) {
-      var modelKey = $(evt.currentTarget).data('modelKey');
-      var value = $(evt.currentTarget).val();
-
-      var obj = {};
-      obj[modelKey] = value;
-      this.model.set(obj);
-    },
-    selectChanged: function(evt) {
-      var modelKey = $(evt.currentTarget).data('modelKey');
-      var value = $(evt.currentTarget).val();
-
-      var obj = {};
-      obj[modelKey] = value;
-      this.model.set(obj);
-    },
-    unload: function() {
-      this.unbind();
-      this.remove();
-    },
-    save: function(e) {
-      e.preventDefault();
-      var self = this;
-
-      if (!self.model.isValid()) {
-        app.confirmBox('errorSaving', 'Add All Fields', "Please supply information for every field.", 'hide', 'OK');
-        return;
-      }
-
-      self.model.save().done(function() {
-        console.log('done with the save');
-        window.location.hash = "#cheese/" + self.model.id;
-        app.confirmBox('saved', 'New Cheese Saved', 'This cheese has been saved. Please continue adding information.', 'hide', 'OK');
-        app.setupPage();
-      });
-    },
-    showError: function() {
-      app.confirmBox('completeInfo', 'Complete Business Information', "Please complete and save business's information before moving on to other tabs.", 'hide', 'OK');
-    },
-    afterRender: function() {
-      var self = this;
-      $('.wrapper').html(TplService.Cheese.Wrapper());
-      $('#newProfileContainer').html('');
-      $('#newProfileContainer').html(TplService.Cheese.Edit());
-
-      self.model.trigger('change');
       app.setupPage();
     }
   });

@@ -17,22 +17,18 @@ module.exports = Backbone.Router.extend({
       this.Layout = new Resources.Layout();
       this.collection = new Data.Collections.Makers();
 
-      this.layoutName = 'makers';
+      this.MakerList = this.Layout.setView('makerList', new Resources.Views.List( { collection: this.collection }));
+      this.MakerDetail = this.Layout.setView('makerDetail', new Resources.Views.Detail());
     },
     list : function () {
-      this.Layout.setView(this.layoutName, new Resources.Views.List( { collection: this.collection }));
-      this.Layout.getView(this.layoutName).render();
+      this.MakerList.render();
     },
     detail : function (id) {
-      var model = new Data.Models.Maker({ id: id });
-
-      this.Layout.setView(this.layoutName, new Data.Views.Detail( { model: model }));
-      this.Layout.getView(this.layoutName).id = id;
-      this.Layout.getView(this.layoutName).render();
+      this.MakerDetail.model = new Data.Models.Maker({ id: id });
+      this.MakerDetail.render();
     },
     new: function () {
-      var model = new Data.Models.Maker();
-      this.Layout.setView('new', new Resources.Views.Detail( { model: model } ));
-      this.Layout.getView('new').render();
+      this.MakerDetail.model = new Data.Models.Maker();
+      this.MakerDetail.render();
     }
   });

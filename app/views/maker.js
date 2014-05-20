@@ -23,7 +23,7 @@ module.exports = function( opts ) {
   Module.Views.List = Backbone.Layout.extend({
     el: '#main-content',
     __name__: 'Maker-ListView',
-    sType: '',
+    template: TplService.Maker.Table,
     initialize: function () {
       var self = this;
 
@@ -42,7 +42,7 @@ module.exports = function( opts ) {
     },
     gotoAddNewRoute: function(e) {
       e.preventDefault();
-      Backbone.history.navigate('maker/new', { trigger: true });
+      Backbone.history.navigate('makers/new', { trigger: true });
     },
     toggleAdvancedSearch: function(e) {
       // TODO: Move this somewhere else.
@@ -146,7 +146,6 @@ module.exports = function( opts ) {
       this.originalUsersState = _.extend({}, this.collection.state);
       this.originalUsersQueryParams = _.extend({},this.collection.queryParams);
 
-      $('.wrapper').html(TplService.Maker.Table());
 
       this.collection.fetch({
         success: function(){
@@ -157,6 +156,16 @@ module.exports = function( opts ) {
           });
         }
       });
+    }
+  });
+
+  Module.Views.Header = Backbone.Layout.extend({
+    template: TplService.Maker.Header,
+    sType: '',
+    serialize: function() {
+      return {
+        model: this.model.toJSON()
+      };
     }
   });
 
@@ -244,18 +253,17 @@ module.exports = function( opts ) {
   });
 
   Module.Views.Detail = Backbone.Layout.extend({
-    el: '#main-content .wrapper',
+    el: '#main-content',
     sType: '',
     __name__: 'Maker-Detail-DetailView',
     template: TplService.Maker.Wrapper,
     initialize : function () {
       var self = this;
       self.tabs = {};
-      self.model = new DashboardData.Models.Maker({ id: this.id });
     },
     events : {
       'click .saveButton' : 'save',
-      'click .tab': 'changeTabs'
+      'click .makerTab': 'changeTabs'
     },
     unload : function() {
       this.unbind();
@@ -267,14 +275,22 @@ module.exports = function( opts ) {
     },
     afterRender : function () {
       var self = this;
-      self.model.fetch({
-        success: function() {
-          self.tabs.formTabContainer = self.insertView('#formTabContainer', new Module.Views.EditForm( { model: self.model }));
-          self.tabs.JSONTabContainer = self.insertView('#JSONTabContainer', new Module.Views.JSONEditor( { model: self.model }));
-          self.tabs.formTabContainer.render();
-          self.model.trigger('change');
-        }
-      });
+      this.tabs.formHeader = self.insertView('.formHeader', new Module.Views.Header( { model: self.model }));
+      this.tabs.formTabContainer = self.insertView('#formTabContainer', new Module.Views.EditForm( { model: self.model }));
+      this.tabs.JSONTabContainer = self.insertView('#JSONTabContainer', new Module.Views.JSONEditor( { model: self.model }));
+
+      if (self.model.isNew()) {
+        self.tabs.formTabContainer.render();
+        self.tabs.formHeader.render();
+      } else {
+        self.model.fetch({
+          success: function() {
+            self.tabs.formTabContainer.render();
+            self.tabs.formHeader.render();
+            self.model.trigger('change');
+          }
+        });
+      }
       app.setupPage();
     }
   });

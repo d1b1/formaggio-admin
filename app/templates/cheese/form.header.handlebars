@@ -1,0 +1,23 @@
+
+<section class="panel">
+  <div class="panel-body profile-information">
+    <div class="col-md-3">
+      <div class="profile-pic text-center">
+        <img src="http://www.foodsubs.com/Photos/roquefortcheese.jpg" alt="">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="profile-desk">
+        <h1>{{#if_notempty model.id }} Cheese {{else}} New Cheese {{/if_notempty}}</h1>
+        <span class="text-muted">{{model.name}}</span>
+        <br/>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <br/>
+      <button class="btn btn-primary">Preview <i class="fa fa-plus"></i></button>
+      <br/><br/>
+    </div>
+  </div>
+</section>

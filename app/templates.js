@@ -16,6 +16,7 @@ module.exports = function( opts ) {
       'AdvancedSearch' : require("./templates/cheese/search.handlebars"),
       'Wrapper'        : require("./templates/cheese/formWrapper.handlebars"),
       'JSONEditor'     : require("./templates/cheese/jsonEditor.handlebars"),
+      'Header'         : require("./templates/cheese/form.header.handlebars"),
     },
     'Maker' : {
       'Table'          : require("./templates/maker/table.handlebars"),
@@ -24,6 +25,7 @@ module.exports = function( opts ) {
       'AdvancedSearch' : require("./templates/maker/search.handlebars"),
       'Wrapper'        : require("./templates/maker/formWrapper.handlebars"),
       'JSONEditor'     : require("./templates/maker/jsonEditor.handlebars"),
+      'Header'         : require("./templates/maker/form.header.handlebars"),
     },
     'Account' : {
       'Table'          : require("./templates/account/table.handlebars"),
@@ -32,6 +34,7 @@ module.exports = function( opts ) {
       'AdvancedSearch' : require("./templates/account/search.handlebars"),
       'Wrapper'        : require("./templates/account/formWrapper.handlebars"),
       'JSONEditor'     : require("./templates/account/jsonEditor.handlebars"),
+      'Header'         : require("./templates/account/form.header.handlebars")
     }
   };
 

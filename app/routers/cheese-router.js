@@ -17,21 +17,18 @@ module.exports = Backbone.Router.extend({
       this.Layout = new Resources.Layout();
       this.collection = new Data.Collections.Cheeses();
 
+      this.CheeseList = this.Layout.setView('cheeseList', new Resources.Views.List( { collection: this.collection }));
+      this.CheeseDetail = this.Layout.setView('cheeseDetail', new Resources.Views.Detail());
     },
     list : function () {
-      this.Layout.setView('cheeseList', new Resources.Views.List( { collection: this.collection }));
-      this.Layout.getView('cheeseList').render();
+      this.CheeseList.render();
     },
     detail : function (id) {
-      var model = new Data.Models.Maker({ id: id });
-
-      this.Layout.setView('cheeseDetail', new Resources.Views.Detail( { model: model }));
-      this.Layout.getView('cheeseDetail').id = id;
-      this.Layout.getView('cheeseDetail').render();
+      this.CheeseDetail.model = new Data.Models.Cheese({ id: id });
+      this.CheeseDetail.render();
     },
     new: function () {
-      var model = new Data.Models.Maker();
-      this.Layout.setView('new', new Resources.Views.Detail( { model: model } ));
-      this.Layout.getView('new').render();
+      this.CheeseDetail.model = new Data.Models.Cheese();
+      this.CheeseDetail.render();
     }
   });
