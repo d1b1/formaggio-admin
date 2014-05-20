@@ -25,7 +25,7 @@ module.exports = function( opts ) {
       'Wrapper'        : require("./templates/maker/formWrapper.handlebars"),
       'JSONEditor'     : require("./templates/maker/jsonEditor.handlebars"),
     },
-    'Cheese' : {
+    'Account' : {
       'Table'          : require("./templates/account/table.handlebars"),
       'Tr'             : require("./templates/account/tr.handlebars"),
       'Edit'           : require("./templates/account/form.handlebars"),

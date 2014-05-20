@@ -1,7 +1,7 @@
 var $ = require('jquery-browserify')
     , _ = require('underscore')
     , Backbone = require('backbone')
-    , DashboardData = require("../data/models")();
+    , Data = require("../data/models")();
 
 Backbone.$ = $;
 
@@ -9,9 +9,9 @@ var Resources = require("../views/account")();
 
 module.exports = Backbone.Router.extend({
   routes: {
-      'account'                    : 'list',
-      'account/new'                : 'new',
-      'account/:id'                : 'detail'
+      'accounts'                    : 'list',
+      'accounts/new'                : 'new',
+      'accounts/:id'                : 'detail'
     },
     initialize : function (options) {
       this.Layout = new Resources.Layout();

@@ -14,10 +14,6 @@ var paths = {
 };
 
 var shimsObject = {
-  formaggioCommon : {
-    path : './assets/common/utils.js',
-    exports : 'formaggio-common'
-  },
   serializeObject : {
     path : './assets/plugins/serializeObject/serializeObject.js',
     exports : 'serializeObject'
@@ -82,24 +78,11 @@ var shimsObject = {
   }
 };
 
-// 'connect',
+// 'connect','scripts',
 gulp.task('default',[ 'scripts', 'watch' ]);
 
 gulp.task('watch', function(){
   gulp.watch(paths.scripts, [ 'scripts' ]);
-});
-
-gulp.task('connect', function() {
-  connect.server({
-    root: ['./'],
-    port: 5000,
-    livereload: false
-  });
-});
-
-gulp.task('html', function () {
-  gulp.src('./index.html')
-    .pipe(connect.reload());
 });
 
 gulp.task('scripts',function() {

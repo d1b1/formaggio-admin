@@ -5,7 +5,7 @@ var LayoutManager = require("backboneLayoutmanager");
 var dataTables = require("dataTables");
 var dataTablesBootstrap = require("DT_bootstrap");
 var DashboardData = require("../data/models")();
-var app = require('formaggioCommon')();
+var app = require('formaggio-common')();
 
 var DashboardTemplate = require("../templates/main/dashboard.handlebars");
 var TplService = require("../templates.js")();

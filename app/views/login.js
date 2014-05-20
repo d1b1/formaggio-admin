@@ -1,9 +1,9 @@
 var $ = require('jquery-browserify');
 var _ = require('underscore');
-var Backbone = require('backbone'),
+var Backbone = require('backbone')
     , Handlebars = require("hbsfy/runtime");
 
-var app = require('formaggioCommon')()
+var app = require('formaggio-common')()
     , TplService = require("../templates.js")();
 
 module.exports = function ( opts ) {

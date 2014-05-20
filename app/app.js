@@ -13,6 +13,15 @@ var router = new Router();
 
 Backbone.Layout.configure({ manage: true });
 
+$.ajaxPrefilter(function(options, originalOptions, jqXHR) {
+    options.crossDomain ={
+        crossDomain: true
+    };
+    options.xhrFields = {
+        withCredentials: false
+    };
+});
+
 $.ajaxSetup({
     cache: false,
     statusCode: {

@@ -4,7 +4,7 @@ var $ = require('jquery-browserify')
     , serializeObject = require('serializeObject')
     , jsoneditor = require('jsoneditor');
 
-var app = require('formaggioCommon')()
+var app = require('formaggio-common')()
     , LayoutManager = require("backboneLayoutmanager")
     , DashboardData = require("../data/models")()
     , TplService    = require("../templates.js")();
@@ -37,7 +37,7 @@ module.exports = function( opts ) {
       'change #textSearchBox': 'search',
       'focus #textSearchBox': 'searchFocus',
       'click .advanced-search-tab': 'toggleAdvancedSearch',
-      'submit #advancedSearchForm': 'submitAdvancedSearch',
+      'submit #advancedSearch': 'submitAdvancedSearch',
       'click .addNewButton': 'gotoAddNewRoute'
     },
     gotoAddNewRoute: function(e) {
@@ -64,7 +64,7 @@ module.exports = function( opts ) {
     submitAdvancedSearch: function(e) {
       e.preventDefault();
       var self = this;
-      var advancedSearchResults = self.$el.find('#advancedSearchForm').serializeObject();
+      var advancedSearchResults = self.$el.find('#advancedSearch').serializeObject();
 
       this.collection.state = _.extend({},this.originalUsersState);
       this.collection.queryParams = _.extend({},this.originalUsersQueryParams);
@@ -86,13 +86,12 @@ module.exports = function( opts ) {
       return false;
     },
     search: function(e) {
-      // TODO: can we make this more abstract
       this.collection.state =  _.extend({},this.originalUsersState);
       this.collection.queryParams =  _.extend({},this.originalUsersQueryParams);
       this.collection.state._q = $(e.currentTarget).val();
       this.collection.state._fields = "type";
       this.collection.state.currentPage = 1;
-      this.collection.queryParams._q =  $(e.currentTarget).val();
+      this.collection.queryParams.name =  $(e.currentTarget).val();
       this.collection.queryParams._fields = "type";
 
       this.collection.fetch({
@@ -107,7 +106,14 @@ module.exports = function( opts ) {
 
       if(self.models.length > 0){
         _.each(self.models, function(model){
-          $('#tbody').append(TplService.Cheese.Tr({ model: model.toJSON() }));
+          var modelJSON = model.toJSON();
+
+          // TODO: Fix this to make it work in the template.
+          if (_.isArray(modelJSON.makers)) {
+            modelJSON.maker = modelJSON.makers[0].maker;
+          }
+
+          $('#tbody').append(TplService.Cheese.Tr({ model: modelJSON }));
         });
       } else {
         $('#tbody').append('<tr><td colspan="4" align="center"><br><br>No results found.<br><br></td></tr>');
@@ -145,7 +151,7 @@ module.exports = function( opts ) {
     afterRender: function() {
       var self = this;
 
-      this.collection = new DashboardData.Collections.Cheeses();
+      // this.collection = new DashboardData.Collections.Cheeses();
       this.originalUsersState = _.extend({}, this.collection.state);
       this.originalUsersQueryParams = _.extend({},this.collection.queryParams);
 

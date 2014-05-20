@@ -9,9 +9,9 @@ var Resources = require("../views/maker")();
 
 module.exports = Backbone.Router.extend({
   routes: {
-      'maker'                    : 'list',
-      'maker/new'                : 'new',
-      'maker/:id'                : 'detail'
+      'makers'                    : 'list',
+      'makers/new'                : 'new',
+      'makers/:id'                : 'detail'
     },
     initialize : function (options) {
       this.Layout = new Resources.Layout();

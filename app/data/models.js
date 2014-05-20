@@ -25,27 +25,35 @@ module.exports = function ( opts ) {
 
   Module = {
     Models: {
-      Acount: BaseModel.extend({
+      Account: BaseModel.extend({
         defaults: {
-          name: '',
+          username: '',
+          email: ''
         },
         validate: function(attrs, options) {
-          if (!attrs.name) {
-            return "Missing Name";
+          if (!attrs.username) {
+            return "Missing Username";
+          }
+
+          if (!attrs.email) {
+            return "Missing Email";
           }
         },
-        urlRoot: "/api/users"
+        urlRoot: "http://api.formagg.io/user"
       }),
       Maker: BaseModel.extend({
         defaults: {
           'name': '',
+          'state': '',
+          'city': '',
+          'country': ''
         },
         validate: function(attrs, options) {
           if (!attrs.name) {
             return "Missing Name";
           }
         },
-        urlRoot: "/api/makers"
+        urlRoot: "http://api.formagg.io/maker"
       }),
       Cheese: BaseModel.extend({
         defaults: {},
@@ -58,42 +66,42 @@ module.exports = function ( opts ) {
             return "Missing Description";
           }
 
-          if (!attrs.type) {
-            return "Missing Type";
+          if (!attrs.source) {
+            return "Missing Source";
           }
         },
-        urlRoot: "/api/cheese"
+        urlRoot: "http://api.formagg.io/cheese"
       })
     }
   };
 
   var defaults = {
     queryParams: {
-      pageSize: "_limit",
-      currentPage: "_page",
+      pageSize: "size",
+      currentPage: "page",
       totalPages: null,
       totalRecords: null,
     },
     state: {
       firstPage: 1,
-      pageSize: 10,
+      pageSize: 50,
     },
     parseRecords: function (resp) {
-      return resp.data;
+      return resp.results;
     },
     parseLinks: function (resp, xhr) {
-      return resp.pagination;
+      return resp.pages;
     },
     parseState: function (resp, queryParams, state, options) {
       if(resp.data === null){
         return false;
       }
       return {
-        totalRecords: resp.pagination.totalItems,
-        current: resp.pagination.current,
-        last: resp.pagination.last,
-        totalPages: resp.pagination.totalPages,
-        next: resp.pagination.next,
+        totalRecords: resp.count,
+        current: resp.current,
+        last: resp.last,
+        totalPages: resp.last,
+        next: resp.next,
       };
     }
   };
@@ -102,17 +110,17 @@ module.exports = function ( opts ) {
     Cheeses: Backbone.PageableCollection.extend(
       _.defaults(_.clone(defaults), {
         model: Module.Models.Cheese,
-        url: "/api/cheeses"
+        url: "http://api.formagg.io/cheese/search"
     })),
     Makers: Backbone.PageableCollection.extend(
       _.defaults(_.clone(defaults), {
         model: Module.Models.Maker,
-        url: "/api/makers"
+        url: "http://api.formagg.io/maker/search"
     })),
     Accounts: Backbone.PageableCollection.extend(
       _.defaults(_.clone(defaults), {
         model: Module.Models.Account,
-        url: "/api/users"
+        url: "http://api.formagg.io/user/search"
     }))
   };
 

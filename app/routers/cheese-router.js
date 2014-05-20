@@ -9,26 +9,25 @@ var Resources = require("../views/cheese")();
 
 module.exports = Backbone.Router.extend({
   routes: {
-      'cheese'                    : 'list',
-      'cheese/new'                : 'new',
-      'cheese/:id'                : 'detail'
+      'cheeses'                    : 'list',
+      'cheeses/new'                : 'new',
+      'cheeses/:id'                : 'detail'
     },
     initialize : function (options) {
       this.Layout = new Resources.Layout();
       this.collection = new Data.Collections.Cheeses();
 
-      this.layoutName = 'cheeses';
     },
     list : function () {
-      this.Layout.setView(this.layoutName, new Resources.Views.List( { collection: this.collection }));
-      this.Layout.getView(this.layoutName).render();
+      this.Layout.setView('cheeseList', new Resources.Views.List( { collection: this.collection }));
+      this.Layout.getView('cheeseList').render();
     },
     detail : function (id) {
       var model = new Data.Models.Maker({ id: id });
 
-      this.Layout.setView(this.layoutName, new Resources.Views.Detail( { model: model }));
-      this.Layout.getView(this.layoutName).id = id;
-      this.Layout.getView(this.layoutName).render();
+      this.Layout.setView('cheeseDetail', new Resources.Views.Detail( { model: model }));
+      this.Layout.getView('cheeseDetail').id = id;
+      this.Layout.getView('cheeseDetail').render();
     },
     new: function () {
       var model = new Data.Models.Maker();

@@ -2,11 +2,12 @@ var $ = require('jquery-browserify');
 var _ = require('underscore');
 var Backbone = require('backbone');
 var bootstrap = require('bootstrap-browser');
+
 var select2 = require('select2');
 var bootstrapDatePicker = require('bootstrapDatePicker');
 var dcAccordion = require("dcjqaccordion");
 
-module.exports =   function ( opts ) {
+module.exports = function ( opts ) {
   // FOR IE
   $.ajaxSetup({ cache: false });
 
@@ -15,42 +16,42 @@ module.exports =   function ( opts ) {
   };
   app.loadPage = function() {
 
-    $('.toggle-right-box .fa-bars').click(function (e) {
-      $('#container').toggleClass('open-right-panel');
-      $('.right-sidebar').toggleClass('open-right-bar');
-      $('.header').toggleClass('merge-header');
-
-      e.stopPropagation();
-    });
-
-    $('.sidebar-toggle-box .fa-bars').click(function (e) {
-      $('#sidebar').toggleClass('hide-left-bar');
-      $('#main-content').toggleClass('merge-left');
-      e.stopPropagation();
-      if( $('#container').hasClass('open-right-panel')){
-          $('#container').removeClass('open-right-panel');
-      }
-      if( $('.right-sidebar').hasClass('open-right-bar')){
-          $('.right-sidebar').removeClass('open-right-bar');
-      }
-
-      if( $('.header').hasClass('merge-header')){
-          $('.header').removeClass('merge-header');
-      }
-    });
-    $('.panel-heading span.clickable,.panel div.clickable').unbind('click');
-    $('.panel-heading span.clickable,.panel div.clickable').click(function (e) {
-      $this = $(e.currentTarget)
-      if (!$this.hasClass('panel-collapsed')) {
-          $this.parents('.panel').find('.panel-body').slideUp();
-          $this.addClass('panel-collapsed');
-          $this.find('i').removeClass('glyphicon-minus').addClass('glyphicon-plus');
-      } else {
-          $this.parents('.panel').find('.panel-body').slideDown();
-          $this.removeClass('panel-collapsed');
-          $this.find('i').removeClass('glyphicon-plus').addClass('glyphicon-minus');
-      }
-    });
+    // $('.toggle-right-box .fa-bars').click(function (e) {
+    //   $('#container').toggleClass('open-right-panel');
+    //   $('.right-sidebar').toggleClass('open-right-bar');
+    //   $('.header').toggleClass('merge-header');
+    //
+    //   e.stopPropagation();
+    // });
+    //
+    // $('.sidebar-toggle-box .fa-bars').click(function (e) {
+    //   $('#sidebar').toggleClass('hide-left-bar');
+    //   $('#main-content').toggleClass('merge-left');
+    //   e.stopPropagation();
+    //   if( $('#container').hasClass('open-right-panel')){
+    //       $('#container').removeClass('open-right-panel');
+    //   }
+    //   if( $('.right-sidebar').hasClass('open-right-bar')){
+    //       $('.right-sidebar').removeClass('open-right-bar');
+    //   }
+    //
+    //   if( $('.header').hasClass('merge-header')){
+    //       $('.header').removeClass('merge-header');
+    //   }
+    // });
+    // $('.panel-heading span.clickable,.panel div.clickable').unbind('click');
+    // $('.panel-heading span.clickable,.panel div.clickable').click(function (e) {
+    //   $this = $(e.currentTarget)
+    //   if (!$this.hasClass('panel-collapsed')) {
+    //       $this.parents('.panel').find('.panel-body').slideUp();
+    //       $this.addClass('panel-collapsed');
+    //       $this.find('i').removeClass('glyphicon-minus').addClass('glyphicon-plus');
+    //   } else {
+    //       $this.parents('.panel').find('.panel-body').slideDown();
+    //       $this.removeClass('panel-collapsed');
+    //       $this.find('i').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+    //   }
+    // });
     // print
     $('[data-toggle="print"]').click(function(e) {
       e.preventDefault();
@@ -210,16 +211,16 @@ module.exports =   function ( opts ) {
 
     // v5: use bootstrap dropdown as select
 
-    $('.wrapper .dropdown-select li').click(function( e ) {
-       var $target = $( e.currentTarget );
-       $target.closest( '.btn-group' )
-          .find( '[data-bind="label"]' ).text( $target.text() )
-             .end()
-          .children( '.dropdown-toggle' ).dropdown( 'toggle' );
-       return true;
-    });
+    // $('.wrapper .dropdown-select li').click(function( e ) {
+    //    var $target = $( e.currentTarget );
+    //    $target.closest( '.btn-group' )
+    //       .find( '[data-bind="label"]' ).text( $target.text() )
+    //          .end()
+    //       .children( '.dropdown-toggle' ).dropdown( 'toggle' );
+    //    return true;
+    // });
 
-    //////// App SPECIFIC
+    //////// MAXWELL SPECIFIC
 
     $('.showMessage').unbind('click').click(function(e) {
       app.confirmBox('modal' + new Date(), $(e.currentTarget).attr('data-title'), $(e.currentTarget).attr('data-message'), 'Close', 'hide', false, false, false);
@@ -270,9 +271,13 @@ module.exports =   function ( opts ) {
         view.unload();
       }
     });
+
     if ($('#wrapper').find('#content').length === 0) {
+      console.log('we are here and doing something');
+
       $('#wrapper').append('<div id="content"></div>');
     }
+
     $('.collapse').find('li').removeClass('active');
     $('[data-toggle="collapse"]').removeClass('collapsed');
     $('body').find('.isMenu').each(function() {
@@ -338,6 +343,10 @@ module.exports =   function ( opts ) {
   app.processDemoMode = function() {
     app.confirmBox('demomode', 'Demo Mode', 'Sorry, you are currently in "demo" mode and can\'t save any changes', 'OK', 'hide');
     return false;
+  };
+
+  app.showPleaseWait = function(e) {
+    $(e).html('<div style="padding-top: 20px">Please wait... &nbsp;&nbsp;&nbsp;<img src="/maxwell-app/app/webroot/img/loader.gif"></div>');
   };
 
   app.loadSaving = function(e, caption) {
@@ -498,6 +507,133 @@ module.exports =   function ( opts ) {
     $('#confirmModal').modal('show').removeClass('hide');
   };
 
+  /*
+    app.alertBox({
+      title  : confirmModalTitle defaults : '',
+      body  : confirmModalBody defaults : '',
+      dismiss : hide the dismiss buttons - boolean defaults : true,
+      yesLabel: default : '', null value hides the button
+      yesFunction :what happens on yes button press. default nothing
+      showFunction : what happens on show. default nothing
+    })
+  */
+
+  app.alertBox = function(options) {
+    if(!options) options = {};
+    var defaults = {
+      title  : '',
+      body  : '',
+      yesLabel  : 'Yes',
+      yesFunction : function() {
+        $('#confirmModal').modal('hide').addClass('hide');
+      },
+      dismiss : true,
+      showFunction: null
+    };
+
+    options = _.defaults(options, defaults);
+    $('#confirmModal').find('#confirmModalYesLabel').addClass( "hide" );
+    $('#confirmModal').find('#confirmModalNoLabel').addClass( "hide" );
+    $('#confirmModal').find('#confirmModalTitle').html(options.title);
+    $('#confirmModal').find('#confirmModalBody').html(options.body);
+
+    if (options.confirmDismiss === false) {
+      $('#confirmModal').find('#confirmDismiss').addClass('hide');
+    } else {
+      $('#confirmModal').find('#confirmDismiss').removeClass('hide');
+    }
+
+    $('#confirmModal').find('#confirmModalOkLabel').unbind( "click" );
+    $('#confirmModal').find('#confirmModalOkLabel').removeClass( "hide" );
+    $('#confirmModal').find('#confirmModalOkLabel').html(options.yesLabel);
+    $('#confirmModal').find('#confirmModalOkLabel').on('click', options.yesFunction);
+    $('#confirmModal').modal('show').removeClass('hide');
+  };
+  /*
+    app.confirmBoxNew({
+      title  : confirmModalTitle defaults : '',
+      body  : confirmModalBody defaults : '',
+      dismiss : hide the dismiss buttons - boolean defaults : true,
+      yesLabel: default : '', null value hides the button
+      noLabel: default : '', null value hides the button
+      yes :what happens on yes button press. default nothing
+      no :what happens on no button press. default nothing
+      showFunction : what happens on show. default nothing
+    })
+      */
+  app.confirmBoxNew = function(options) {
+    if(!options) options = {};
+    var defaults = {
+      title  : '',
+      body  : '',
+      yesLabel  : 'Yes',
+      noLabel : 'Cancel',
+      yesFunction : function() {
+        $('#confirmModal').modal('hide').addClass('hide');
+      },
+      noFunction : function() {
+        $('#confirmModal').modal('hide').addClass('hide');
+      },
+      dismiss : true,
+      showFunction: null
+    };
+
+    options = _.defaults(options, defaults);
+
+    $('#confirmModal').find('#confirmModalTitle').html(options.title);
+    $('#confirmModal').find('#confirmModalBody').html(options.body);
+
+
+    if (options.confirmDismiss === false) {
+      $('#confirmModal').find('#confirmDismiss').addClass('hide');
+    } else {
+      $('#confirmModal').find('#confirmDismiss').removeClass('hide');
+    }
+
+    if (options.noLabel === null) {
+      $('#confirmModal').find('#confirmModalNoLabel').addClass('hide');
+    } else {
+      $('#confirmModal').find('#confirmModalNoLabel').removeClass('hide');
+      $('#confirmModal').find('#confirmModalNoLabel').html(options.noLabel);
+    }
+
+    if (options.yesLabel === null) {
+      $('#confirmModal').find('#confirmModalYesLabel').addClass('hide');
+    } else {
+      $('#confirmModal').find('#confirmModalYesLabel').removeClass('hide');
+      $('#confirmModal').find('#confirmModalYesLabel').html(options.yesLabel);
+    }
+
+    if ((options.yesLabel === null) && (options.noLabel === null)) {
+      $('#confirmModal').find('.modal-footer').addClass('hide');
+    } else {
+      $('#confirmModal').find('.modal-footer').removeClass('hide');
+    }
+
+    app.setupPage();
+    if ((options.showfunction !== false) && (options.showfunction !== undefined)) {
+      options.showfunction();
+    }
+
+    $('#confirmModal').find('#confirmModalYesLabel').unbind( "click" );
+    $('#confirmModal').find('#confirmModalYesLabel').on('click', options.yesFunction);
+
+    $('#confirmModal').on('hidden', function () {
+
+      $('#confirmModal').find('#confirmModalNoLabel').off('click').on('click',function() {
+        $('#confirmModal').modal('hide').addClass('hide');
+      });
+
+      $('#confirmModal').find('#confirmModalYesLabel').off('click');
+      $('#confirmModal').find('#confirmModalBody').html('');
+    });
+
+    $('#confirmModal').find('#confirmModalNoLabel').unbind( "click" );
+    $('#confirmModal').find('#confirmModalNoLabel').on('click', options.noFunction);
+
+    $('#confirmModal').modal('show').removeClass('hide');
+  };
+
   app.confirmBox = function(dialogname, title, body, yeslabel, nolabel, yesfunction, nofunction, showfunction,confirmDismiss) {
     $('#confirmModal').find('#confirmModalTitle').html(title);
     $('#confirmModal').find('#confirmModalBody').html(body);
@@ -577,8 +713,18 @@ module.exports =   function ( opts ) {
     var regexS = "[\\?&]"+param+"=([^&#]*)";
     var regex = new RegExp( regexS );
     var results = regex.exec( window.location.href );
-     if( results === null )    return "";
+    if( results === null )    return "";
     else    return results[1];
+  };
+
+
+
+  app.reloadMemberHeader = function() {
+    window.notConfirmed = false;
+    if (!$('.completeProcess').find('a').hasClass('confirmed')) window.notConfirmed = true;
+    $('#memberHeader').load('/maxwell-app/member_pages/memberheader', function() {
+      app.setupPage();
+    });
   };
 
   app.numberFormat = function(number, decimals, dec_point, thousands_sep) {
