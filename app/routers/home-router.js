@@ -1,8 +1,9 @@
 var $ = require('jquery-browserify');
 var _ = require('underscore');
 var Backbone = require('backbone');
-var Main = require("../views/home")();
 Backbone.$ = $ ;
+
+var Resource = require("../views/home")();
 
 module.exports = Backbone.Router.extend({
 
@@ -12,9 +13,9 @@ module.exports = Backbone.Router.extend({
     },
 
     initialize: function(options) {
-      this.Layout = new Main.Layout();
+      this.Layout = new Resource.Layout();
 
-      this.Dashboard = this.Layout.setView('main', new Main.Views.Dashboard());
+      this.Dashboard = this.Layout.setView('main', new Resource.Views.Dashboard());
     },
 
     showDashboard: function() {
