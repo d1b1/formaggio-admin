@@ -1,8 +1,9 @@
-var $ = require('jquery-browserify');
-var _ = require('underscore');
-var Backbone = require('backbone');
+var $ = require('jquery-browserify')
+    , Backbone = require('backbone')
+    , _ = require('underscore');
+
+Backbone.$ = $
 var Login = require("../views/login")();
-Backbone.$ = $ ;
 
 module.exports =  Backbone.Router.extend({
   routes: {
@@ -12,7 +13,7 @@ module.exports =  Backbone.Router.extend({
       this.Layout = new Login.Layout();
     },
     showLogin: function() {
-      this.Layout.setView('login', new Login.LoginView());
+      this.Layout.setView('login', new Login.Views.Form());
       this.Layout.getView('login').render();
     }
   });

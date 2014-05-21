@@ -1,6 +1,6 @@
-var $ = require('jquery-browserify');
-var _ = require('underscore');
-var Backbone = require('backbone')
+var $ = require('jquery-browserify')
+    , _ = require('underscore')
+    , Backbone = require('backbone')
     , Handlebars = require("hbsfy/runtime");
 
 var app = require('formaggio-common')()
@@ -20,6 +20,7 @@ module.exports = function ( opts ) {
 
   Module.Views.Form = Backbone.View.extend({
     el: '#container',
+    __name__: "LoginView",
     events: {
       'submit #form-container': 'login'
     },
@@ -27,6 +28,9 @@ module.exports = function ( opts ) {
       var self = this;
     },
     unload: function() {
+      // Make this clean and add a body class.
+      $('body').removeClass('login-body');
+
       this.unbind();
       this.remove();
     },
@@ -36,7 +40,7 @@ module.exports = function ( opts ) {
       var loginParams = $(e.currentTarget).serializeObject();
       $.ajax({
           type: 'POST',
-          url:'/api/auth/analyst-admin',
+          url:'http://api.formagg.io/auth/accesstoken',
           data:  JSON.stringify (loginParams),
           success: function(data) {
             window.location.href="#";
@@ -49,6 +53,9 @@ module.exports = function ( opts ) {
       });
     },
     afterRender: function () {
+      // Make this clean and add a body class.
+      $('body').addClass('login-body');
+
       $('#container').html(TplService.Login.Form());
     }
   });

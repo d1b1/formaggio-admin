@@ -7,17 +7,18 @@ Backbone.$ = $ ;
 module.exports = Backbone.Router.extend({
 
   routes: {
-      ''                 : 'showHome',
-      'home'             : 'showHoe'
+      ''                 : 'showDashboard',
+      'home'             : 'showDashboard'
     },
 
     initialize: function(options) {
       this.Layout = new Main.Layout();
+
+      this.Dashboard = this.Layout.setView('main', new Main.Views.Dashboard());
     },
 
     showDashboard: function() {
-      this.Layout.setView('main', new Main.Views.Dashboard());
-      this.Layout.render();
+      this.Dashboard.render();
     }
 
   });

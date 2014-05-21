@@ -5,6 +5,7 @@ module.exports = function( opts ) {
 
   var Templates = {
     'PaginationTemplate' : require("./templates/general/pagination.handlebars"),
+    'Dashboard': require("./templates/main/dashboard.handlebars"),
     'Login': {
       'Form': require("./templates/login/login.handlebars")
     },

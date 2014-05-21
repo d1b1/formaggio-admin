@@ -66,4 +66,4 @@ $(function() {
 
 });
 
-Backbone.history.start();
+Backbone.history.start( { pushState: false } );

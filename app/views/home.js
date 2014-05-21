@@ -12,18 +12,18 @@ var TplService = require("../templates.js")();
 
 module.exports = function( opts ) {
 
-  var Main = {};
+  var Module = {};
 
-  Main.Layout = Backbone.Layout.extend({
+  Module.Layout = Backbone.Layout.extend({
     initialize : function () {
       var self = this;
 
     }
   });
 
-  Main.Views = {};
+  Module.Views = {};
 
-  Main.Views.Sidebar = Backbone.Layout.extend({
+  Module.Views.Sidebar = Backbone.Layout.extend({
     el: '#sidebar',
     template: TplService.Sidebar,
     sType: '',
@@ -41,9 +41,10 @@ module.exports = function( opts ) {
     }
   });
 
-  Main.Views.Dashboard = Backbone.Layout.extend({
-    el: '#content',
+  Module.Views.Dashboard = Backbone.Layout.extend({
+    el: '#main-content',
     sType: '',
+    template: TplService.Dashboard,
     initialize: function () {
       var self = this;
     },
@@ -52,10 +53,10 @@ module.exports = function( opts ) {
       this.remove();
     },
     afterRender: function () {
-      $('.wrapper').html(DashboardTemplate());
+      console.log('asdfasdf');
       app.setupPage();
     }
   });
 
-  return Main;
+  return Module;
 };
