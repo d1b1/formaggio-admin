@@ -1,6 +1,7 @@
 var $ = require('jquery-browserify');
 var _ = require('underscore');
 var Backbone = require('backbone');
+var Authorization = require('./authorization');
 
 Backbone.$ = $ ;
 window._ = _;
@@ -12,6 +13,25 @@ var Router = require('./router.js');
 var router = new Router();
 
 Backbone.Layout.configure({ manage: true });
+
+var authConfig = {
+  key: 'abc123',
+  secret: 'ssh-secret'
+};
+
+var AuthService = Authorization.Header(authConfig);
+
+var sync = Backbone.sync;
+Backbone.sync = function (method, model, options) {
+  options.beforeSend = function(xhr, request) {
+    // Only send a signed request when we have tokens or we
+    // are trying to login.
+    if (signature = AuthService.getSignature(request.url, request.type)) {
+      xhr.setRequestHeader('Authorization', signature);
+    }
+  };
+  sync(method, model, options);
+};
 
 $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
     options.crossDomain ={

@@ -13,7 +13,7 @@ window.helper = {
   elements: {}
 };
 
-module.exports =  Backbone.Router.extend({
+module.exports = Backbone.Router.extend({
   routes: {
     ''              : 'index'
   },
