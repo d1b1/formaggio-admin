@@ -3,20 +3,22 @@
   <div class="panel-body profile-information">
     <div class="col-md-3">
       <div class="profile-pic text-center">
-        <img src="{{model.logoUrl}}" alt="">
+        <img src="{{model.avatar}}" alt="">
       </div>
     </div>
     <div class="col-md-6">
       <div class="profile-desk">
-        <h1> Account</h1>
-        <span class="text-muted">{{model.name}}</span>
+        <h1>Account</h1>
+        <span class="text-muted">{{model.name}}</span><br>
+        <span class="text-muted"><b>Created:</b> {{easyDate model.created}}</span><br>
+        <span class="text-muted"><b>Modified:</b> {{easyDate model.modified}}</span>
         <br/>
       </div>
     </div>
 
     <div class="col-md-3">
       <br/>
-      <button class="btn btn-primary">XXXXX <i class="fa fa-plus"></i></button>
+      <button class="btn btn-primary">Email <i class="fa fa-plus"></i></button>
       <br/><br/>
     </div>
   </div>

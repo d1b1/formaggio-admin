@@ -11,15 +11,28 @@
     <div class="col-md-6">
       <div class="profile-desk">
         <h1>{{#if_notempty model.id }} Maker {{else}} New Maker {{/if_notempty}}</h1>
-        <span class="text-muted">{{model.name}}</span>
+        <span class="text-muted">{{model.name}}</span><br>
+        <span class="text-muted"><b>Created:</b> {{easyDate model.created}}</span><br>
+        <span class="text-muted"><b>Modified:</b> {{easyDate model.modified}}</span>
         <br/>
       </div>
     </div>
 
     <div class="col-md-3">
       <br/>
-      <button class="btn btn-primary">Preview <i class="fa fa-plus"></i></button>
+      <button class="btn btn-primary">Email <i class="fa fa-plus"></i></button>
+
       <br/><br/>
+      {{#if_notempty model.website }}
+        <a href="{{model.website}}" target="_blank" class="btn btn-primary">Site Site <i class="fa fa-plus"></i></a>
+        <br/><br/>
+      {{/if_notempty}}
+
+      {{#if_notempty model.twitter }}
+        <a href="http://twitter.com/{{model.twitter}}" target="_blank" class="btn btn-primary">Twitter <i class="fa fa-plus"></i></a>
+        <br/><br/>
+      {{/if_notempty}}
+
     </div>
   </div>
 </section>

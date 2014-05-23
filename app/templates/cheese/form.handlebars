@@ -1,33 +1,80 @@
+<form role="form" role="form" id="employerInfoForm">
 
-<form role="form" class="form-horizontal" id="employerInfoForm">
+<div class="row">
 
-  <div class="form-group">
-    <label class="col-lg-3 control-label">Name</label>
-    <div class="col-lg-9">
-      <input type="text" class="form-control col-xs-3" id="name" data-model-key="name" value="{{model.name}}" placeholder="" data-validate="required">
-      <span class="error help-block hide">Please enter a cheese name</span>
-    </div>
+  <div class="col-md-offset-3 col-md-6 form-group">
+      <label>Cheese Name</label>
+      <input type="text" value="{{model.name}}" placeholder=".col-md-6" class="form-control">
   </div>
 
-  <div class="form-group">
-    <label class="col-lg-3 control-label">Milk</label>
-    <div class="col-lg-9">
-      <select id="source" name="source" data-model-key="source" data-value="{{model.source}}" data-validate="required" class="form-control">
-        <option value="" {{#if_empty model.source}}selected{{/if_empty}}>Select Milk Type</option>
-        <option value="Cow" {{#if_eq model.source "Cow"}}selected{{/if_eq}}>Cow</option>
-        <option value="Goat" {{#if_eq model.source "Goat"}}selected{{/if_eq}}>Goat</option>
-        <option value="Sheep" {{#if_eq model.source "Sheep"}}selected{{/if_eq}}>Sheep</option>
-        </select>
-      <span class="error help-block hide">Please enter the payroll period</span>
+</div>
+
+  <div class="row">
+
+    <div class="col-md-offset-3 col-md-3 form-group">
+        <label>Milk/Source</label>
+        <select id="source" name="source" data-model-key="source" data-value="{{model.source}}" data-validate="required" class="form-control">
+          <option value="" {{#if_empty model.source}}selected{{/if_empty}}>Select Milk Type</option>
+          <option value="Cow" {{#if_eq model.source "Cow"}}selected{{/if_eq}}>Cow</option>
+          <option value="Goat" {{#if_eq model.source "Goat"}}selected{{/if_eq}}>Goat</option>
+          <option value="Sheep" {{#if_eq model.source "Sheep"}}selected{{/if_eq}}>Sheep</option>
+          </select>
+        <span class="error help-block hide">Please enter the payroll period</span>
     </div>
+
+    <div class="col-md-3 form-group">
+        <label>Favor</label>
+        <input type="text" data-model-key="farm" value="{{model.flavor}}" placeholder="Flavor" class="form-control">
+    </div>
+
   </div>
 
-  <div class="form-group">
-    <label class="col-lg-3 control-label">Description</label>
-    <div class="col-lg-9">
-      <textarea type="text" rows="5" class="form-control col-10" id="description" data-model-key="description" placeholder="" data-validate="required">{{model.content}}</textarea>
-      <span class="error help-block hide">Please enter a description</span>
+  <div class="row">
+
+     <div class="col-md-offset-3 col-md-3 form-group">
+         <label>Texture</label>
+         <input type="text" data-model-key="texture" value="{{model.texture}}" placeholder="What type of Texture?" class="form-control">
+     </div>
+
+     <div class="col-md-3 form-group">
+         <label>Rennet</label>
+         <input type="text" data-model-key="rennet" value="{{model.rennet}}" placeholder="What type of Rennet?" class="form-control">
+     </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="col-md-offset-3 col-md-3 form-group">
+        <label>Pronunciation</label>
+        <input type="text" data-model-key="pronunciation" value="{{model.pronunciation}}" placeholder="Pronunciation?" class="form-control">
     </div>
+
+    <div class="col-md-3 form-group">
+        <label>Pasteurised</label>
+        <input type="text" data-model-key="pasteurised" value="{{model.pasteurised}}" placeholder="Pasteurised?" class="form-control">
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="col-md-offset-3 col-md-6 form-group">
+        <label>Description</label>
+        <textarea type="text" rows="5" class="form-control col-10" data-model-key="description" placeholder="" data-validate="required">{{model.content}}</textarea>
+        <span class="error help-block hide">Please enter a description</span>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="col-md-offset-3 col-md-3 form-group">
+        <label>Aging Time</label>
+        <input type="text" data-model-key="aging-time" value="{{model.aging-time}}" placeholder="Aging Time?" class="form-control">
+
+    </div>
+
   </div>
 
   <div class="form-group">

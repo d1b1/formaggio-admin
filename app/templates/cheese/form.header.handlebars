@@ -9,7 +9,9 @@
     <div class="col-md-6">
       <div class="profile-desk">
         <h1>{{#if_notempty model.id }} Cheese {{else}} New Cheese {{/if_notempty}}</h1>
-        <span class="text-muted">{{model.name}}</span>
+        <span class="text-muted">{{model.name}}</span><br>
+        <span class="text-muted"><b>Created:</b> {{easyDate model.created}}</span><br>
+        <span class="text-muted"><b>Modified:</b> {{easyDate model.modified}}</span>
         <br/>
       </div>
     </div>

@@ -146,6 +146,14 @@ module.exports = function(Handlebars) {
       }
     });
 
+    Handlebars.registerHelper('easyDate', function(context) {
+      if (context !== null) {
+        return moment(context).format('MMMM D, YYYY') + ' (' + moment(context).from(moment()) + ')';
+      } else {
+        return '';
+      }
+    });
+
     Handlebars.registerHelper('jsondecode', function(context) {
       return $.parseJSON(context);
     });
