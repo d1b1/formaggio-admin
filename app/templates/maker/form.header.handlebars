@@ -1,11 +1,13 @@
 
 <section class="panel">
   <div class="panel-body profile-information">
+
     <div class="col-md-3">
       <div class="profile-pic text-center">
-        <img src="http://www.foodsubs.com/Photos/roquefortcheese.jpg" alt="">
+        <img src="{{model.logourl}}" alt="">
       </div>
     </div>
+
     <div class="col-md-6">
       <div class="profile-desk">
         <h1>{{#if_notempty model.id }} Maker {{else}} New Maker {{/if_notempty}}</h1>
