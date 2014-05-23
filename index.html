@@ -3,6 +3,7 @@
 <html>
     <head>
      <link href="assets/styles/css/main.css" rel="stylesheet">
+     <link href="http://simonwhitaker.github.io/github-fork-ribbon-css/gh-fork-ribbon.css" rel="stylesheet">
      <script type="text/javascript">
         var Caliper = {
           config: { apiKey: "da053a43-8d86-460d-9820-056bfa7f48f7" }
@@ -20,8 +21,8 @@
       <!--logo start-->
       <div class="brand">
 
-          <a href="index.html" class="logo">
-              <img style="margin-left:100px;" src="https://nodeloader.s3.amazonaws.com/scratch/94b3b0039df429e1acb01c56a6496493" height="50" alt="Formagg.io">
+          <a href="#" class="logo">
+              <h4>Formagg.io</h4>
           </a>
           <div class="sidebar-toggle-box">
               <div class="fa fa-bars"></div>
@@ -39,7 +40,7 @@
       </div>
 
       <div class="top-nav clearfix">
-          <ul class='nav pull-left top-menu'>
+          <ul class='nav pull-left hide top-menu'>
               <li>
                   <a href="#">
                       &nbsp;&nbsp;<i class="fa fa-question"></i>
@@ -52,7 +53,7 @@
           <!--search & user info start-->
           <ul class="nav pull-right top-menu">
               <!-- inbox dropdown start-->
-              <li id="header_inbox_bar" class="dropdown">
+              <li id="header_inbox_bar" class="hide dropdown">
                   <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                       <i class="fa fa-envelope-o"></i>
                       <span class="badge bg-important">4</span>
@@ -116,9 +117,8 @@
               </li>
               <!-- inbox dropdown end -->
               <!-- notification dropdown start-->
-              <li id="header_notification_bar" class="dropdown">
+              <li id="header_notification_bar" class="hide dropdown">
                   <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-
                       <i class="fa fa-bell-o"></i>
                       <span class="badge bg-warning">3</span>
                   </a>
@@ -158,13 +158,13 @@
               <li class="dropdown">
                   <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                       <i class="fa fa-cog"></i>&nbsp;
-                      <span class="username">Company Name</span>
+                      <span class="hide username">SSmith</span>
                       <b class="caret"></b>
                   </a>
                   <ul class="dropdown-menu extended logout">
                       <li><a href="#profile"><i class=" fa fa-suitcase"></i>Profile</a></li>
                       <li><a href="#settings"><i class="fa fa-cog"></i> Settings</a></li>
-                      <li><a href="login.html"><i class="fa fa-key"></i> Log Out</a></li>
+                      <li><a href="#logout"><i class="fa fa-key"></i> Log Out</a></li>
                   </ul>
               </li>
               <!-- user login dropdown end -->
@@ -218,7 +218,8 @@
     <!--sidebar end-->
 
     <!--main content start-->
-    <section id="main-content"></section>
+    <section id="main-content">
+    </section>
 
     <!--right sidebar start-->
     <div class="right-sidebar">
@@ -252,5 +253,12 @@
     <script type="text/javascript" src="assets/vendors/caliper.backbone-0.4.2.min.js"></script>
 
    </section>
+   <!-- BOTTOM RIGHT RIBBON: START COPYING HERE -->
+    <div class="github-fork-ribbon-wrapper left-bottom">
+        <div class="github-fork-ribbon">
+            <a href="https://github.com/d1b1/formaggio-admin">Fork on GitHub</a>
+        </div>
+    </div>
+    <!-- BOTTOM RIGHT RIBBON: END COPYING HERE -->
   </body>
 </html>
