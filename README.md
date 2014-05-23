@@ -32,6 +32,19 @@ and will be ported to the backbone.js version.
 obsession. Its an attempt to map the artisan cheeses of the world. The API
 is build using node.js, express.js, passport and Mongo.
 
+### Local
+To run locally. You need an account to test the full CRUD features.
+
+Static:
+
+    Open the /index.html in a browser.
+
+Using Node.js and gulp:
+
+    npm install
+    gulp default
+    servedir .
+
 ### Related Projects
  * [Infinite Cheese Board](http://blog.happypath.ws/formaggio-infinite-scroll) - (used AirBnb Infinity.js)
  * [Simple Search](http://blog.happypath.ws/formaggio-search) - Simple Backbone.js
