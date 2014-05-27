@@ -159,6 +159,69 @@ module.exports = function( opts ) {
     }
   });
 
+  Module.Views.Accounts = Backbone.Layout.extend({
+    __name__: 'Maker-Accounts-ListView',
+    template: TplService.Maker.Accounts.Table,
+    unload: function() {
+      this.unbind();
+      this.remove();
+    },
+    updateTable : function () {
+      var self = this;
+      $('#tbody').html('');
+
+      if(self.model.get('accounts').length > 0){
+        _.each(self.model.get('accounts'), function(model){
+          $('#tbody').append(TplService.Maker.Accounts.Tr({ model: model.toJSON() }));
+        });
+      } else {
+        $('#tbody').append('<tr><td colspan="4" align="center"><br><br>No results found.<br><br></td></tr>');
+      }
+    }
+  });
+
+  Module.Views.Images = Backbone.Layout.extend({
+    __name__: 'Maker-Images-ListView',
+    template: TplService.Maker.Images.Table,
+    unload: function() {
+      this.unbind();
+      this.remove();
+    },
+    updateTable : function () {
+      var self = this;
+      $('#tbody').html('');
+
+      if(self.model.get('images').length > 0){
+        _.each(self.model.get('images'), function(model){
+          $('#tbody').append(TplService.Maker.Accounts.Tr({ model: model.toJSON() }));
+        });
+      } else {
+        $('#tbody').append('<tr><td colspan="4" align="center"><br><br>No results found.<br><br></td></tr>');
+      }
+    }
+  });
+
+  Module.Views.Cheeses = Backbone.Layout.extend({
+    __name__: 'Maker-Cheeses-ListView',
+    template: TplService.Maker.Cheeses.Table,
+    unload: function() {
+      this.unbind();
+      this.remove();
+    },
+    updateTable : function () {
+      var self = this;
+      $('#tbody').html('');
+
+      if(self.model.get('cheeses').length > 0){
+        _.each(self.model.get('cheeses'), function(model){
+          $('#tbody').append(TplService.Maker.Cheeses.Tr({ model: model.toJSON() }));
+        });
+      } else {
+        $('#tbody').append('<tr><td colspan="4" align="center"><br><br>No results found.<br><br></td></tr>');
+      }
+    }
+  });
+
   Module.Views.Header = Backbone.Layout.extend({
     template: TplService.Maker.Header,
     sType: '',
@@ -278,6 +341,9 @@ module.exports = function( opts ) {
       this.tabs.formHeader = self.insertView('.formHeader', new Module.Views.Header( { model: self.model }));
       this.tabs.formTabContainer = self.insertView('#formTabContainer', new Module.Views.EditForm( { model: self.model }));
       this.tabs.JSONTabContainer = self.insertView('#JSONTabContainer', new Module.Views.JSONEditor( { model: self.model }));
+      this.tabs.CheesesTabContainer = self.insertView('#CheesesTabContainer', new Module.Views.Cheeses( { model: self.model }));
+      this.tabs.AccountsTabContainer = self.insertView('#AccountsTabContainer', new Module.Views.Accounts( { model: self.model }));
+      this.tabs.ImagesTabContainer = self.insertView('#ImagesTabContainer', new Module.Views.Images( { model: self.model }));
 
       if (self.model.isNew()) {
         self.tabs.formTabContainer.render();

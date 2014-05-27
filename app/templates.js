@@ -18,6 +18,19 @@ module.exports = function( opts ) {
       'Wrapper'        : require("./templates/cheese/formWrapper.handlebars"),
       'JSONEditor'     : require("./templates/cheese/jsonEditor.handlebars"),
       'Header'         : require("./templates/cheese/form.header.handlebars"),
+      'Map'            : require("./templates/cheese/map.handlebars"),
+      'Makers'        : {
+        'Table'        : require("./templates/cheese/makers/table.handlebars"),
+        'Tr'           : require("./templates/cheese/makers/tr.handlebars")
+      },
+      'Accounts'       : {
+        'Table'        : require("./templates/cheese/accounts/table.handlebars"),
+        'Tr'           : require("./templates/cheese/accounts/tr.handlebars")
+      },
+      'Images'       : {
+        'Table'        : require("./templates/cheese/images/table.handlebars"),
+        'Tr'           : require("./templates/cheese/images/tr.handlebars")
+      }
     },
     'Maker' : {
       'Table'          : require("./templates/maker/table.handlebars"),
@@ -27,6 +40,19 @@ module.exports = function( opts ) {
       'Wrapper'        : require("./templates/maker/formWrapper.handlebars"),
       'JSONEditor'     : require("./templates/maker/jsonEditor.handlebars"),
       'Header'         : require("./templates/maker/form.header.handlebars"),
+      'Map'            : require("./templates/maker/map.handlebars"),
+      'Cheeses'        : {
+        'Table'        : require("./templates/maker/cheeses/table.handlebars"),
+        'Tr'           : require("./templates/maker/cheeses/tr.handlebars")
+      },
+      'Accounts'       : {
+        'Table'        : require("./templates/maker/accounts/table.handlebars"),
+        'Tr'           : require("./templates/maker/accounts/tr.handlebars")
+      },
+      'Images'       : {
+        'Table'        : require("./templates/maker/images/table.handlebars"),
+        'Tr'           : require("./templates/maker/images/tr.handlebars")
+      }
     },
     'Account' : {
       'Table'          : require("./templates/account/table.handlebars"),
