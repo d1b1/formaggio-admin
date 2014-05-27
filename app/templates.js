@@ -61,7 +61,28 @@ module.exports = function( opts ) {
       'AdvancedSearch' : require("./templates/account/search.handlebars"),
       'Wrapper'        : require("./templates/account/formWrapper.handlebars"),
       'JSONEditor'     : require("./templates/account/jsonEditor.handlebars"),
-      'Header'         : require("./templates/account/form.header.handlebars")
+      'Header'         : require("./templates/account/form.header.handlebars"),
+      'Map'            : require("./templates/account/map.handlebars"),
+      'Cheeses'        : {
+        'Table'        : require("./templates/account/cheeses/table.handlebars"),
+        'Tr'           : require("./templates/account/cheeses/tr.handlebars")
+      },
+      'Makers'       : {
+        'Table'        : require("./templates/account/makers/table.handlebars"),
+        'Tr'           : require("./templates/account/makers/tr.handlebars")
+      },
+      'OAuth'       : {
+        'Table'        : require("./templates/account/oauth/table.handlebars"),
+        'Tr'           : require("./templates/account/oauth/tr.handlebars")
+      },
+      'Images'       : {
+        'Table'        : require("./templates/account/images/table.handlebars"),
+        'Tr'           : require("./templates/account/images/tr.handlebars")
+      },
+      'Favorites'      : {
+        'Table'        : require("./templates/account/favorites/table.handlebars"),
+        'Tr'           : require("./templates/account/favorites/tr.handlebars")
+      }
     }
   };
 

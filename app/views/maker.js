@@ -222,6 +222,15 @@ module.exports = function( opts ) {
     }
   });
 
+  Module.Views.Map = Backbone.Layout.extend({
+    __name__: 'Maker-Map-ListView',
+    template: TplService.Maker.Map,
+    unload: function() {
+      this.unbind();
+      this.remove();
+    }
+  });
+
   Module.Views.Header = Backbone.Layout.extend({
     template: TplService.Maker.Header,
     sType: '',
@@ -344,6 +353,7 @@ module.exports = function( opts ) {
       this.tabs.CheesesTabContainer = self.insertView('#CheesesTabContainer', new Module.Views.Cheeses( { model: self.model }));
       this.tabs.AccountsTabContainer = self.insertView('#AccountsTabContainer', new Module.Views.Accounts( { model: self.model }));
       this.tabs.ImagesTabContainer = self.insertView('#ImagesTabContainer', new Module.Views.Images( { model: self.model }));
+      this.tabs.MapTabContainer = self.insertView('#MapTabContainer', new Module.Views.Map( { model: self.model }));
 
       if (self.model.isNew()) {
         self.tabs.formTabContainer.render();

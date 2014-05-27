@@ -164,6 +164,15 @@ module.exports = function( opts ) {
     }
   });
 
+  Module.Views.Map = Backbone.Layout.extend({
+    __name__: 'Cheese-Map-ListView',
+    template: TplService.Cheese.Map,
+    unload: function() {
+      this.unbind();
+      this.remove();
+    }
+  });
+
   Module.Views.Accounts = Backbone.Layout.extend({
     __name__: 'Cheese-Accounts-ListView',
     template: TplService.Cheese.Accounts.Table,
@@ -348,6 +357,7 @@ module.exports = function( opts ) {
       this.tabs.MakersTabContainer = self.insertView('#MakersTabContainer', new Module.Views.Makers( { model: self.model }));
       this.tabs.AccountsTabContainer = self.insertView('#AccountsTabContainer', new Module.Views.Accounts( { model: self.model }));
       this.tabs.ImagesTabContainer = self.insertView('#ImagesTabContainer', new Module.Views.Images( { model: self.model }));
+      this.tabs.MapTabContainer = self.insertView('#MapTabContainer', new Module.Views.Map( { model: self.model }));
 
       if (self.model.isNew()) {
         self.tabs.formTabContainer.render();
