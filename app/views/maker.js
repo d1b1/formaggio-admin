@@ -26,6 +26,7 @@ module.exports = function( opts ) {
     template: TplService.Maker.Table,
     initialize: function () {
       var self = this;
+      self.tabs = {};
 
       self.collection.on('sync', self.updateTable);
     },
@@ -38,7 +39,8 @@ module.exports = function( opts ) {
       'focus #textSearchBox': 'searchFocus',
       'click .advanced-search-tab': 'toggleAdvancedSearch',
       'submit #advancedSearch': 'submitAdvancedSearch',
-      'click .addNewButton': 'gotoAddNewRoute'
+      'click .addNewButton': 'gotoAddNewRoute',
+      // 'click .makerTab': 'changeTabs'
     },
     gotoAddNewRoute: function(e) {
       e.preventDefault();
@@ -137,6 +139,11 @@ module.exports = function( opts ) {
       });
 
     },
+    // changeTabs: function(e) {
+    //   var tab = $(e.currentTarget)[0].hash.replace('#', '');
+    //   console.log('tab', tab);
+    //   // this.tabs[tab].render();
+    // },
     adjustPerPage : function(e) {
       this.collection.setPageSize( parseInt($(e.currentTarget).val()) );
       this.collection.fetch();
@@ -146,10 +153,14 @@ module.exports = function( opts ) {
       this.originalUsersState = _.extend({}, this.collection.state);
       this.originalUsersQueryParams = _.extend({},this.collection.queryParams);
 
+      // this.tabs.MapTabContainer = self.insertView('#MapTabContainer', TplService.Maker.Map() );
+      // this.$el.find('#MapTabContainer').html(TplService.Maker.Map());
 
       this.collection.fetch({
         success: function(){
           app.setupPage();
+
+          // self.tabs.MapTabContainer.render();
 
           $('.adv-table').find('.adjustPerPage').change(function(e){
             self.adjustPerPage(e);
