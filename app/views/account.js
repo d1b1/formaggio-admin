@@ -157,6 +157,125 @@ module.exports = function( opts ) {
     }
   });
 
+  Module.Views.Cheeses = Backbone.Layout.extend({
+    __name__: 'Account-Cheeses-ListView',
+    template: TplService.Account.Cheeses.Table,
+    unload: function() {
+      this.unbind();
+      this.remove();
+    },
+    updateTable : function () {
+      var self = this;
+      $('#tbody').html('');
+
+      if(self.model.get('cheeses').length > 0){
+        _.each(self.model.get('cheeses'), function(model){
+          $('#tbody').append(TplService.Account.Cheeses.Tr({ model: model.toJSON() }));
+        });
+      } else {
+        $('#tbody').append('<tr><td colspan="4" align="center"><br><br>No results found.<br><br></td></tr>');
+      }
+    }
+  });
+
+  Module.Views.OAuths = Backbone.Layout.extend({
+    __name__: 'Account-OAuth-ListView',
+    template: TplService.Account.OAuth.Table,
+    unload: function() {
+      this.unbind();
+      this.remove();
+    },
+    updateTable : function () {
+      var self = this;
+      $('#tbody').html('');
+
+      if(self.model.get('images').length > 0){
+        _.each(self.model.get('images'), function(model){
+          $('#tbody').append(TplService.Account.OAuth.Tr({ model: model.toJSON() }));
+        });
+      } else {
+        $('#tbody').append('<tr><td colspan="4" align="center"><br><br>No results found.<br><br></td></tr>');
+      }
+    }
+  });
+
+  Module.Views.Images = Backbone.Layout.extend({
+    __name__: 'Account-Images-ListView',
+    template: TplService.Cheese.Images.Table,
+    unload: function() {
+      this.unbind();
+      this.remove();
+    },
+    updateTable : function () {
+      var self = this;
+      $('#tbody').html('');
+
+      if(self.model.get('images').length > 0){
+        _.each(self.model.get('images'), function(model){
+          $('#tbody').append(TplService.Account.Images.Tr({ model: model.toJSON() }));
+        });
+      } else {
+        $('#tbody').append('<tr><td colspan="4" align="center"><br><br>No results found.<br><br></td></tr>');
+      }
+    }
+  });
+
+  Module.Views.Map = Backbone.Layout.extend({
+    __name__: 'Account-Map-ListView',
+    template: TplService.Account.Map,
+    unload: function() {
+      this.unbind();
+      this.remove();
+    },
+    updateTable : function () {
+      var self = this;
+
+      //
+    }
+  });
+
+  Module.Views.Favorites = Backbone.Layout.extend({
+    __name__: 'Account-Favorites-ListView',
+    template: TplService.Account.Favorites.Table,
+    unload: function() {
+      this.unbind();
+      this.remove();
+    },
+    updateTable : function () {
+      var self = this;
+      $('#tbody').html('');
+
+      if(self.model.get('favorites').length > 0){
+        _.each(self.model.get('makers'), function(model){
+          $('#tbody').append(TplService.Account.Favorites.Tr({ model: model.toJSON() }));
+        });
+      } else {
+        $('#tbody').append('<tr><td colspan="4" align="center"><br><br>No results found.<br><br></td></tr>');
+      }
+    }
+  });
+
+  Module.Views.Makers = Backbone.Layout.extend({
+    __name__: 'Account-Makers-ListView',
+    template: TplService.Account.Makers.Table,
+    unload: function() {
+      this.unbind();
+      this.remove();
+    },
+    updateTable : function () {
+      var self = this;
+      $('#tbody').html('');
+
+      if(self.model.get('makers').length > 0){
+        _.each(self.model.get('makers'), function(model){
+          $('#tbody').append(TplService.Maker.Cheeses.Tr({ model: model.toJSON() }));
+        });
+      } else {
+        $('#tbody').append('<tr><td colspan="4" align="center"><br><br>No results found.<br><br></td></tr>');
+      }
+    }
+  });
+
   Module.Views.Header = Backbone.Layout.extend({
     template: TplService.Account.Header,
     serialize: function() {
@@ -275,6 +394,11 @@ module.exports = function( opts ) {
       this.tabs.formHeader = self.insertView('.formHeader', new Module.Views.Header( { model: self.model }));
       this.tabs.formTabContainer = self.insertView('#formTabContainer', new Module.Views.EditForm( { model: self.model }));
       this.tabs.JSONTabContainer = self.insertView('#JSONTabContainer', new Module.Views.JSONEditor( { model: self.model }));
+      this.tabs.CheesesTabContainer = self.insertView('#CheesesTabContainer', new Module.Views.Cheeses( { model: self.model }));
+      this.tabs.MakersTabContainer = self.insertView('#MakersTabContainer', new Module.Views.Makers( { model: self.model }));
+      this.tabs.OAuthTabContainer = self.insertView('#OAuthTabContainer', new Module.Views.OAuths( { model: self.model }));
+      this.tabs.FavoritesTabContainer = self.insertView('#FavoritesTabContainer', new Module.Views.Favorites( { model: self.model }));
+      this.tabs.MapTabContainer = self.insertView('#MapTabContainer', new Module.Views.Map( { model: self.model }));
 
       if (self.model.isNew()) {
         self.tabs.formTabContainer.render();
