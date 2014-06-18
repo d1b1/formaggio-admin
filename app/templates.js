@@ -33,6 +33,7 @@ module.exports = function( opts ) {
       }
     },
     'Maker' : {
+      'Container'      : require("./templates/maker/container.handlebars"),
       'Table'          : require("./templates/maker/table.handlebars"),
       'Tr'             : require("./templates/maker/tr.handlebars"),
       'Edit'           : require("./templates/maker/form.handlebars"),

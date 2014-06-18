@@ -53,7 +53,7 @@ module.exports = function( opts ) {
       this.remove();
     },
     afterRender: function () {
-      console.log('asdfasdf');
+      console.log('Dashboard Render');
       app.setupPage();
     }
   });

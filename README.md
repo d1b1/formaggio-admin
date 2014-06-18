@@ -47,8 +47,8 @@ Using Node.js and gulp:
     servedir .
 
 ### Related Projects
- * [Infinite Cheese Board](http://blog.happypath.ws/formaggio-infinite-scroll) - (used AirBnb Infinity.js)
- * [Simple Search](http://blog.happypath.ws/formaggio-search) - Simple Backbone.js
+ * [Infinite Cheese Board](http://happypath.ws/formaggio-infinite-scroll) - (used AirBnb Infinity.js)
+ * [Simple Search](http://happypath.ws/formaggio-search) - Simple Backbone.js
  each tool.
  * [Google Maps Integration](http://formaggio.divshot.io) - Simple maps integration
  hosted on divshot.io
