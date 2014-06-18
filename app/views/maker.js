@@ -20,15 +20,72 @@ module.exports = function( opts ) {
     })
   };
 
+  Module.Views.Pagination = Backbone.Layout.extend({
+    initialize: function(options) {
+      var self = this;
+      self.collection = options.collection;
+      this.collection.on('sync', this.render, this);
+    },
+    events: {
+      'click .gotNextPage': function() {
+        this.collection.getNextPage();
+      },
+      'click .getPreviousPage': function() {
+        this.collection.getPreviousPage();
+      },
+      'click .getPage': function(e) {
+        this.collection.getPage( $(e.currentTarget).data('page') );
+      }
+    },
+    template: TplService.PaginationTemplate,
+    serialize: function() {
+      var arr = [];
+      var firstPage = this.collection.state.firstPage;
+      while(firstPage <= this.collection.state.lastPage){
+        arr.push(firstPage++);
+      }
+
+      return {
+        currentPage: this.collection.state.currentPage,
+        firstPage: this.collection.state.firstPage,
+        arr: arr,
+        lastPage: this.collection.state.lastPage
+      }
+    }
+  });
+
   Module.Views.List = Backbone.Layout.extend({
+    template: TplService.Maker.Table,
+    initialize: function(options) {
+      var self = this;
+      options.collection.on('sync', this.renderTable, this);
+    },
+    renderTable: function() {
+      var self = this;
+      var tbody = this.$el.find('#tbody');
+      tbody.html('');
+
+      var collection = this.collection;
+
+      if(collection.models.length > 0){
+        _.each(collection.models, function(model){
+          tbody.append(TplService.Maker.Tr({ model: model.toJSON() }));
+        });
+      } else {
+        tbody.append('<tr><td colspan="4" align="center"><br><br>No results found.<br><br></td></tr>');
+      }
+    }
+  });
+
+  Module.Views.Container = Backbone.Layout.extend({
     el: '#main-content',
     __name__: 'Maker-ListView',
-    template: TplService.Maker.Table,
+    template: TplService.Maker.Container,
     initialize: function () {
       var self = this;
       self.tabs = {};
 
-      self.collection.on('sync', self.updateTable);
+      var self = this;
     },
     unload: function() {
       this.unbind();
@@ -40,133 +97,85 @@ module.exports = function( opts ) {
       'click .advanced-search-tab': 'toggleAdvancedSearch',
       'submit #advancedSearch': 'submitAdvancedSearch',
       'click .addNewButton': 'gotoAddNewRoute',
-      // 'click .makerTab': 'changeTabs'
+      'click .makerListTab': 'changeTabs'
     },
-    gotoAddNewRoute: function(e) {
-      e.preventDefault();
-      Backbone.history.navigate('makers/new', { trigger: true });
-    },
-    toggleAdvancedSearch: function(e) {
-      // TODO: Move this somewhere else.
-      var body = this.$el.find('.advanced-search-body');
-      var currentTarget = this.$el.find(e.currentTarget);
-
-      if (currentTarget.hasClass('selected')){
-        body.html('').hide();
-      } else {
-        body.show().html(TplService.Maker.AdvancedSearch());
-      }
-
-      currentTarget.toggleClass('selected');
-    },
-    searchFocus: function(e) {
-      var target = this.$el.find('.advanced-search-tab');
-      return (target.hasClass('selected') ? target.click() : '');
-    },
-    submitAdvancedSearch: function(e) {
-      e.preventDefault();
-      var self = this;
-      var advancedSearchResults = self.$el.find('#advancedSearch').serializeObject();
-
-      this.collection.state = _.extend({},this.originalUsersState);
-      this.collection.queryParams = _.extend({},this.originalUsersQueryParams);
-
-      for(var key in advancedSearchResults){
-        if(advancedSearchResults[key]){
-          this.collection.state[key] = advancedSearchResults[key];
-          this.collection.queryParams[key] = advancedSearchResults[key];
-        } else {
-          this.collection.state[key] = null;
-        }
-      }
-
-      this.collection.fetch({error: function(collection, response, options) {
-          self.$el.find('#tbody').append('<div class"alert">No results for ' + $(e.currentTarget).val() + "</div>");
-        }
-      });
-
-      return false;
-    },
-    search: function(e) {
-      this.collection.state =  _.extend({},this.originalUsersState);
-      this.collection.queryParams =  _.extend({},this.originalUsersQueryParams);
-      this.collection.state._q = $(e.currentTarget).val();
-      this.collection.state._fields = "type";
-      this.collection.state.currentPage = 1;
-      this.collection.queryParams.name =  $(e.currentTarget).val();
-      this.collection.queryParams._fields = "type";
-
-      this.collection.fetch({
-        error: function(collection, response, options) {
-          $('#tbody').append('<tr><td>Oops, error searching for ' + $(e.currentTarget).val() + "</td></tr>");
-        }
-      });
-    },
-    updateTable : function () {
-      var self = this;
-      $('#tbody').html('');
-
-      if(self.models.length > 0){
-        _.each(self.models, function(model){
-          $('#tbody').append(TplService.Maker.Tr({ model: model.toJSON() }));
-        });
-      } else {
-        $('#tbody').append('<tr><td colspan="4" align="center"><br><br>No results found.<br><br></td></tr>');
-      }
-
-      var firstPage = self.state.firstPage;
-      var arr = [];
-      while(firstPage <= self.state.lastPage){
-        arr.push(firstPage++);
-      }
-      $('.adv-table').find('.pagination').remove();
-      $('.adv-table').append(TplService.PaginationTemplate({
-          currentPage : self.state.currentPage,
-          lastPage : self.state.lastPage,
-          firstPage : self.state.firstPage,
-          arr : arr,
-        })
-      );
-
-      $('.adv-table').find('.getPreviousPage').click(function(e){
-        self.getPreviousPage();
-      });
-      $('.adv-table').find('.getPage').click(function(e){
-        self.getPage($(e.currentTarget).data('page'));
-      });
-      $('.adv-table').find('.getNextPage').click(function(e){
-        self.getNextPage();
-      });
-
-    },
+    // toggleAdvancedSearch: function(e) {
+    //   // TODO: Move this somewhere else.
+    //   var body = this.$el.find('.advanced-search-body');
+    //   var currentTarget = this.$el.find(e.currentTarget);
+    //
+    //   if (currentTarget.hasClass('selected')){
+    //     body.html('').hide();
+    //   } else {
+    //     body.show().html(TplService.Maker.AdvancedSearch());
+    //   }
+    //
+    //   currentTarget.toggleClass('selected');
+    // },
+    // // searchFocus: function(e) {
+    //   var target = this.$el.find('.advanced-search-tab');
+    //   return (target.hasClass('selected') ? target.click() : '');
+    // },
+    // submitAdvancedSearch: function(e) {
+    //   e.preventDefault();
+    //   var self = this;
+    //   var advancedSearchResults = self.$el.find('#advancedSearch').serializeObject();
+    //
+    //   this.collection.state = _.extend({},this.originalUsersState);
+    //   this.collection.queryParams = _.extend({},this.originalUsersQueryParams);
+    //
+    //   for(var key in advancedSearchResults){
+    //     if(advancedSearchResults[key]){
+    //       this.collection.state[key] = advancedSearchResults[key];
+    //       this.collection.queryParams[key] = advancedSearchResults[key];
+    //     } else {
+    //       this.collection.state[key] = null;
+    //     }
+    //   }
+    //
+    //   this.collection.fetch({error: function(collection, response, options) {
+    //       self.$el.find('#tbody').append('<div class"alert">No results for ' + $(e.currentTarget).val() + "</div>");
+    //     }
+    //   });
+    //
+    //   return false;
+    // },
+    // search: function(e) {
+    //   this.collection.state =  _.extend({},this.originalUsersState);
+    //   this.collection.queryParams =  _.extend({},this.originalUsersQueryParams);
+    //   this.collection.state._q = $(e.currentTarget).val();
+    //   this.collection.state._fields = "type";
+    //   this.collection.state.currentPage = 1;
+    //   this.collection.queryParams.name =  $(e.currentTarget).val();
+    //   this.collection.queryParams._fields = "type";
+    //
+    //   this.collection.fetch({
+    //     error: function(collection, response, options) {
+    //       $('#tbody').append('<tr><td>Oops, error searching for ' + $(e.currentTarget).val() + "</td></tr>");
+    //     }
+    //   });
+    // },
     // changeTabs: function(e) {
     //   var tab = $(e.currentTarget)[0].hash.replace('#', '');
-    //   console.log('tab', tab);
-    //   // this.tabs[tab].render();
+    //
+    //   if (this.tabs[tab]) {
+    //     console.log('Found and Rendered', tab);
+    //     this.tabs[tab].render();
+    //   } else {
+    //     console.log('Could not Find', tab);
+    //   }
     // },
-    adjustPerPage : function(e) {
-      this.collection.setPageSize( parseInt($(e.currentTarget).val()) );
-      this.collection.fetch();
-    },
+    // adjustPerPage : function(e) {
+    //   this.collection.setPageSize( parseInt($(e.currentTarget).val()) );
+    //   this.collection.fetch();
+    // },
     afterRender: function() {
       var self = this;
-      this.originalUsersState = _.extend({}, this.collection.state);
-      this.originalUsersQueryParams = _.extend({},this.collection.queryParams);
+      // this.originalUsersState = _.extend({}, this.collection.state);
+      // this.originalUsersQueryParams = _.extend({},this.collection.queryParams);
 
-      // this.tabs.MapTabContainer = self.insertView('#MapTabContainer', TplService.Maker.Map() );
-      // this.$el.find('#MapTabContainer').html(TplService.Maker.Map());
-
-      this.collection.fetch({
-        success: function(){
-          app.setupPage();
-
-          // self.tabs.MapTabContainer.render();
-
-          $('.adv-table').find('.adjustPerPage').change(function(e){
-            self.adjustPerPage(e);
-          });
-        }
-      });
+      $('.makerListTab')[0].click();
+      // this.pager.render();
     }
   });
 

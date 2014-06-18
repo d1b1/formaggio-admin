@@ -18,7 +18,7 @@ module.exports = function( opts ) {
         var self = this;
       }
     })
-  };
+  };  
 
   Module.Views.List = Backbone.Layout.extend({
     el: '#main-content',

@@ -84,7 +84,7 @@ module.exports = function ( opts ) {
     },
     state: {
       firstPage: 1,
-      pageSize: 50,
+      pageSize: 10,
     },
     parseRecords: function (resp) {
       return resp.results;

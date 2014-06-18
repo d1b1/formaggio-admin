@@ -9,6 +9,13 @@ var gulp = require('gulp')
   , connect  = require('gulp-connect')
   , notify   = require("gulp-notify");
 
+// Tiny Livereload
+var lr = require('tiny-lr')
+    , server = lr()
+    , refresh = require('gulp-livereload')
+    , modRewrite = require('connect-modrewrite');
+
+// Setup the paths
 var paths = {
     scripts : ['app/**' ,'assets/common/**','!build/**'],
 };
@@ -78,11 +85,35 @@ var shimsObject = {
   }
 };
 
-// 'connect','scripts',
-gulp.task('default',[ 'scripts', 'watch' ]);
+gulp.task('connect', function() {
+  connect.server({
+    port: 2000,
+    middleware: function() {
+      return [
+        modRewrite([
+          // TODO: Not working yet
+          // '!\\.html|\\images|\\.js|\\.css|\\.png|\\.jpg|\\.woff|\\.ttf|\\.svg / [L]'
+        ])
+      ];
+    }
+  });
+});
 
-gulp.task('watch', function(){
-  gulp.watch(paths.scripts, [ 'scripts' ]);
+// Setp the Gulp Default Task. Use this to start the
+// connect server, then tell the server to listen for
+// reload events on port 35729. Each time th watch
+// find a change it will force the 'scripts' task
+// to run which calls a server reload event.
+
+gulp.task('default', [ 'scripts', 'connect' ], function() {
+  server.listen(35729, function ( err ) {
+    if ( err )
+      return console.log(err);
+
+    // gulp.watch(paths.scripts, [ 'scripts' ]);
+    gulp.watch('app/**/*.js', [ 'scripts' ]);
+    // gulp.watch('./index.html', [ 'scripts' ]);
+  });
 });
 
 gulp.task('scripts',function() {
@@ -95,5 +126,6 @@ gulp.task('scripts',function() {
     .on('error',function(err) {
       if(err) console.log('' + err);
     }))
-    .pipe(gulp.dest('build'));
+    .pipe(gulp.dest('build'))
+    .pipe(refresh(server));
 });

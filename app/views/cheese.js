@@ -330,7 +330,6 @@ module.exports = function( opts ) {
 
   Module.Views.Detail = Backbone.Layout.extend({
     el: '#main-content',
-    sType: '',
     __name__: 'Cheese-Detail-DetailView',
     template: TplService.Cheese.Wrapper,
     initialize : function () {
