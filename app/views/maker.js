@@ -6,7 +6,7 @@ var $ = require('jquery-browserify')
 
 var app = require('formaggio-common')()
     , LayoutManager = require("backboneLayoutmanager")
-    , DashboardData = require("../data/models")()
+    , Data = require("../data/models")()
     , TplService    = require("../templates.js")();
 
 module.exports = function( opts ) {
@@ -66,6 +66,8 @@ module.exports = function( opts ) {
       tbody.html('');
 
       var collection = this.collection;
+
+      console.log('Found', collection.length);
 
       if(collection.models.length > 0){
         _.each(collection.models, function(model){
@@ -224,21 +226,21 @@ module.exports = function( opts ) {
   Module.Views.Cheeses = Backbone.Layout.extend({
     __name__: 'Maker-Cheeses-ListView',
     template: TplService.Maker.Cheeses.Table,
-    unload: function() {
-      this.unbind();
-      this.remove();
-    },
-    updateTable : function () {
-      var self = this;
-      $('#tbody').html('');
+    initialize: function() {
+      this.collection = new Data.Collections.Cheeses();
+      this.collection.state.maker = this.model.id;
+      this.collection.queryParams.maker = this.model.id;
 
-      if(self.model.get('cheeses').length > 0){
-        _.each(self.model.get('cheeses'), function(model){
-          $('#tbody').append(TplService.Maker.Cheeses.Tr({ model: model.toJSON() }));
-        });
-      } else {
-        $('#tbody').append('<tr><td colspan="4" align="center"><br><br>No results found.<br><br></td></tr>');
-      }
+      this.collection.on('sync', this.list, this);
+    },
+    list: function () {
+      var tbody = $('#tbody').empty();
+      _.each(this.collection.models, function(model){
+        tbody.append(TplService.Maker.Cheeses.Tr({ model: model.toJSON() }));
+      });
+    },
+    afterRender: function() {
+      this.collection.fetch();
     }
   });
 
@@ -362,32 +364,34 @@ module.exports = function( opts ) {
       this.remove();
     },
     changeTabs: function(e) {
+      alert('dddd');
       var tab = $(e.currentTarget)[0].hash.replace('#', '');
       this.tabs[tab].render();
     },
     afterRender : function () {
       var self = this;
-      this.tabs.formHeader = self.insertView('.formHeader', new Module.Views.Header( { model: self.model }));
-      this.tabs.formTabContainer = self.insertView('#formTabContainer', new Module.Views.EditForm( { model: self.model }));
-      this.tabs.JSONTabContainer = self.insertView('#JSONTabContainer', new Module.Views.JSONEditor( { model: self.model }));
-      this.tabs.CheesesTabContainer = self.insertView('#CheesesTabContainer', new Module.Views.Cheeses( { model: self.model }));
-      this.tabs.AccountsTabContainer = self.insertView('#AccountsTabContainer', new Module.Views.Accounts( { model: self.model }));
-      this.tabs.ImagesTabContainer = self.insertView('#ImagesTabContainer', new Module.Views.Images( { model: self.model }));
-      this.tabs.MapTabContainer = self.insertView('#MapTabContainer', new Module.Views.Map( { model: self.model }));
-
-      if (self.model.isNew()) {
-        self.tabs.formTabContainer.render();
-        self.tabs.formHeader.render();
-      } else {
-        self.model.fetch({
-          success: function() {
-            self.tabs.formTabContainer.render();
-            self.tabs.formHeader.render();
-            self.model.trigger('change');
-          }
-        });
-      }
-      app.setupPage();
+      alert('asdfasd');
+      // this.tabs.formHeader = self.insertView('.formHeader', new Module.Views.Header( { model: self.model }));
+      // this.tabs.formTabContainer = self.insertView('#formTabContainer', new Module.Views.EditForm( { model: self.model }));
+      // this.tabs.JSONTabContainer = self.insertView('#JSONTabContainer', new Module.Views.JSONEditor( { model: self.model }));
+      // this.tabs.CheesesTabContainer = self.insertView('#CheesesTabContainer', new Module.Views.Cheeses( { model: self.model }));
+      // this.tabs.AccountsTabContainer = self.insertView('#AccountsTabContainer', new Module.Views.Accounts( { model: self.model }));
+      // this.tabs.ImagesTabContainer = self.insertView('#ImagesTabContainer', new Module.Views.Images( { model: self.model }));
+      // this.tabs.MapTabContainer = self.insertView('#MapTabContainer', new Module.Views.Map( { model: self.model }));
+      //
+      // if (self.model.isNew()) {
+      //   self.tabs.formTabContainer.render();
+      //   self.tabs.formHeader.render();
+      // } else {
+      //   self.model.fetch({
+      //     success: function() {
+      //       self.tabs.formTabContainer.render();
+      //       self.tabs.formHeader.render();
+      //       self.model.trigger('change');
+      //     }
+      //   });
+      // }
+      // app.setupPage();
     }
   });
 
