@@ -14,12 +14,14 @@ var presenter = require('../presenter');
 module.exports = Backbone.Router.extend({
   routes: {
       'makers'                    : 'list',
-      'makers/new'                : 'new',
       'makers/:id'                : 'detail'
     },
     initialize : function (options) {
       self.makers = this.makers = new Data.Collections.Makers();
       this.Layout = new Resources.Layout();
+
+      // Old Pattern: This attaches both the List and Detail
+      // to the outer layout.
 
       // this.MakerList = this.Layout.setView('makerList', new Resources.Views.Container({ collection: this.collection }));
       // this.MakerDetail = this.Layout.setView('makerDetail', new Resources.Views.Detail());
@@ -27,7 +29,7 @@ module.exports = Backbone.Router.extend({
     list : function () {
 
       var Layout = Backbone.Layout.extend({
-        el: '#main-content',
+        // el: '#main-content',
         template: TplService.Maker.Container,
         views: {
           '#MakerListTabContainer': new Resources.Views.List({ collection: this.makers }),
@@ -36,8 +38,9 @@ module.exports = Backbone.Router.extend({
         }
       });
 
-      presenter.presentView( new Layout() );
+      // new Layout().render();
 
+      presenter.presentView( new Layout() );
       self.makers.fetch();
     },
     detail: function (id) {
@@ -46,7 +49,7 @@ module.exports = Backbone.Router.extend({
       var model = new Data.Models.Maker({ id: id });
 
       var Layout = Backbone.Layout.extend({
-        el: '#main-content',
+        // el: '#main-content',
         template: TplService.Maker.Wrapper,
         views: {
           '.formHeader':           new Resources.Views.Header({ model: model }),
@@ -69,7 +72,6 @@ module.exports = Backbone.Router.extend({
       // view to make a better user experience.
 
       presenter.presentView( new Layout() );
-      
       model.fetch();
 
       // Option 2 (Alt): Fetch and only render after success.
@@ -86,10 +88,5 @@ module.exports = Backbone.Router.extend({
       //   }
       // });
 
-    },
-    new: function () {
-      this.MakerDetail.model = new Data.Models.Maker();
-      // this.MakerDetail.render();
-      presenter.presentView( this.MakerDetail );
     }
   });

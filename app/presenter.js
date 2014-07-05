@@ -8,12 +8,7 @@ module.exports = {
 
     view.render();
 
-    // This is only used when we do not define
-		// the attachment point. Need to figure a better
-		// way to handle this. Want to be able to
-		// let view options determine when needed.
-
-    // view.$el.appendTo($('#main-content'));
+    view.$el.appendTo($('#main-content'));
 
 		this.$currentView = view;
 	},

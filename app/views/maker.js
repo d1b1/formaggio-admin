@@ -67,8 +67,6 @@ module.exports = function( opts ) {
 
       var collection = this.collection;
 
-      console.log('Found', collection.length);
-
       if(collection.models.length > 0){
         _.each(collection.models, function(model){
           tbody.append(TplService.Maker.Tr({ model: model.toJSON() }));
@@ -89,7 +87,8 @@ module.exports = function( opts ) {
 
       var self = this;
     },
-    unload: function() {
+    unload : function() {
+      console.log('Unloading the Maker List');
       this.unbind();
       this.remove();
     },
@@ -255,7 +254,6 @@ module.exports = function( opts ) {
 
   Module.Views.Header = Backbone.Layout.extend({
     template: TplService.Maker.Header,
-    sType: '',
     serialize: function() {
       return {
         model: this.model.toJSON()
@@ -265,7 +263,6 @@ module.exports = function( opts ) {
 
   Module.Views.JSONEditor = Backbone.View.extend({
     template: TplService.Maker.JSONEditor,
-    sType: '',
     events: {
       'click .saveButton' : 'save',
     },
@@ -312,7 +309,6 @@ module.exports = function( opts ) {
 
   Module.Views.EditForm = Backbone.Layout.extend({
     template: TplService.Maker.Edit,
-    sType: '',
     serialize: function() {
       return { model: this.model.toJSON() };
     },
@@ -348,7 +344,6 @@ module.exports = function( opts ) {
 
   Module.Views.Detail = Backbone.Layout.extend({
     el: '#main-content',
-    sType: '',
     __name__: 'Maker-Detail-DetailView',
     template: TplService.Maker.Wrapper,
     initialize : function () {
@@ -360,17 +355,16 @@ module.exports = function( opts ) {
       'click .makerTab': 'changeTabs'
     },
     unload : function() {
+      console.log('Unloading the Maker Detail');
       this.unbind();
       this.remove();
     },
     changeTabs: function(e) {
-      alert('dddd');
       var tab = $(e.currentTarget)[0].hash.replace('#', '');
       this.tabs[tab].render();
     },
     afterRender : function () {
       var self = this;
-      alert('asdfasd');
       // this.tabs.formHeader = self.insertView('.formHeader', new Module.Views.Header( { model: self.model }));
       // this.tabs.formTabContainer = self.insertView('#formTabContainer', new Module.Views.EditForm( { model: self.model }));
       // this.tabs.JSONTabContainer = self.insertView('#JSONTabContainer', new Module.Views.JSONEditor( { model: self.model }));

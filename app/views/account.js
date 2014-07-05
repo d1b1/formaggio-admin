@@ -18,7 +18,7 @@ module.exports = function( opts ) {
         var self = this;
       }
     })
-  };  
+  };
 
   Module.Views.List = Backbone.Layout.extend({
     el: '#main-content',
@@ -30,6 +30,7 @@ module.exports = function( opts ) {
       self.collection.on('sync', self.updateTable);
     },
     unload: function() {
+      console.log('Unloading the Account List');
       this.unbind();
       this.remove();
     },
@@ -287,7 +288,6 @@ module.exports = function( opts ) {
 
   Module.Views.JSONEditor = Backbone.View.extend({
     template: TplService.Account.JSONEditor,
-    sType: '',
     events: {
       'click .saveButton' : 'save',
     },
@@ -334,7 +334,6 @@ module.exports = function( opts ) {
 
   Module.Views.EditForm = Backbone.Layout.extend({
     template: TplService.Account.Edit,
-    sType: '',
     serialize: function() {
       return { model: this.model.toJSON() };
     },
@@ -370,7 +369,6 @@ module.exports = function( opts ) {
 
   Module.Views.Detail = Backbone.Layout.extend({
     el: '#main-content',
-    sType: '',
     __name__: 'Account-Detail-DetailView',
     template: TplService.Account.Wrapper,
     initialize : function () {
@@ -382,6 +380,7 @@ module.exports = function( opts ) {
       'click .accountTab': 'changeTabs'
     },
     unload : function() {
+      console.log('Unloading the Account Detail');
       this.unbind();
       this.remove();
     },

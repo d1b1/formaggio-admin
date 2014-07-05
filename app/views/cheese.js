@@ -21,7 +21,7 @@ module.exports = function( opts ) {
   };
 
   Module.Views.List = Backbone.Layout.extend({
-    el: '#main-content',
+    // el: '#main-content',
     __name__: 'Cheese-ListView',
     template: TplService.Cheese.Table,
     initialize: function () {
@@ -30,6 +30,7 @@ module.exports = function( opts ) {
       self.collection.on('sync', self.updateTable);
     },
     unload: function() {
+      console.log('Unloading the Cheese List');
       this.unbind();
       this.remove();
     },
@@ -247,7 +248,6 @@ module.exports = function( opts ) {
 
   Module.Views.JSONEditor = Backbone.View.extend({
     template: TplService.Cheese.JSONEditor,
-    sType: '',
     events: {
       'click .saveButton' : 'save',
     },
@@ -294,7 +294,6 @@ module.exports = function( opts ) {
 
   Module.Views.EditForm = Backbone.Layout.extend({
     template: TplService.Cheese.Edit,
-    sType: '',
     serialize: function() {
       return { model: this.model.toJSON() };
     },
@@ -329,7 +328,7 @@ module.exports = function( opts ) {
   });
 
   Module.Views.Detail = Backbone.Layout.extend({
-    el: '#main-content',
+    // el: '#main-content',
     __name__: 'Cheese-Detail-DetailView',
     template: TplService.Cheese.Wrapper,
     initialize : function () {
@@ -341,6 +340,7 @@ module.exports = function( opts ) {
       'click .cheeseTab': 'changeTabs'
     },
     unload : function() {
+      console.log('Unloading the Cheese Detail');
       this.unbind();
       this.remove();
     },
