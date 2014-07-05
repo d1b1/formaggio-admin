@@ -112,7 +112,8 @@ gulp.task('default', [ 'scripts', 'connect' ], function() {
 
     // gulp.watch(paths.scripts, [ 'scripts' ]);
     gulp.watch('app/**/*.js', [ 'scripts' ]);
-    // gulp.watch('./index.html', [ 'scripts' ]);
+    gulp.watch('app/**/*.handlebars', [ 'scripts' ]);
+    gulp.watch('./index.html', [ 'scripts' ]);
   });
 });
 
