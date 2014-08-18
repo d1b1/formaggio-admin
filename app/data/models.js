@@ -58,8 +58,8 @@ module.exports = function ( opts ) {
       Cheese: BaseModel.extend({
         defaults: {},
         validate: function(attrs, options) {
-          if (!attrs.nameShort) {
-            return "Missing Short Name";
+          if (!attrs.name) {
+            return "Missing Name";
           }
 
           if (!attrs.description) {

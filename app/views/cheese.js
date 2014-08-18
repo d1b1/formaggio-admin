@@ -313,17 +313,29 @@ module.exports = function( opts ) {
       e.preventDefault();
 
       if (!self.model.isValid()) {
+        console.log(self.model.validationError);
         app.confirmBox('errorSaving', 'Add All Fields', "Please supply information for every field.", 'hide', 'OK');
         return;
       }
 
-      self.model.save().done(function() {
-        location.reload(true);
-        app.setupPage();
-      }).fail(function() {
-        app.confirmBox('errorSaving', 'Error Saving Information', "We're sorry, there was an error saving this information. Please try again.", 'hide', 'OK');
-        app.setupPage();
+      console.log('here 1');
+      self.model.save({
+        success: function() {
+          console.log('saved');
+        },
+        error: function() {
+          console.log('eerror');
+        }
       });
+      // .done(function() {
+      //   console.log('here 2');
+      //   location.reload(true);
+      //   app.setupPage();
+      // }).fail(function() {
+      //   console.log('here 3');
+      //   app.confirmBox('errorSaving', 'Error Saving Information', "We're sorry, there was an error saving this information. Please try again.", 'hide', 'OK');
+      //   app.setupPage();
+      // });
     }
   });
 

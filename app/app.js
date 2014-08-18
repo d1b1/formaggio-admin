@@ -9,6 +9,8 @@ window.Backbone = Backbone;
 window.Backbone.$ = $ ;
 var LayoutManager = require("backboneLayoutmanager");
 
+var Login = require('./views/login')();
+
 var Router = require('./router.js');
 var router = new Router();
 
@@ -24,8 +26,10 @@ var AuthService = Authorization.Header(authConfig);
 var sync = Backbone.sync;
 Backbone.sync = function (method, model, options) {
   options.beforeSend = function(xhr, request) {
+
     // Only send a signed request when we have tokens or we
     // are trying to login.
+
     if (signature = AuthService.getSignature(request.url, request.type)) {
       xhr.setRequestHeader('Authorization', signature);
     }
@@ -45,9 +49,11 @@ $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
 $.ajaxSetup({
     cache: false,
     statusCode: {
-      401: function () {
-        window.location.href='#login';
-        window.location.reload();
+      401: function (req) {
+        console.log('401');
+        new Login.Views.Login({}).render();
+
+        req.abort();
       }
     }
 });

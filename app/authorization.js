@@ -4,6 +4,9 @@ var $ = require('jquery-browserify')
 
 exports.Header = function( opts ) {
 
+  var self = this;
+  var debug = false;
+
   var defaults = {
     oauth_version:          "1.0",
     oauth_consumer_key:     opts.key,
@@ -39,6 +42,7 @@ exports.Header = function( opts ) {
           'oauth_timestamp': dateNow.getTime()
         }, baseParams);
         preparedData.oauth_signature = this.signRequest(preparedData, options);
+
         return preparedData;
       },
 
@@ -75,7 +79,6 @@ exports.Header = function( opts ) {
             var normalizedURL    = this.normalizeURI(options.url);
             var normalizedParams = this.normalizeParams(params);
             var normalizedQuery  = null;
-
             var base = this.constructBaseString(options.requestMethod, normalizedURL, normalizedParams);
             var key  = this.encode(options.consumerSecret) + '&';
 
@@ -84,6 +87,7 @@ exports.Header = function( opts ) {
             }
 
             signature = this.hmacsha1(key, base);
+
 
             this.debug('');
             this.debug('NormalizedURL ', normalizedURL);
@@ -295,9 +299,10 @@ exports.Header = function( opts ) {
     getSignature: function(url, method) {
       var accessToken  = localStorage.getItem('tokenId');
       var accessSecret = localStorage.getItem('secret');
-      var includeToken = url.indexOf("auth/accesstoken") === -1;
-      var isLoginCall  = url.indexOf("auth/accesstoken") > -1;
+      var includeToken = url.indexOf("authenticate/accesstoken") === -1;
+      var isLoginCall  = url.indexOf("authenticate/accesstoken") > -1;
 
+      console.log('includeToken', includeToken, isLoginCall, accessToken, accessSecret);
       // If we are not making a call to login, and we
       // do not have the required tokens then do not
       // include an auth value.
@@ -306,7 +311,7 @@ exports.Header = function( opts ) {
       }
 
       // Setup the authParams
-      var authParams = _.extend(_.clone(this.defaults), this.user);
+      var authParams = _.extend(_.clone(defaults), this.user);
 
       // Setup the Signing Options
       var authSigningOptions = {

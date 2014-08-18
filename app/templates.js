@@ -7,7 +7,8 @@ module.exports = function( opts ) {
     'PaginationTemplate' : require("./templates/general/pagination.handlebars"),
     'Dashboard': require("./templates/main/dashboard.handlebars"),
     'Login': {
-      'Form': require("./templates/login/login.handlebars")
+      'Form': require("./templates/login/login.handlebars"),
+      'Login': require("./templates/login/loginForm.handlebars")
     },
     'Sidebar' : require("./templates/main/sidebar.handlebars"),
     'Cheese' : {
