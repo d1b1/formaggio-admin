@@ -302,7 +302,6 @@ exports.Header = function( opts ) {
       var includeToken = url.indexOf("authenticate/accesstoken") === -1;
       var isLoginCall  = url.indexOf("authenticate/accesstoken") > -1;
 
-      console.log('includeToken', includeToken, isLoginCall, accessToken, accessSecret);
       // If we are not making a call to login, and we
       // do not have the required tokens then do not
       // include an auth value.

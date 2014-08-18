@@ -50,9 +50,40 @@
     "slick": "^1.11.2",
     "servedir": "^0.2.2"
   },
+  "browserify-shim": {
+    "bootstrap-browser": {
+      "exports": "bootstrap-browser",
+      "depends": [
+        "jquery-ui",
+        "jquery"
+      ]
+    },
+    "backboneLayoutmanager": "backboneLayoutmanager",
+    "serializeObject": "serializeObject",
+    "select2": "select2",
+    "bootstrapDatePicker": "bootstrapDatePicker",
+    "messenger": "messenger",
+    "dcjqaccordion": "dcjqaccordion",
+    "inputMask": "inputMask",
+    "gauge": "gauge",
+    "dataTables": "dataTables",
+    "dataTableTools": "dataTableTools",
+    "jquery_ui": "jquery_ui",
+    "nestable": "nestable",
+    "wysihtml5": "wysihtml5",
+    "bootstrapwysihtml5": {
+      "exports": "bootstrapwysihtml5",
+      "depends": [
+        "./public/js/plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js:wysihtml5"
+      ]
+    },
+    "DT_bootstrap": "DT_bootstrap"
+  },
   "browser": {
     "formaggio-common": "./assets/common/utils.js",
-    "formaggio-handlebars-helpers": "./assets/common/handlebars.js"
+    "formaggio-handlebars-helpers": "./assets/common/handlebars.js",
+    "messenger": "./assets/plugins/HubSpot-Messenger/build/js/messenger.min.js"
+
   },
   "dependencies": {
     "tiny-lr": "0.0.7",

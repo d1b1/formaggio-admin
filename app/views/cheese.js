@@ -6,7 +6,8 @@ var $ = require('jquery-browserify')
 
 var app = require('formaggio-common')()
     , LayoutManager = require("backboneLayoutmanager")
-    , DashboardData = require("../data/models")()
+    , Data = require("../data/models")()
+    , Shared        = require("../shared/resources")()
     , TplService    = require("../templates.js")();
 
 module.exports = function( opts ) {
@@ -21,16 +22,15 @@ module.exports = function( opts ) {
   };
 
   Module.Views.List = Backbone.Layout.extend({
-    // el: '#main-content',
     __name__: 'Cheese-ListView',
     template: TplService.Cheese.Table,
     initialize: function () {
       var self = this;
 
       self.collection.on('sync', self.updateTable);
+      self.collection.on('remove', self.updateTable);
     },
     unload: function() {
-      console.log('Unloading the Cheese List');
       this.unbind();
       this.remove();
     },
@@ -39,11 +39,63 @@ module.exports = function( opts ) {
       'focus #textSearchBox': 'searchFocus',
       'click .advanced-search-tab': 'toggleAdvancedSearch',
       'submit #advancedSearch': 'submitAdvancedSearch',
-      'click .addNewButton': 'gotoAddNewRoute'
+      'click .addNewCheeseButton': 'newCheese',
+      'click .deleteCheeseButton': 'deleteCheese'
     },
-    gotoAddNewRoute: function(e) {
-      e.preventDefault();
-      Backbone.history.navigate('cheeses/new', { trigger: true });
+    newCheese: function(evt) {
+      var cheese = new Data.Models.Cheese();
+
+      new Shared.Views.NewCheese({ model: cheese }).render();
+    },
+    deleteCheese: function(evt) {
+      var self = this;
+      var cheese = this.collection.get($(evt.currentTarget).data('id'));
+
+      if (cheese) {
+        if (confirm('Do you want to delete this cheese?')) {
+
+          cheese.destroy({
+            success: function() {
+              // Remove from the collection.
+              self.collection.remove(cheese);
+
+              // Alert the UI.
+              Messenger().post({
+                message: "Successfully deleted a cheese.",
+                type: "info",
+                hideAfter: 1,
+                hideOnNavigate: true,
+                showCloseButton: false,
+                id: cheese.id
+              });
+
+            },
+            error: function() {
+              // Alert the UI.
+              Messenger().post({
+                message: "Failed to remove.",
+                type: "error",
+                hideAfter: 1,
+                hideOnNavigate: true,
+                showCloseButton: false,
+                id: cheese.id
+              });
+            }
+          });
+
+          // TODO: Figure out why this craps out. maybe we need
+          // to upgrade the JQuery and/or backbone.js.
+
+          // .done(function() {
+          //   console.log('Deleted a cheese');
+          // })
+          // .fail(function() {
+          //   console.log('Opps failed to delete a cheese');
+          // });
+        }
+      } else {
+        console.log('Opps we could not find the cheese you wanted to cut. Ha!');
+      }
     },
     toggleAdvancedSearch: function(e) {
       // TODO: Move this somewhere else.
@@ -312,30 +364,38 @@ module.exports = function( opts ) {
       var self = this;
       e.preventDefault();
 
+      self.model.unset('maker');
+      self.model.unset('makers');
+      self.model.unset('users');
+      self.model.unset('user');
+      self.model.unset('__v');
+      self.model.unset('_id');
+      self.model.unset('accounts');
+
       if (!self.model.isValid()) {
-        console.log(self.model.validationError);
-        app.confirmBox('errorSaving', 'Add All Fields', "Please supply information for every field.", 'hide', 'OK');
+        var msg = "Please supply information for every field.<br><br>" + self.model.validationError;
+        app.confirmBox('errorSaving', 'Add All Fields', msg, 'hide', 'OK');
         return;
       }
 
-      console.log('here 1');
-      self.model.save({
+      self.model.save(null, {
         success: function() {
-          console.log('saved');
+
+          Messenger().post({
+            message: "Cheese was saved!",
+            type: "info",
+            hideAfter: 1,
+            hideOnNavigate: true,
+            showCloseButton: false,
+            id: self.model.id
+          });
+
         },
         error: function() {
-          console.log('eerror');
+          app.confirmBox('errorSaving', 'Error Saving Information', "We're sorry, there was an error saving this information. Please try again.", 'hide', 'OK');
+          app.setupPage();
         }
       });
-      // .done(function() {
-      //   console.log('here 2');
-      //   location.reload(true);
-      //   app.setupPage();
-      // }).fail(function() {
-      //   console.log('here 3');
-      //   app.confirmBox('errorSaving', 'Error Saving Information', "We're sorry, there was an error saving this information. Please try again.", 'hide', 'OK');
-      //   app.setupPage();
-      // });
     }
   });
 

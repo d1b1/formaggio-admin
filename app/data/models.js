@@ -26,6 +26,7 @@ module.exports = function ( opts ) {
   Module = {
     Models: {
       Account: BaseModel.extend({
+        idAttribute: '_id',
         defaults: {
           username: '',
           email: ''
@@ -42,6 +43,7 @@ module.exports = function ( opts ) {
         urlRoot: "http://api.formagg.io/user"
       }),
       Maker: BaseModel.extend({
+        idAttribute: '_id',
         defaults: {
           'name': '',
           'state': '',
@@ -56,6 +58,7 @@ module.exports = function ( opts ) {
         urlRoot: "http://api.formagg.io/maker"
       }),
       Cheese: BaseModel.extend({
+        idAttribute: '_id',
         defaults: {},
         validate: function(attrs, options) {
           if (!attrs.name) {

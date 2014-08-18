@@ -2,6 +2,7 @@ var $ = require('jquery-browserify');
 var _ = require('underscore');
 var Backbone = require('backbone');
 var Authorization = require('./authorization');
+var Messenger = require("messenger");
 
 Backbone.$ = $ ;
 window._ = _;
@@ -59,6 +60,12 @@ $.ajaxSetup({
 });
 
 $(function() {
+
+  Messenger.options = {
+    extraClasses: 'messenger-fixed messenger-on-bottom messenger-on-left',
+    theme: 'flat'
+  };
+
   $('#nav-accordion').dcAccordion({
     eventType: 'click',
     autoClose: true,
