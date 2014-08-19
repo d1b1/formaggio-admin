@@ -163,7 +163,13 @@ module.exports = function( opts ) {
 
           // TODO: Fix this to make it work in the template.
           if (_.isArray(modelJSON.makers)) {
-            modelJSON.maker = modelJSON.makers[0].maker;
+            if (!_.isEmpty(modelJSON.makers)) {
+              modelJSON.maker = modelJSON.makers[0].maker;
+            } else {
+              modelJSON.maker = { name: 'NA' };
+            }
+          } else {
+            modelJSON.maker = { name: 'NA' };
           }
 
           $('#tbody').append(TplService.Cheese.Tr({ model: modelJSON }));
