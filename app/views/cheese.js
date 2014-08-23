@@ -6,7 +6,7 @@ var $ = require('jquery-browserify')
 
 var app = require('formaggio-common')()
     , LayoutManager = require("backboneLayoutmanager")
-    , Data = require("../data/models")()
+    , Data          = require("../data/models")()
     , Shared        = require("../shared/resources")()
     , TplService    = require("../templates.js")();
 
@@ -82,16 +82,6 @@ module.exports = function( opts ) {
               });
             }
           });
-
-          // TODO: Figure out why this craps out. maybe we need
-          // to upgrade the JQuery and/or backbone.js.
-
-          // .done(function() {
-          //   console.log('Deleted a cheese');
-          // })
-          // .fail(function() {
-          //   console.log('Opps failed to delete a cheese');
-          // });
         }
       } else {
         console.log('Opps we could not find the cheese you wanted to cut. Ha!');
@@ -297,6 +287,47 @@ module.exports = function( opts ) {
 
   Module.Views.Header = Backbone.Layout.extend({
     template: TplService.Cheese.Header,
+    events: {
+      'click .deleteCheeseButton': 'deleteCheese'
+    },
+    deleteCheese: function(evt) {
+      var self = this;
+
+      if (self.model) {
+        if (confirm('Do you want to delete this cheese?')) {
+
+          self.model.destroy({
+            success: function() {
+              // Remove from the collection.
+
+              // Alert the UI.
+              Messenger().post({
+                message: "Successfully deleted a cheese.",
+                type: "info",
+                hideAfter: 1,
+                hideOnNavigate: true,
+                showCloseButton: false,
+                id: self.model.id
+              });
+
+            },
+            error: function() {
+              // Alert the UI.
+              Messenger().post({
+                message: "Failed to remove.",
+                type: "error",
+                hideAfter: 1,
+                hideOnNavigate: true,
+                showCloseButton: false,
+                id: self.model.id
+              });
+            }
+          });
+        }
+      } else {
+        console.log('Opps we could not find the cheese you wanted to cut. Ha!');
+      }
+    },
     serialize: function() {
       return {
         model: this.model.toJSON()
@@ -324,12 +355,14 @@ module.exports = function( opts ) {
       var self = this;
       var ed = _.first(this.$el.find("#jsonEditorDiv"));
 
-      var editor = new jsoneditor.JSONEditor(ed, {
-        change: function () {
-          var changedData = _.omit(editor.get(), [ 'id', '_id', '_modified' ]);
-          self.model.set(changedData);
-        }
-      }).set(_.omit(self.model.toJSON(), [ 'id', '_id', '_modified' ]));
+      var options = {
+        'mode': 'tree',
+        'modes': ['code','tree'],
+        'search': false,
+        'expand': true
+      };
+
+      var editor = new jsoneditor.JSONEditor(ed, options).set(_.omit(self.model.toJSON(), [ "id", "_id", "_modified" ]));
     },
     save: function(e) {
       var self = this;
@@ -375,7 +408,6 @@ module.exports = function( opts ) {
       self.model.unset('users');
       self.model.unset('user');
       self.model.unset('__v');
-      self.model.unset('_id');
       self.model.unset('accounts');
 
       if (!self.model.isValid()) {
@@ -406,7 +438,6 @@ module.exports = function( opts ) {
   });
 
   Module.Views.Detail = Backbone.Layout.extend({
-    // el: '#main-content',
     __name__: 'Cheese-Detail-DetailView',
     template: TplService.Cheese.Wrapper,
     initialize : function () {
@@ -418,7 +449,6 @@ module.exports = function( opts ) {
       'click .cheeseTab': 'changeTabs'
     },
     unload : function() {
-      console.log('Unloading the Cheese Detail');
       this.unbind();
       this.remove();
     },
@@ -436,18 +466,14 @@ module.exports = function( opts ) {
       this.tabs.ImagesTabContainer = self.insertView('#ImagesTabContainer', new Module.Views.Images( { model: self.model }));
       this.tabs.MapTabContainer = self.insertView('#MapTabContainer', new Module.Views.Map( { model: self.model }));
 
-      if (self.model.isNew()) {
-        self.tabs.formTabContainer.render();
-        self.tabs.formHeader.render();
-      } else {
-        self.model.fetch({
-          success: function() {
-            self.tabs.formTabContainer.render();
-            self.tabs.formHeader.render();
-            self.model.trigger('change');
-          }
-        });
-      }
+      self.model.fetch({
+        success: function() {
+          self.tabs.formTabContainer.render();
+          self.tabs.formHeader.render();
+          self.model.trigger('change');
+        }
+      });
+
       app.setupPage();
     }
   });

@@ -24,7 +24,7 @@
                 <a href="javascript:void(0)">Advanced Search <span class="fa fa-chevron-down"></span></a>
               </div>
               <div class="col-md-1">
-                <a href="#accounts/new" class="btn btn-primary addNewButton">Add New Account <i class="fa fa-plus"></i></a>
+                <button class="btn btn-primary addNewAccountButton">Add New Account <i class="fa fa-plus"></i></button>
               </div>
             </div>
             <div class="row">
@@ -43,28 +43,16 @@
             </ul>
         </header>
         <div class="panel-body">
-        <div class="adv-table">
-          <div class="data-table-header">
-            <div class="col-md-4">
-              <select name="adjustPerPage" class="adjustPerPage">
-                <option value="1">1</option>
-                <option value="5">5</option>
-                <option value="10" selected="selected">10</option>
-                <option value="20">20</option>
-                <option value="50">50</option>
-              </select>
-              <label for="adjustPerPage">Records Per Page</label>
-            </div>
-
+          <div class="adv-table">
+            <table class="display table table-bordered table-striped dataTable">
+              <thead>
+                <th width="25%">Name</th>
+                <th width-"15%">Email</th>
+                <th width="20%">Options</th>
+              </thead>
+              <tbody id="tbody"></tbody>
+            </table>
           </div>
-          <table class="display table table-bordered table-striped dataTable">
-            <thead>
-              <th width="25%">Name</th>
-              <th width-"15%">Email</th>
-              <th width="20%">Options</th>
-            </thead>
-            <tbody id="tbody"></tbody>
-          </table>
       </div>
     </div>
 

@@ -33,8 +33,7 @@ module.exports = Backbone.Router.extend({
       presenter.presentView( this.CheeseList );
     },
     detail : function (id) {
-      this.CheeseDetail.model = new Data.Models.Cheese({ id: id });
-      // WAS: Moved to the presenter: this.CheeseDetail.render();
+      this.CheeseDetail.model = new Data.Models.Cheese({ _id: id });
 
       presenter.presentView( this.CheeseDetail );
     }

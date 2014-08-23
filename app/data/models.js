@@ -1,6 +1,6 @@
-var $ = require('jquery-browserify');
-var _ = require('underscore');
-var Backbone = require('backbone');
+var $ = require("jquery-browserify");
+var _ = require("underscore");
+var Backbone = require("backbone");
 Backbone.PageableCollection = require("backbone-pageable");
 
 Backbone.$ = $ ;
@@ -26,10 +26,10 @@ module.exports = function ( opts ) {
   Module = {
     Models: {
       Account: BaseModel.extend({
-        idAttribute: '_id',
+        idAttribute: "_id",
         defaults: {
-          username: '',
-          email: ''
+          username: "",
+          email: ""
         },
         validate: function(attrs, options) {
           if (!attrs.username) {
@@ -43,12 +43,12 @@ module.exports = function ( opts ) {
         urlRoot: "http://api.formagg.io/user"
       }),
       Maker: BaseModel.extend({
-        idAttribute: '_id',
+        idAttribute: "_id",
         defaults: {
-          'name': '',
-          'state': '',
-          'city': '',
-          'country': ''
+          "name": "",
+          "state": "",
+          "city": "",
+          "country": ""
         },
         validate: function(attrs, options) {
           if (!attrs.name) {
@@ -58,7 +58,7 @@ module.exports = function ( opts ) {
         urlRoot: "http://api.formagg.io/maker"
       }),
       Cheese: BaseModel.extend({
-        idAttribute: '_id',
+        idAttribute: "_id",
         defaults: {},
         validate: function(attrs, options) {
           if (!attrs.name) {

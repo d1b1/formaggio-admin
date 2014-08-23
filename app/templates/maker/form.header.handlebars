@@ -10,8 +10,8 @@
 
     <div class="col-md-6">
       <div class="profile-desk">
-        <h1>{{#if_notempty model.id }} Maker {{else}} New Maker {{/if_notempty}}</h1>
-        <span class="text-muted">{{model.name}}</span><br>
+        <h1>{{model.name}}</h1>
+        <span class="text-muted">{{model.country}}</span><br>
         <span class="text-muted"><b>Created:</b> {{easyDate model.created}}</span><br>
         <span class="text-muted"><b>Modified:</b> {{easyDate model.modified}}</span>
         <br/>

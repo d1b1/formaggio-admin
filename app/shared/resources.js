@@ -8,8 +8,8 @@ module.exports = function() {
   Module.Views = {};
 
   Module.Views.NewCheese = require("./views/newCheese");
-  // Module.Views.CopyEmployer   = require("./views/copyEmployer");
-  // Module.Views.NewEmployer    = require("./views/newEmployer");
+  Module.Views.NewAccount = require("./views/newAccount");
+  Module.Views.NewMaker = require("./views/newMaker");
 
   return Module;
 }

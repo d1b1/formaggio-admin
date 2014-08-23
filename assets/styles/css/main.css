@@ -7,8 +7,8 @@
 @import url('jsoneditor/jsoneditor.css');
 @import url('style-responsive.css');
 @import url('DT_bootstrap.css');
-@import url('../HubSpot-Messenger/messenger.css');
-@import url('../HubSpot-Messenger/messenger-theme-flat.css');
+@import url('../../plugins/HubSpot-Messenger/build/css/messenger.css');
+@import url('../../plugins/HubSpot-Messenger/build/css/messenger-theme-flat.css');
 
 h1, h2, h3, h4, h5, h6 {
   font-family: Lato; }

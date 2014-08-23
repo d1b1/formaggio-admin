@@ -1,20 +1,20 @@
-var $ = require('jquery-browserify')
-    , _ = require('underscore')
-    , Backbone = require('backbone')
+var $ = require("jquery-browserify")
+    , _ = require("underscore")
+    , Backbone = require("backbone")
     , Data = require("../data/models")();
 
-var app = require('formaggio-common')();
+var app = require("formaggio-common")();
 
 Backbone.$ = $;
 
 var Resources = require("../views/maker")();
 var TplService    = require("../templates.js")();
-var presenter = require('../presenter');
+var presenter = require("../presenter");
 
 module.exports = Backbone.Router.extend({
   routes: {
-      'makers'                    : 'list',
-      'makers/:id'                : 'detail'
+      "makers"                    : "list",
+      "makers/:id"                : "detail"
     },
     initialize : function (options) {
       self.makers = this.makers = new Data.Collections.Makers();
@@ -23,18 +23,18 @@ module.exports = Backbone.Router.extend({
       // Old Pattern: This attaches both the List and Detail
       // to the outer layout.
 
-      // this.MakerList = this.Layout.setView('makerList', new Resources.Views.Container({ collection: this.collection }));
-      // this.MakerDetail = this.Layout.setView('makerDetail', new Resources.Views.Detail());
+      // this.MakerList = this.Layout.setView("makerList", new Resources.Views.Container({ collection: this.collection }));
+      // this.MakerDetail = this.Layout.setView("makerDetail", new Resources.Views.Detail());
     },
     list : function () {
 
       var Layout = Backbone.Layout.extend({
-        // el: '#main-content',
+        // el: "#main-content",
         template: TplService.Maker.Container,
         views: {
-          '#MakerListTabContainer': new Resources.Views.List({ collection: this.makers }),
-          '#MakerMapTabContainer': new Resources.Views.Map({ collection: this.makers }),
-          '#Pagination': new Resources.Views.Pagination({ collection: this.makers }),
+          "#MakerListTabContainer": new Resources.Views.List({ collection: this.makers }),
+          "#MakerMapTabContainer": new Resources.Views.Map({ collection: this.makers }),
+          "#Pagination": new Resources.Views.Pagination({ collection: this.makers }),
         }
       });
 
@@ -46,19 +46,18 @@ module.exports = Backbone.Router.extend({
     detail: function (id) {
 
       var self = this;
-      var model = new Data.Models.Maker({ id: id });
+      var model = new Data.Models.Maker({ "_id": id });
 
       var Layout = Backbone.Layout.extend({
-        // el: '#main-content',
         template: TplService.Maker.Wrapper,
         views: {
-          '.formHeader':           new Resources.Views.Header({ model: model }),
-          '#formTabContainer':     new Resources.Views.EditForm( { model: model }),
-          '#JSONTabContainer':     new Resources.Views.JSONEditor( { model: model }),
-          '#CheesesTabContainer':  new Resources.Views.Cheeses( { model: model }),
-          '#AccountsTabContainer': new Resources.Views.Accounts( { model: model }),
-          '#ImagesTabContainer':   new Resources.Views.Images( { model: model }),
-          '#MapTabContainer':      new Resources.Views.Map( { model: model })
+          ".formHeader":           new Resources.Views.Header({ model: model }),
+          "#formTabContainer":     new Resources.Views.EditForm( { model: model }),
+          "#JSONTabContainer":     new Resources.Views.JSONEditor( { model: model }),
+          "#CheesesTabContainer":  new Resources.Views.Cheeses( { model: model }),
+          "#AccountsTabContainer": new Resources.Views.Accounts( { model: model }),
+          "#ImagesTabContainer":   new Resources.Views.Images( { model: model }),
+          "#MapTabContainer":      new Resources.Views.Map( { model: model })
         }
       });
 
@@ -71,8 +70,11 @@ module.exports = Backbone.Router.extend({
       // of issues might arise and we need the UI elements in the
       // view to make a better user experience.
 
-      presenter.presentView( new Layout() );
-      model.fetch();
+      model.fetch({
+        success: function() {
+          presenter.presentView( new Layout() );
+        }
+      });
 
       // Option 2 (Alt): Fetch and only render after success.
       //
