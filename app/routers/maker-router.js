@@ -4,6 +4,7 @@ var $ = require("jquery-browserify")
     , Data = require("../data/models")();
 
 var app = require("formaggio-common")();
+var Shared = require("../shared/resources")()
 
 Backbone.$ = $;
 
@@ -30,6 +31,14 @@ module.exports = Backbone.Router.extend({
 
       var Layout = Backbone.Layout.extend({
         // el: "#main-content",
+        events: {
+          "click .addNewMakerButton": "newMaker"
+        },
+        newMaker: function(evt) {
+          var maker = new Data.Models.Maker();
+
+          new Shared.Views.NewMaker({ model: maker }).render();
+        },
         template: TplService.Maker.Container,
         views: {
           "#MakerListTabContainer": new Resources.Views.List({ collection: this.makers }),

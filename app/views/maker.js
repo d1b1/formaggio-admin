@@ -136,12 +136,12 @@ module.exports = function( opts ) {
       this.remove();
     },
     events: {
+      "click .addNewMakerButton": "newMaker"
       // "change #textSearchBox": "search",
       // "focus #textSearchBox": "searchFocus",
       // "click .advanced-search-tab": "toggleAdvancedSearch",
       // "submit #advancedSearch": "submitAdvancedSearch",
       // "click .makerListTab": "changeTabs",
-      "click .addNewMakerButton": "newMaker"
     },
     newMaker: function(evt) {
       var maker = new Data.Models.Maker();
@@ -222,6 +222,10 @@ module.exports = function( opts ) {
       var self = this;
       // this.originalUsersState = _.extend({}, this.collection.state);
       // this.originalUsersQueryParams = _.extend({},this.collection.queryParams);
+
+      $('.addNewMakerButton').on('click', function() {
+        alert('asdf');
+      });
 
       $(".makerListTab")[0].click();
       // this.pager.render();
