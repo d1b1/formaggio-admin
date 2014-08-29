@@ -11,9 +11,14 @@ window.Backbone.$ = $ ;
 var LayoutManager = require("backboneLayoutmanager");
 
 var Login = require('./views/login')();
-
 var Router = require('./router.js');
-var router = new Router();
+
+// var api = 'api.formagg.io';
+// if (localStorage.getItem('api')) {
+//   api = localStorage.getItem('api');
+// }
+//
+// Backbone.api = api;
 
 Backbone.Layout.configure({ manage: true });
 
@@ -79,9 +84,23 @@ $(function() {
 
 });
 
-Backbone.history.start( { pushState: false } );
+var Session = Backbone.Model.extend({
+  url: 'http://api.formagg.io/user/current'
+});
 
-console.log('Starting Router');
+window.Session = new Session();
+
+window.Session.fetch({
+  success: function() {
+    var router = new Router();
+    Backbone.history.start({ pushState: false });
+  },
+  error: function(err) {
+    // TODO: Find a better way to handle this state change.
+
+    console.log('Unable to talk to the API. Could not start Backbone.');
+  }
+});
 
 // All navigation that is relative should be passed through the navigate
 // method, to be processed by the router. If the link has a `data-bypass`

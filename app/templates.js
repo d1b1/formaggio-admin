@@ -10,7 +10,9 @@ module.exports = function( opts ) {
       'Form': require("./templates/login/login.handlebars"),
       'Login': require("./templates/login/loginForm.handlebars")
     },
-    'Sidebar' : require("./templates/main/sidebar.handlebars"),
+    'Header'           : require("./templates/main/header.handlebars"),
+    'Sidebar'          : require("./templates/main/sidebar.handlebars"),
+    'Profile'          : require("./templates/main/profile.handlebars"),
     'Cheese' : {
       'Table'          : require("./templates/cheese/table.handlebars"),
       'Tr'             : require("./templates/cheese/tr.handlebars"),
