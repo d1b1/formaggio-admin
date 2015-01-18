@@ -122,7 +122,6 @@ module.exports = function( opts ) {
   });
 
   Module.Views.Container = Backbone.Layout.extend({
-    // el: "#main-content",
     __name__: "Maker-ListView",
     template: TplService.Maker.Container,
     initialize: function () {
@@ -136,9 +135,9 @@ module.exports = function( opts ) {
       this.remove();
     },
     events: {
-      "click .addNewMakerButton": "newMaker"
-      // "change #textSearchBox": "search",
-      // "focus #textSearchBox": "searchFocus",
+      "click .addNewMakerButton": "newMaker",
+      "keyup #textMakerSearchBox": "search",
+      "focus #textMakerSearchBox": "searchFocus"
       // "click .advanced-search-tab": "toggleAdvancedSearch",
       // "submit #advancedSearch": "submitAdvancedSearch",
       // "click .makerListTab": "changeTabs",
@@ -189,21 +188,22 @@ module.exports = function( opts ) {
     //
     //   return false;
     // },
-    // search: function(e) {
-    //   this.collection.state =  _.extend({},this.originalUsersState);
-    //   this.collection.queryParams =  _.extend({},this.originalUsersQueryParams);
-    //   this.collection.state._q = $(e.currentTarget).val();
-    //   this.collection.state._fields = "type";
-    //   this.collection.state.currentPage = 1;
-    //   this.collection.queryParams.name =  $(e.currentTarget).val();
-    //   this.collection.queryParams._fields = "type";
-    //
-    //   this.collection.fetch({
-    //     error: function(collection, response, options) {
-    //       $("#tbody").append("<tr><td>Oops, error searching for " + $(e.currentTarget).val() + "</td></tr>");
-    //     }
-    //   });
-    // },
+    search: _.debounce(function(e) {
+      alert('asdf');
+      this.collection.state =  _.extend({},this.originalUsersState);
+      this.collection.queryParams =  _.extend({},this.originalUsersQueryParams);
+      this.collection.state._q = $(e.currentTarget).val();
+      this.collection.state._fields = "type";
+      this.collection.state.currentPage = 1;
+      this.collection.queryParams.name =  $(e.currentTarget).val();
+      this.collection.queryParams._fields = "type";
+    
+      this.collection.fetch({
+        error: function(collection, response, options) {
+          $("#tbody").append("<tr><td>Oops, error searching for " + $(e.currentTarget).val() + "</td></tr>");
+        }
+      });
+    }, 150),
     // changeTabs: function(e) {
     //   var tab = $(e.currentTarget)[0].hash.replace("#", "");
     //

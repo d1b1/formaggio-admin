@@ -35,7 +35,7 @@ module.exports = function( opts ) {
       this.remove();
     },
     events: {
-      'change #textSearchBox': 'search',
+      'keyup #textSearchBox': 'search',
       'focus #textSearchBox': 'searchFocus',
       'click .advanced-search-tab': 'toggleAdvancedSearch',
       'submit #advancedSearch': 'submitAdvancedSearch',
@@ -128,7 +128,7 @@ module.exports = function( opts ) {
 
       return false;
     },
-    search: function(e) {
+    search: _.debounce(function(e) {
       this.collection.state =  _.extend({},this.originalUsersState);
       this.collection.queryParams =  _.extend({},this.originalUsersQueryParams);
       this.collection.state._q = $(e.currentTarget).val();
@@ -142,7 +142,7 @@ module.exports = function( opts ) {
           $('#tbody').append('<tr><td>Oops, error searching for ' + $(e.currentTarget).val() + "</td></tr>");
         }
       });
-    },
+    }, 150),
     updateTable : function () {
       var self = this;
       $('#tbody').html('');

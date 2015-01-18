@@ -32,13 +32,29 @@ module.exports = Backbone.Router.extend({
       var Layout = Backbone.Layout.extend({
         // el: "#main-content",
         events: {
-          "click .addNewMakerButton": "newMaker"
+          "click .addNewMakerButton": "newMaker",
+          "keyup #textMakerSearchBox": "search"
         },
         newMaker: function(evt) {
           var maker = new Data.Models.Maker();
 
           new Shared.Views.NewMaker({ model: maker }).render();
         },
+        search: _.debounce(function(e) {
+          this.collection.state =  _.extend({},this.originalUsersState);
+          this.collection.queryParams =  _.extend({},this.originalUsersQueryParams);
+          this.collection.state._q = $(e.currentTarget).val();
+          this.collection.state._fields = "type";
+          this.collection.state.currentPage = 1;
+          this.collection.queryParams.name =  $(e.currentTarget).val();
+          this.collection.queryParams._fields = "type";
+        
+          this.collection.fetch({
+            error: function(collection, response, options) {
+              $("#tbody").append("<tr><td>Oops, error searching for " + $(e.currentTarget).val() + "</td></tr>");
+            }
+          });
+        }, 150),
         template: TplService.Maker.Container,
         views: {
           "#MakerListTabContainer": new Resources.Views.List({ collection: this.makers }),
@@ -49,7 +65,7 @@ module.exports = Backbone.Router.extend({
 
       // new Layout().render();
 
-      presenter.presentView( new Layout() );
+      presenter.presentView( new Layout( { collection: this.makers }) );
       self.makers.fetch();
     },
     detail: function (id) {
