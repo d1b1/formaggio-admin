@@ -10,6 +10,7 @@ window.Backbone = Backbone;
 window.Backbone.$ = $ ;
 var LayoutManager = require("backboneLayoutmanager");
 
+console.log('here');
 var Login = require('./views/login')();
 var Router = require('./router.js');
 
