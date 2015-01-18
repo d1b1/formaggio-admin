@@ -7,6 +7,8 @@ Backbone.$ = $ ;
 
 module.exports = function ( opts ) {
 
+  var apiDomain = window.apiDomain;
+
   var BaseModel = Backbone.Model.extend({
     parse : function(response,options){
       if(response.data && response.data !== null){
@@ -40,7 +42,7 @@ module.exports = function ( opts ) {
             return "Missing Email";
           }
         },
-        urlRoot: "http://api.formagg.io/user"
+        urlRoot: "http://" + apiDomain + "/user"
       }),
       Maker: BaseModel.extend({
         idAttribute: "_id",
@@ -55,7 +57,7 @@ module.exports = function ( opts ) {
             return "Missing Name";
           }
         },
-        urlRoot: "http://api.formagg.io/maker"
+        urlRoot: "http://" + apiDomain + "/maker"
       }),
       Cheese: BaseModel.extend({
         idAttribute: "_id",
@@ -73,7 +75,7 @@ module.exports = function ( opts ) {
             return "Missing Source";
           }
         },
-        urlRoot: "http://api.formagg.io/cheese"
+        urlRoot: "http://" + apiDomain + "/cheese"
       })
     }
   };
@@ -113,17 +115,17 @@ module.exports = function ( opts ) {
     Cheeses: Backbone.PageableCollection.extend(
       _.defaults(_.clone(defaults), {
         model: Module.Models.Cheese,
-        url: "http://api.formagg.io/cheese/search"
+        url: "http://" + apiDomain + "/cheese/search"
     })),
     Makers: Backbone.PageableCollection.extend(
       _.defaults(_.clone(defaults), {
         model: Module.Models.Maker,
-        url: "http://api.formagg.io/maker/search"
+        url: "http://" + apiDomain + "/maker/search"
     })),
     Accounts: Backbone.PageableCollection.extend(
       _.defaults(_.clone(defaults), {
         model: Module.Models.Account,
-        url: "http://api.formagg.io/user/search"
+        url: "http://" + apiDomain + "/user/search"
     }))
   };
 

@@ -1,0 +1,25 @@
+
+<section class="panel">
+  <div class="panel-body profile-information">
+    <div class="col-md-3">
+      <div class="profile-pic text-center">
+        <img src="{{model.avatar}}" alt="">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="profile-desk">
+        <h1>{{model.name}}</h1>
+        <span class="text-muted">{{model.email}}</span><br>
+        <span class="text-muted"><b>Created:</b> {{easyDate model.created}}</span><br>
+        <span class="text-muted"><b>Modified:</b> {{easyDate model.modified}}</span>
+        <br/>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <br/>
+      <button class="btn btn-primary">Email <i class="fa fa-plus"></i></button>
+      <br/><br/>
+    </div>
+  </div>
+</section>

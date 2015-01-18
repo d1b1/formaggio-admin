@@ -6,6 +6,7 @@ var $ = require("jquery-browserify")
 Backbone.$ = $;
 
 var Resources = require("../views/account")();
+var presenter = require('../presenter');
 
 module.exports = Backbone.Router.extend({
   routes: {
@@ -25,10 +26,11 @@ module.exports = Backbone.Router.extend({
       this.AccountDetail = this.Layout.setView("accountdetail", new Resources.Views.Detail());
     },
     list : function () {
-      this.AccountList.render();
+      presenter.presentView( this.AccountList );
     },
     detail : function (id) {
       this.AccountDetail.model = new Data.Models.Account({ _id: id });
-      this.AccountDetail.render();
+
+      presenter.presentView( this.AccountDetail );
     }
   });

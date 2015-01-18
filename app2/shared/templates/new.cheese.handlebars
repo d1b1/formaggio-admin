@@ -1,0 +1,71 @@
+<div class="modal hide fade" id="LoginModalDialog" data-backdrop="static">
+  <div class="modal-dialog" style="width: 900px !important;">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&#215;</button>
+        <h3 class="title">New Cheese</h3>
+      </div>
+
+      <div class="modal-body padded">
+        <form class="col-md-offset-1 form-horizontal" id="modalForm">
+
+          <div class="form-group">
+             <label class="col-md-3 control-label">Name</label>
+             <div class="col-md-7">
+               <input type="text" class="form-control" value="{{model.name}}" name="name">
+             </div>
+          </div>
+
+          <div class="form-group">
+             <label class="col-md-3 control-label">Source</label>
+             <div class="col-md-7">
+               <input type="text" class="form-control" value="{{model.source}}" name="source">
+             </div>
+          </div>
+
+          <div class="form-group">
+             <label class="col-md-3 control-label">Flavor</label>
+             <div class="col-md-7">
+               <input type="text" class="form-control" value="{{model.favor}}" name="flavor">
+             </div>
+          </div>
+
+          <div class="form-group">
+             <label class="col-md-3 control-label">Pasteurised</label>
+             <div class="col-md-7">
+               <input type="text" class="form-control" value="{{model.pasteurized}}" name="pasteurized">
+             </div>
+          </div>
+
+          <div class="form-group">
+             <label class="col-md-3 control-label">Aging Time</label>
+             <div class="col-md-7">
+               <input type="text" class="form-control" value="{{model.aging-time}}" name="aging-time">
+             </div>
+          </div>
+
+          <div class="form-group">
+             <label class="col-md-3 control-label">Description</label>
+             <div class="col-md-7">
+               <textarea class="form-control" value="" name="description">{{model.description}}</textarea>
+             </div>
+          </div>
+
+          <p class="text-danger" id="ModalErrorMessages"></p>
+
+        </form>
+      </div>
+
+      <div class="modal-footer">
+
+        <div class="col-md-12">
+          <button href="javascript:void(0)" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <button class="btn btn-success btn-default actionButton" data-state="open">Continue</button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

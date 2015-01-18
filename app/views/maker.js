@@ -122,7 +122,7 @@ module.exports = function( opts ) {
   });
 
   Module.Views.Container = Backbone.Layout.extend({
-    el: "#main-content",
+    // el: "#main-content",
     __name__: "Maker-ListView",
     template: TplService.Maker.Container,
     initialize: function () {
@@ -409,7 +409,6 @@ module.exports = function( opts ) {
   });
 
   Module.Views.Detail = Backbone.Layout.extend({
-    el: "#main-content",
     __name__: "Maker-Detail-DetailView",
     template: TplService.Maker.Wrapper,
     initialize : function () {

@@ -10,32 +10,32 @@ var presenter = require('../presenter');
 
 module.exports = Backbone.Router.extend({
   routes: {
-      'cheeses'                    : 'list',
-      'cheeses/:id'                : 'detail'
-    },
-    initialize : function (options) {
-      this.Layout = new Resources.Layout();
-      this.collection = new Data.Collections.Cheeses();
+    'cheeses'                    : 'list',
+    'cheeses/:id'                : 'detail'
+  },
+  initialize : function (options) {
+    this.Layout = new Resources.Layout();
+    this.collection = new Data.Collections.Cheeses();
 
-      // This used the pattern of attaching the views using
-      // the layout manager in the init, and then makeing them
-      // available for render.
+    // This used the pattern of attaching the views using
+    // the layout manager in the init, and then makeing them
+    // available for render.
 
-      // Additionally the presenter handles the DOM
-      // swap and the view unload actions.
+    // Additionally the presenter handles the DOM
+    // swap and the view unload actions.
 
-      this.CheeseList = this.Layout.setView('cheeseList', new Resources.Views.List( { collection: this.collection }));
-      this.CheeseDetail = this.Layout.setView('cheeseDetail', new Resources.Views.Detail());
-    },
-    list : function () {
-      this.CheeseList.render();
+    this.CheeseList = this.Layout.setView('cheeseList', new Resources.Views.List( { collection: this.collection }));
+    this.CheeseDetail = this.Layout.setView('cheeseDetail', new Resources.Views.Detail());
+  },
+  list : function () {
+    this.CheeseList.render();
 
-      presenter.presentView( this.CheeseList );
-    },
-    detail : function (id) {
-      this.CheeseDetail.model = new Data.Models.Cheese({ _id: id });
+    presenter.presentView( this.CheeseList );
+  },
+  detail : function (id) {
+    this.CheeseDetail.model = new Data.Models.Cheese({ _id: id });
 
-      presenter.presentView( this.CheeseDetail );
-    }
+    presenter.presentView( this.CheeseDetail );
+  }
 
-  });
+});

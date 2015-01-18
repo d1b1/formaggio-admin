@@ -1,0 +1,74 @@
+<div class="modal hide fade" data-backdrop="static">
+  <div class="modal-dialog" style="width: 800px !important;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&#215;</button>
+        <h3 class="title">Your Profile</h3>
+      </div>
+
+      <div class="modal-body">
+        <form class="form-horizontal col-md-offset-1" autocomplete="off" id="modalForm">
+
+          <div class="form-group">
+            <div class="col-lg-offset-1">
+               <div class="col-lg-6 ">
+                  <p class="text-danger" id="ModalErrorMessages"></p>
+               </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-3 control-label">First Name</label>
+            <div class="col-md-7">
+              <input type="text" autocomplete="off" class="form-control name" name="nameFirst" value="{{profile.nameFirst}}" placeholder="Enter Name..." data-validate="required">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-3 control-label">Last Name</label>
+            <div class="col-md-7">
+              <input type="text" autocomplete="off" class="form-control nameLast" name="nameLast" value="{{profile.nameLast}}" placeholder="Enter Name..." data-validate="required">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-3 control-label">Email</label>
+            <div class="col-md-7">
+              <input type="text" autocomplete="off" class="form-control name" name="email" value="{{profile.email}}" placeholder="Enter Name..." data-validate="required">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-3 control-label">Password</label>
+            <div class="col-md-7">
+              <input type="password" autocomplete="off" class="form-control name" name="password" value="" placeholder="*******" data-validate="required">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-3 control-label">Picture Url</label>
+            <div class="col-md-7">
+              <input type="text" autocomplete="off" class="form-control name" name="profilePictureUrls" value="{{profile.profilePictureUrl}}" placeholder="Enter Profile Picture URL..." data-validate="required">
+            </div>
+          </div>
+
+        </form>
+
+        <br style="clear: both"/>
+      </div>
+
+      <div class="modal-footer">
+        <div class="checkbox col-md-2">
+          <label class="hide" id="createAnotherOption">
+            <input type="checkbox" id="createAnother"> Create Another
+          </label>
+        </div>
+        <div class="col-md-10">
+          <a href="javascript:void(0)" class="btn btn-success continue" data-state="open">Continue</a>
+          <a href="javascript:void(0)" class="btn btn-default" data-dismiss="modal">Cancel</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

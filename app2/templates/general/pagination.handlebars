@@ -1,0 +1,20 @@
+<ul class="pagination pull-right">
+  {{#if_greaterthan currentPage 1}}
+    <li><a class="previous getPreviousPage" href="javascript:void(0)">&laquo;</a></li>
+  {{else}}
+    <li class="disabled"><a href="javascript:void(0)">&laquo;</a></li>
+  {{/if_greaterthan}}
+  
+  {{#each arr}}
+    {{#if_eq ../currentPage this}}
+      <li class="active" ><a href="javascript:void(0)"> {{this}} <span class="sr-only">(current)</span></a></li>
+    {{else}}
+      <li><a class="getPage" data-page="{{this}}" href="javascript:void(0)"> {{this}}</a></li>
+    {{/if_eq}}
+  {{/each}}
+  {{#if_greaterthan  lastPage currentPage}}
+    <li><a class="next getNextPage" href="javascript:void(0)">&raquo;</a></li>
+  {{else}}
+    <li class="disabled"><a href="javascript:void(0)">&raquo;</a></li>
+  {{/if_greaterthan}}
+</ul>

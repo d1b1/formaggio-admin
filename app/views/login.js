@@ -65,7 +65,7 @@ module.exports = function ( opts ) {
       };
 
       var AuthService = Authorization.Header(authConfig);
-      var url = 'http://api.formagg.io/authenticate/accesstoken';
+      var url = 'http://' + window.apiDomain + '/authenticate/accesstoken';
 
       var opts = {
         url: url,
@@ -83,6 +83,8 @@ module.exports = function ( opts ) {
           // Store the session and token info.
           localStorage.setItem('tokenId', data.tokenId);
           localStorage.setItem('secret', data.secret);
+
+          window.Session.setup();
 
           self.unload();
         })
@@ -115,13 +117,18 @@ module.exports = function ( opts ) {
       e.preventDefault();
       var self = this;
       var loginParams = $(e.currentTarget).serializeObject();
+
+alert('dddasdfasdf');
+
       $.ajax({
           type: 'POST',
-          url:'http://api.formagg.io/auth/accesstoken',
+          url:'http://' + window.apiDomain + '/auth/accesstoken',
           data:  JSON.stringify (loginParams),
           success: function(data) {
+            alert('ssss');
             window.location.href="#";
             window.location.reload(true);
+            alert('asdfasfd');
           },
           contentType: "application/json",
           dataType: 'json'

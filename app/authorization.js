@@ -32,7 +32,7 @@ exports.Header = function( opts ) {
   var Utils = {
 
      debug: function(args) {
-       if (debug) console.log('DEBUG', arguments);
+       if (debug) console.log('DEBUG', arguments)
      },
 
      prepareXAuthData: function(baseParams, options) {

@@ -10,16 +10,11 @@ window.Backbone = Backbone;
 window.Backbone.$ = $ ;
 var LayoutManager = require("backboneLayoutmanager");
 
-console.log('here');
+window.apiDomain = localStorage.getItem('apiDomain') ? localStorage.getItem('apiDomain') : 'staging-api.formagg.io';
+window.apiDomain = 'localhost:3000';
+
 var Login = require('./views/login')();
 var Router = require('./router.js');
-
-// var api = 'api.formagg.io';
-// if (localStorage.getItem('api')) {
-//   api = localStorage.getItem('api');
-// }
-//
-// Backbone.api = api;
 
 Backbone.Layout.configure({ manage: true });
 
@@ -34,8 +29,7 @@ var sync = Backbone.sync;
 Backbone.sync = function (method, model, options) {
   options.beforeSend = function(xhr, request) {
 
-    // Only send a signed request when we have tokens or we
-    // are trying to login.
+    // Only send a signed request when we have tokens or we are trying to login.
 
     if (signature = AuthService.getSignature(request.url, request.type)) {
       xhr.setRequestHeader('Authorization', signature);
@@ -86,23 +80,24 @@ $(function() {
 });
 
 var Session = Backbone.Model.extend({
-  url: 'http://api.formagg.io/user/current'
+  url: 'http://' + window.apiDomain + '/user/current',
+  setup: function() {
+    this.fetch({
+      success: function() {
+        console.log('Start the router.');
+        var router = new Router();
+
+        Backbone.history.start({ pushState: false });
+      },
+      error: function(err) {
+        console.log('Unable to talk to the API. Could not start Backbone.');
+      }
+    });
+  }
 });
 
 window.Session = new Session();
-
-window.Session.fetch({
-  success: function() {
-    var router = new Router();
-    Backbone.history.start({ pushState: false });
-  },
-  error: function(err) {
-    console.log('sssss');
-    // TODO: Find a better way to handle this state change.
-
-    console.log('Unable to talk to the API. Could not start Backbone.');
-  }
-});
+window.Session.setup();
 
 // All navigation that is relative should be passed through the navigate
 // method, to be processed by the router. If the link has a `data-bypass`

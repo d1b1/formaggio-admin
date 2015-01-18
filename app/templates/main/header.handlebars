@@ -144,7 +144,7 @@
             <ul class="dropdown-menu extended logout">
                 <li><a href="#profile"><i class="editProfileButton fa fa-suitcase"></i>Profile</a></li>
                 <li><a href="#settings"><i class="HIDE fa fa-cog"></i> Settings</a></li>
-                <li><a href="#logout"><i class="fa fa-key"></i> Log Out</a></li>
+                <li><a href="#" class="logoutButton"><i class="fa fa-key"></i> Log Out</a></li>
             </ul>
         </li>
         <!-- user login dropdown end -->
@@ -162,7 +162,7 @@
   left: 50%;
   margin-left: -15%;
   top: 0px;
-  height: 25px;
+  height: 30px;
   width: 30%;
   line-height: 25px;
   text-align: center;
@@ -175,5 +175,7 @@
 </style>
 
 <div class="versionHeader">
-  Production api.formagg.io
+  Production {{apiDomain}}
+  &nbsp;&nbsp;&nbsp;
+  <button class="btn btn-xs changeAPIButton">toggle API</button>
 </div>

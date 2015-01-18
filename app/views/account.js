@@ -22,7 +22,6 @@ module.exports = function( opts ) {
   };
 
   Module.Views.List = Backbone.Layout.extend({
-    el: "#main-content",
     __name__: "Account-ListView",
     template: TplService.Account.Table,
     initialize: function () {
@@ -417,7 +416,6 @@ module.exports = function( opts ) {
   });
 
   Module.Views.Detail = Backbone.Layout.extend({
-    el: "#main-content",
     __name__: "Account-Detail-DetailView",
     template: TplService.Account.Wrapper,
     initialize : function () {

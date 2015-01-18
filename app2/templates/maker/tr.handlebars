@@ -1,0 +1,9 @@
+<tr>
+  <td><img src="{{model.logourl}}" class="img img-thumbnail"></td>
+  <td>{{model.name}}</td>
+  <td>{{model.state}}, {{model.country}}</td>
+  <td>
+    <a href="#makers/{{model._id}}" height="60px" class="btn btn-success editButton">View <i class="fa fa-eye"></i></a>
+    <button data-id="{{model._id}}" class="btn btn-danger deleteMakerButton">Delete <i class="fa fa-trash-o"></i></button>
+  </td>
+</tr>

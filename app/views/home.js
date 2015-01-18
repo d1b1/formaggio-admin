@@ -17,7 +17,6 @@ module.exports = function( opts ) {
   Module.Layout = Backbone.Layout.extend({
     initialize : function () {
       var self = this;
-
     }
   });
 
@@ -26,6 +25,17 @@ module.exports = function( opts ) {
   Module.Views.Sidebar = Backbone.Layout.extend({
     el: '#sidebar',
     template: TplService.Sidebar,
+    events: {
+      'click a': 'makeActive'
+    },
+    makeActive: function(evt) {
+      // First remove from any active elements in
+      // the active view.
+      this.$el.find('.active').removeClass('active');
+
+      // Toggle the class for the selected target.
+      $(evt.currentTarget).toggleClass('active');
+    },
     initialize: function () {
       var self = this;
     },
@@ -53,7 +63,6 @@ module.exports = function( opts ) {
     }
   });
 
-
   Module.Views.Dashboard = Backbone.Layout.extend({
     el: '#main-content',
     sType: '',
@@ -80,14 +89,28 @@ module.exports = function( opts ) {
 
       // If the Session Changes, then trigger the session to change.
       this.session.on('change', function() {
-        console.log('Session Changed.');
         self.render();
       });
-
     },
     events: {
       'click .sidebar-toggle-box .fa-bars': 'toggleSideBar',
-      'click .editProfileButton':           'profile'
+      'click .editProfileButton':           'profile',
+      'click .logoutButton':                'logout',
+      'click .changeAPIButton':             'changeAPI'
+    },
+    changeAPI: function() {
+      // Toggle the api.
+      window.apiDomain = (localStorage.getItem('apiDomain') == 'staging-api.formagg.io') ? 'api.formagg.io' : 'staging-api.formagg.io';
+
+      // Update the localStorage.
+      localStorage.setItem('apiDomain', window.apiDomain);
+
+      // Remove the auth info from localStorage.
+      localStorage.removeItem('tokenId');
+      localStorage.removeItem('secret');
+
+      // Reup the Session.
+      window.Session.setup();
     },
     profile: function(evt) {
       evt.preventDefault();
@@ -95,6 +118,12 @@ module.exports = function( opts ) {
       this.session.fetch().then(function() {
         new Main.Views.Profile({ model: this.session }).render();
       });
+    },
+    logout: function() {
+      localStorage.removeItem('tokenId');
+      localStorage.removeItem('secret');
+
+      this.session.fetch();
     },
     // toggleSideBar: function(e) {
     //
@@ -116,7 +145,8 @@ module.exports = function( opts ) {
     // },
     serialize: function() {
       return {
-        model: this.session.toJSON()
+        model: this.session.toJSON(),
+        apiDomain: window.apiDomain
       };
     },
     unload: function() {

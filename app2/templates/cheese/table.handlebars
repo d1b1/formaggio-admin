@@ -1,0 +1,74 @@
+<section class="wrapper">
+
+  <div class="row">
+    <div class="col-md-12">
+        <!--breadcrumbs start -->
+        <ul class="breadcrumb">
+            <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+            <li class="active"><i class="fa fa-group"></i> Cheeses</li>
+        </ul>
+        <!--breadcrumbs end -->
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+        <section class="panel">
+          <div class="panel-body">
+            <div class="col-md-12">
+              <div class="col-md-4">
+                Go To :
+                <input type="text" placeholder=" Search" id="textSearchBox" class="inline-search search"name="searchTeam">
+              </div>
+              <div class="col-md-8 advanced-search-tab">
+                <a href="javascript:void(0)">Advanced Search <span class="fa fa-chevron-down"></span></a>
+              </div>
+              <div class="col-md-1">
+                <button class="btn btn-primary addNewCheeseButton">Add New Cheese <i class="fa fa-plus"></i></button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="advanced-search-body" style="display:none"></div>
+            </div>
+          </div>
+        </section>
+    </div>
+  </div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <section class="panel">
+
+      <header class="panel-heading tab-bg-dark-navy-blue">
+        <ul class="nav nav-tabs nav-justified">
+          <li  class="active">
+            <a data-toggle="tab" class="makerListTab" href="#MakerListTabContainer">
+              List
+            </a>
+          </li>
+          <li>
+            <a data-toggle="tab" class="makerListTab" href="#MakerMapTabContainer">
+              Map
+            </a>
+          </li>
+        </ul>
+      </header>
+
+      <div class="panel-body">
+      <div class="adv-table">
+        <table class="display table table-bordered table-striped dataTable">
+          <thead>
+            <th width="10%"></th>
+            <th width="30%">Name</th>
+            <th width="20%">Type</th>
+            <th width="15%">Maker</th>
+            <th width="15%">Type</th>
+            <th width="20%">Options</th>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+
+    </div>
+  </div>
+
+</section>
