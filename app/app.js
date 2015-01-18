@@ -11,7 +11,7 @@ window.Backbone.$ = $ ;
 var LayoutManager = require("backboneLayoutmanager");
 
 window.apiDomain = localStorage.getItem('apiDomain') ? localStorage.getItem('apiDomain') : 'staging-api.formagg.io';
-window.apiDomain = 'localhost:3000';
+// window.apiDomain = 'localhost:3000';
 
 var Login = require('./views/login')();
 var Router = require('./router.js');
