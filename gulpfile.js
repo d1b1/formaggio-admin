@@ -117,6 +117,10 @@ gulp.task('default', [ 'scripts', 'connect' ], function() {
   });
 });
 
+gulp.task('deploy', [ 'scripts' ], function() {
+  console.log('Build ready to deploy in the gh-pages branch.');
+});
+
 gulp.task('scripts',function() {
   gulp.src('app/app.js',{ read: false })
     .pipe(browserify({
