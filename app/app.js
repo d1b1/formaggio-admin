@@ -96,6 +96,7 @@ window.Session.fetch({
     Backbone.history.start({ pushState: false });
   },
   error: function(err) {
+    console.log('sssss');
     // TODO: Find a better way to handle this state change.
 
     console.log('Unable to talk to the API. Could not start Backbone.');
