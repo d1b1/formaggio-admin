@@ -405,6 +405,8 @@ module.exports = function( opts ) {
         return;
       }
 
+      alert('sss');
+
       self.model.save().done(function() {
         location.reload(true);
         app.setupPage();

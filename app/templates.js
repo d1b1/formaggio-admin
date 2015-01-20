@@ -12,7 +12,6 @@ module.exports = function( opts ) {
     },
     'Header'           : require("./templates/main/header.handlebars"),
     'Sidebar'          : require("./templates/main/sidebar.handlebars"),
-    'Profile'          : require("./templates/main/profile.handlebars"),
     'Cheese' : {
       'Table'          : require("./templates/cheese/table.handlebars"),
       'Tr'             : require("./templates/cheese/tr.handlebars"),

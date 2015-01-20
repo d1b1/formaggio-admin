@@ -10,6 +10,8 @@ var app = require('formaggio-common')();
 var DashboardTemplate = require("../templates/main/dashboard.handlebars");
 var TplService = require("../templates.js")();
 
+var ProfileEditView = require('./profile');
+
 module.exports = function( opts ) {
 
   var Module = {};
@@ -115,9 +117,7 @@ module.exports = function( opts ) {
     profile: function(evt) {
       evt.preventDefault();
 
-      this.session.fetch().then(function() {
-        new Main.Views.Profile({ model: this.session }).render();
-      });
+      new ProfileEditView({ model: this.session }).render();
     },
     logout: function() {
       localStorage.removeItem('tokenId');
@@ -152,81 +152,6 @@ module.exports = function( opts ) {
     unload: function() {
       this.unbind();
       this.remove();
-    }
-  });
-
-  Module.Views.Profile = Backbone.Layout.extend({
-    template: TplService.Profile,
-    initialize: function() {},
-    serialize: function() {
-      return {
-        profile: this.model.toJSON()
-      };
-    },
-    events: {
-      'click .continue': 'save'
-    },
-    save: function() {
-      var self = this;
-      var form = $(this.$el.find('#modalForm')[0]);
-      var data = form.serializeObject();
-
-      if (!data.password) {
-        delete data.password;
-      }
-
-      // Update the data.
-      this.model.set(data);
-
-      if (!this.model.isValid()) {
-        $('#ModalErrorMessages').html(this.model.validationError);
-        return;
-      }
-
-      this.model.save().done(function() {
-        // Alert the UI.
-        Messenger().post({
-          message: 'Your profile has been updated.',
-          type: 'success',
-          hideAfter: 5,
-          hideOnNavigate: true,
-          showCloseButton: false,
-          id: 'Profile'
-        });
-
-        // Force the session to update.
-        window.Session.fetch();
-        self.unload();
-      })
-      .fail(function(){
-        Messenger().post({
-          message: 'Opps error tring to save your profile.',
-          type: 'error',
-          hideAfter: 5,
-          hideOnNavigate: true,
-          showCloseButton: false,
-          id: 'Profile'
-        });
-      });
-    },
-    unload: function() {
-      $('.modal').modal('hide').addClass('hide');
-      $('body').removeClass('modal-open');
-
-      this.unbind();
-      this.undelegateEvents();
-      this.remove();
-    },
-    afterRender: function() {
-      var self = this;
-      self.$el.appendTo('body');
-      self.$el.find('.modal').on('hidden.bs.modal', function () {
-        self.unload();
-      });
-
-      this.model.fetch().done(function(){
-        self.$el.find('.modal').modal('show').removeClass('hide').removeClass('fade');
-      });
     }
   });
 
