@@ -9,6 +9,8 @@ var app = require('formaggio-common')();
 
 var DashboardTemplate = require("../templates/main/dashboard.handlebars");
 var TplService = require("../templates.js")();
+var welcomeTpl = require('../templates/public/welcome.handlebars');
+var Login = require('./login')();
 
 var ProfileEditView = require('./profile');
 
@@ -152,6 +154,31 @@ module.exports = function( opts ) {
     unload: function() {
       this.unbind();
       this.remove();
+    }
+  });
+
+  Module.Views.Welcome = Backbone.Layout.extend({
+    template: welcomeTpl,
+    initialize: function () {
+      var self = this;
+    },
+    events: {
+      'click .loginButton': 'login'
+    },
+    login: function(evt) {
+      new Login.Views.Login({}).render();
+    },
+    unload: function() {
+      this.unbind();
+      this.remove();
+    },
+    afterRender: function () {
+      $('body').addClass('modal-open');
+      $('.github-fork-ribbon-wrapper').addClass('hide');
+
+      this.$el.appendTo("body");
+
+      this.$el.find('.modal').modal('show').removeClass('hide').removeClass('fade');
     }
   });
 

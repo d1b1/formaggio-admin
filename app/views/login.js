@@ -104,6 +104,7 @@ module.exports = function ( opts ) {
       'submit #form-container': 'login'
     },
     initialize: function() {
+      alert('here');
       var self = this;
     },
     unload: function() {
@@ -118,14 +119,11 @@ module.exports = function ( opts ) {
       var self = this;
       var loginParams = $(e.currentTarget).serializeObject();
 
-alert('dddasdfasdf');
-
       $.ajax({
           type: 'POST',
           url:'http://' + window.apiDomain + '/auth/accesstoken',
           data:  JSON.stringify (loginParams),
           success: function(data) {
-            alert('ssss');
             window.location.href="#";
             window.location.reload(true);
             alert('asdfasfd');

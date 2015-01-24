@@ -11,7 +11,6 @@ window.Backbone.$ = $ ;
 var LayoutManager = require("backboneLayoutmanager");
 
 window.apiDomain = localStorage.getItem('apiDomain') ? localStorage.getItem('apiDomain') : 'staging-api.formagg.io';
-// window.apiDomain = 'localhost:3000';
 
 var Login = require('./views/login')();
 var Router = require('./router.js');
@@ -39,7 +38,7 @@ Backbone.sync = function (method, model, options) {
 };
 
 $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
-    options.crossDomain ={
+    options.crossDomain = {
         crossDomain: true
     };
     options.xhrFields = {
@@ -51,9 +50,12 @@ $.ajaxSetup({
     cache: false,
     statusCode: {
       401: function (req) {
-        console.log('401');
-        new Login.Views.Login({}).render();
 
+        // No need to show the login on the home welcome page.
+        if (window.location.pathname == '/') return req.abort();
+
+        // Render the Login modal.
+        new Login.Views.Login({}).render();
         req.abort();
       }
     }
@@ -90,7 +92,10 @@ var Session = Backbone.Model.extend({
         Backbone.history.start({ pushState: true });
       },
       error: function(err) {
-        console.log('Unable to talk to the API. Could not start Backbone.');
+        console.log('Oops no ');
+        var router = new Router();
+
+        Backbone.history.start({ pushState: true });
       }
     });
   }
