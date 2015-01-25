@@ -86,15 +86,14 @@ var Session = Backbone.Model.extend({
   setup: function() {
     this.fetch({
       success: function() {
-        console.log('Start the router.');
-        var router = new Router();
-
-        Backbone.history.start({ pushState: true });
+        console.log('here', Backbone.History.started);
+        if (Backbone.History.started == false) {
+          var router = new Router();
+          Backbone.history.start({ pushState: true });
+        }
       },
       error: function(err) {
-        console.log('Oops no ');
         var router = new Router();
-
         Backbone.history.start({ pushState: true });
       }
     });

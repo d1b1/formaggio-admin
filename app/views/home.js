@@ -125,7 +125,9 @@ module.exports = function( opts ) {
       localStorage.removeItem('tokenId');
       localStorage.removeItem('secret');
 
-      this.session.fetch();
+      window.Session.clear();
+
+      Backbone.history.navigate('/', { trigger: true });
     },
     // toggleSideBar: function(e) {
     //
@@ -151,6 +153,16 @@ module.exports = function( opts ) {
         apiDomain: window.apiDomain
       };
     },
+    afterRender: function() {
+      var self = this;
+      if (!window.Session.get('username')) {
+        self.$el.find('#UserInfo').addClass('hide');
+        self.$el.find('.versionHeader').addClass('hide');
+      } else {
+        self.$el.find('#UserInfo').removeClass('hide');
+        self.$el.find('.versionHeader').removeClass('hide');
+      }
+    },
     unload: function() {
       this.unbind();
       this.remove();
@@ -166,9 +178,14 @@ module.exports = function( opts ) {
       'click .loginButton': 'login'
     },
     login: function(evt) {
+      $('.modal').modal('hide').addClass('hide');
+      $('body').removeClass("modal-open");
+      this.unload();
+
       new Login.Views.Login({}).render();
     },
     unload: function() {
+      
       this.unbind();
       this.remove();
     },

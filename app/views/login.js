@@ -53,7 +53,7 @@ module.exports = function ( opts ) {
         });
 
         self.show();
-      }
+      } 
     },
     action: function(evt) {
       var self = this;
@@ -79,13 +79,13 @@ module.exports = function ( opts ) {
 
       $.ajax(opts)
         .done(function( data ) {
-
           // Store the session and token info.
           localStorage.setItem('tokenId', data.tokenId);
           localStorage.setItem('secret', data.secret);
 
           window.Session.setup();
 
+          Backbone.history.navigate('/home', { trigger: true });
           self.unload();
         })
         .fail(function( data ) {
@@ -97,50 +97,50 @@ module.exports = function ( opts ) {
     }
   });
 
-  Module.Views.Form = Backbone.View.extend({
-    el: '#container',
-    __name__: "LoginView",
-    events: {
-      'submit #form-container': 'login'
-    },
-    initialize: function() {
-      alert('here');
-      var self = this;
-    },
-    unload: function() {
-      // Make this clean and add a body class.
-      $('body').removeClass('login-body');
+  // Module.Views.Form = Backbone.View.extend({
+  //   el: '#container',
+  //   __name__: "LoginView",
+  //   events: {
+  //     'submit #form-container': 'login'
+  //   },
+  //   initialize: function() {
+  //     alert('here');
+  //     var self = this;
+  //   },
+  //   unload: function() {
+  //     // Make this clean and add a body class.
+  //     $('body').removeClass('login-body');
 
-      this.unbind();
-      this.remove();
-    },
-    login : function(e) {
-      e.preventDefault();
-      var self = this;
-      var loginParams = $(e.currentTarget).serializeObject();
+  //     this.unbind();
+  //     this.remove();
+  //   },
+  //   login : function(e) {
+  //     e.preventDefault();
+  //     var self = this;
+  //     var loginParams = $(e.currentTarget).serializeObject();
 
-      $.ajax({
-          type: 'POST',
-          url:'http://' + window.apiDomain + '/auth/accesstoken',
-          data:  JSON.stringify (loginParams),
-          success: function(data) {
-            window.location.href="#";
-            window.location.reload(true);
-            alert('asdfasfd');
-          },
-          contentType: "application/json",
-          dataType: 'json'
-      }).fail(function() {
-        alert( "there was an issue with your username or password" );
-      });
-    },
-    afterRender: function () {
-      // Make this clean and add a body class.
-      $('body').addClass('login-body');
+  //     $.ajax({
+  //         type: 'POST',
+  //         url:'http://' + window.apiDomain + '/auth/accesstoken',
+  //         data:  JSON.stringify (loginParams),
+  //         success: function(data) {
+  //           window.location.href="#";
+  //           window.location.reload(true);
+  //           alert('asdfasfd');
+  //         },
+  //         contentType: "application/json",
+  //         dataType: 'json'
+  //     }).fail(function() {
+  //       alert( "there was an issue with your username or password" );
+  //     });
+  //   },
+  //   afterRender: function () {
+  //     // Make this clean and add a body class.
+  //     $('body').addClass('login-body');
 
-      $('#container').html(TplService.Login.Form());
-    }
-  });
+  //     $('#container').html(TplService.Login.Form());
+  //   }
+  // });
 
   return Module;
 };

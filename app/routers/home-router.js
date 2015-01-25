@@ -19,8 +19,9 @@ module.exports = Backbone.Router.extend({
     },
 
     welcome: function() {
-      // $('#container').addClass('hide');
-      // $('#sidebar').addClass('hide');
+      if (window.Session.get('username')) {
+        return Backbone.history.navigate("home", { trigger: true });
+      }
 
       this.Welcome.render();
     },
