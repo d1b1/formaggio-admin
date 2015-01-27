@@ -113,7 +113,7 @@ module.exports = function( opts ) {
 
       if(collection.models.length > 0){
         _.each(collection.models, function(model){
-          tbody.append(TplService.Maker.Tr({ model: model.toJSON() }));
+          tbody.append(TplService.Maker.Tr({ model: model.toJSON(), numOfCheeses: model.get('cheeses').length }));
         });
       } else {
         tbody.append("<tr><td colspan=4 align=center><br><br>No results found.<br><br></td></tr>");
@@ -235,20 +235,30 @@ module.exports = function( opts ) {
   Module.Views.Accounts = Backbone.Layout.extend({
     __name__: "Maker-Accounts-ListView",
     template: TplService.Maker.Accounts.Table,
+    events: {
+      'click .addAccountBtn': 'addNewAccount',
+      'click .findAccountBtn': 'findAccount'
+    },
+    addNewAccount: function(evt) {
+      alert('Open modal to create a new account.');
+    },
+    findAccount: function(evt) {
+      alert('Open modal to find an existing account');
+    },
     unload: function() {
       this.unbind();
       this.remove();
     },
-    updateTable : function () {
+    afterRender: function () {
       var self = this;
-      $("#tbody").html("");
+      var ctl = this.$el.find('#tbody').empty();
 
-      if(self.model.get("accounts").length > 0){
+      if(self.model.get("accounts").length > 0){ 
         _.each(self.model.get("accounts"), function(model){
-          $("#tbody").append(TplService.Maker.Accounts.Tr({ model: model.toJSON() }));
+          ctl.append(TplService.Maker.Accounts.Tr({ model: model }));
         });
       } else {
-        $("#tbody").append("<tr><td colspan=4 align=center><br><br>No results found.<br><br></td></tr>");
+        ctl.append("<tr><td colspan=4 align=center><br><br>No results found.<br><br></td></tr>");
       }
     }
   });
@@ -260,16 +270,22 @@ module.exports = function( opts ) {
       this.unbind();
       this.remove();
     },
+    events: {
+      'click .addImageBtn': 'addImageBtn'
+    },
+    addImageBtn: function(evt) {
+      alert('Open Modal to Upload an Image');
+    },
     updateTable : function () {
       var self = this;
-      $("#tbody").html("");
+      var ctl = self.$el.find("#tbody").empty();
 
       if(self.model.get("images").length > 0){
         _.each(self.model.get("images"), function(model){
-          $("#tbody").append(TplService.Maker.Accounts.Tr({ model: model.toJSON() }));
+          ctl.append(TplService.Maker.Images.Tr({ model: model }));
         });
       } else {
-        $("#tbody").append("<tr><td colspan=4 align=center><br><br>No results found.<br><br></td></tr>");
+        ctl.append("<tr><td colspan=4 align=center><br><br>No results found.<br><br></td></tr>");
       }
     }
   });
@@ -277,6 +293,16 @@ module.exports = function( opts ) {
   Module.Views.Cheeses = Backbone.Layout.extend({
     __name__: "Maker-Cheeses-ListView",
     template: TplService.Maker.Cheeses.Table,
+    events: {
+      'click .addNewCheeseButton': 'addNewCheese',
+      'click .findCheeseButton': 'findCheese'
+    },
+    addNewCheese: function(evt) {
+      alert('Open Modal to Create a New Cheese');
+    },
+    findCheese: function(evt) {
+      alert('Open Modal to Find an Existing Cheese');
+    },
     initialize: function() {
       this.collection = new Data.Collections.Cheeses();
       this.collection.state.maker = this.model.id;
@@ -285,10 +311,15 @@ module.exports = function( opts ) {
       this.collection.on("sync", this.list, this);
     },
     list: function () {
-      var tbody = $("#tbody").empty();
+      var ctl = this.$el.find("#tbody").empty();
+
       _.each(this.collection.models, function(model){
-        tbody.append(TplService.Maker.Cheeses.Tr({ model: model.toJSON() }));
+        ctl.append(TplService.Maker.Cheeses.Tr({ model: model.toJSON() }));
       });
+
+      if (_.isEmpty(this.collection.models)) {
+        ctl.append("<tr><td colspan=4 align=center><br><br>No results found.<br><br></td></tr>");
+      }
     },
     afterRender: function() {
       this.collection.fetch();

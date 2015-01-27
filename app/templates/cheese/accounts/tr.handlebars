@@ -1,7 +1,8 @@
 <tr>
-  <td>{{model.name}}</td>
-  <td>{{model.source}}</td>
+  <td>{{model.user.username}}</td>
+  <td>{{model.user.email}}</td>
+  <td>{{model.relationship}}</td>
   <td>
-    <a href="#cheeses/{{model._id}}" height="60px" class="btn btn-success editButton">View <i class="fa fa-eye"></i></a>
+    <a href="#accounts/{{model.user._id}}" height="60px" class="btn btn-success editButton">View <i class="fa fa-eye"></i></a>
   </td>
 </tr>

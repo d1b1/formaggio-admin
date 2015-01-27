@@ -229,16 +229,26 @@ module.exports = function( opts ) {
       this.unbind();
       this.remove();
     },
-    updateTable : function () {
+    events: {
+      'click .addAccountBtn': 'addAccountButton',
+      'click .findAccountBtn': 'findAccountButton'
+    },
+    addAccountButton: function(evt) {
+      alert('Open Modal to Add a New Account');
+    },
+    findAccountButton: function(evt) {
+      alert('Open Modal to Find and Link a Account');
+    },
+    afterRender: function () {
       var self = this;
-      $('#tbody').html('');
+      var ctl = self.$el.find('#tbody').empty();
 
       if(self.model.get('accounts').length > 0){
         _.each(self.model.get('accounts'), function(model){
-          $('#tbody').append(TplService.Maker.Accounts.Tr({ model: model.toJSON() }));
+          ctl.append(TplService.Cheese.Accounts.Tr({ model: model }));
         });
       } else {
-        $('#tbody').append('<tr><td colspan="4" align="center"><br><br>No results found.<br><br></td></tr>');
+        ctl.append('<tr><td colspan="4" align="center"><br><br>No results found.<br><br></td></tr>');
       }
     }
   });
@@ -250,16 +260,22 @@ module.exports = function( opts ) {
       this.unbind();
       this.remove();
     },
-    updateTable : function () {
+     events: {
+      'click .addBtn': 'add'
+    },
+    add: function(evt) {
+      alert('Open Modal to Add a Image');
+    },
+    afterRender: function () {
       var self = this;
-      $('#tbody').html('');
+      var ctl = self.$el.find('#tbody').empty();
 
       if(self.model.get('images').length > 0){
         _.each(self.model.get('images'), function(model){
-          $('#tbody').append(TplService.Maker.Accounts.Tr({ model: model.toJSON() }));
+          ctl.append(TplService.Cheese.Images.Tr({ model: model.toJSON() }));
         });
       } else {
-        $('#tbody').append('<tr><td colspan="4" align="center"><br><br>No results found.<br><br></td></tr>');
+        ctl.append('<tr><td colspan="4" align="center"><br><br>No results found.<br><br></td></tr>');
       }
     }
   });
@@ -271,16 +287,26 @@ module.exports = function( opts ) {
       this.unbind();
       this.remove();
     },
-    updateTable : function () {
+    events: {
+      'click .addMakerBtn': 'addMakerButton',
+      'click .findMakerBtn': 'findMakerButton'
+    },
+    addMakerButton: function(evt) {
+      alert('Open Modal to Add a New Maker');
+    },
+    findMakerButton: function(evt) {
+      alert('Open Modal to Find and Link a Maker');
+    },
+    afterRender: function () {
       var self = this;
-      $('#tbody').html('');
+      var ctl = self.$el.find('#tbody').empty();
 
       if(self.model.get('makers').length > 0){
         _.each(self.model.get('makers'), function(model){
-          $('#tbody').append(TplService.Maker.Cheeses.Tr({ model: model.toJSON() }));
+          ctl.append(TplService.Cheese.Makers.Tr({ model: model }));
         });
       } else {
-        $('#tbody').append('<tr><td colspan="4" align="center"><br><br>No results found.<br><br></td></tr>');
+        ctl.append('<tr><td colspan="4" align="center"><br><br>No results found.<br><br></td></tr>');
       }
     }
   });
