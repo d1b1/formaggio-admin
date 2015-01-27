@@ -1,5 +1,9 @@
 ### TO-DO
 
+ # Add a Modal Add Cheese Button, with Link Feature.
+ # Add a Modal Add Account Button, with a Link Feature.
+ # Add a Modal Add Maker Button, with a Link Feature.
+ # Add a Find Cheese, Account, Maker with a Link Feature.
  # Remove the Settings page.
  # Add in the Caliper.io code.
  # Add a public landing page.
