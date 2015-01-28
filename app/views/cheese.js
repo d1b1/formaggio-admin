@@ -10,6 +10,7 @@ var app = require('formaggio-common')()
     , Shared        = require("../shared/resources")()
     , TplService    = require("../templates.js")();
 
+
 module.exports = function( opts ) {
 
   var Module = {

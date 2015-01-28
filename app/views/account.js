@@ -10,6 +10,8 @@ var app = require("formaggio-common")()
     , Shared        = require("../shared/resources")()
     , TplService    = require("../templates.js")();
 
+var SearchBox = require('./cheese/search');
+
 module.exports = function( opts ) {
 
   var Module = {
@@ -211,9 +213,20 @@ module.exports = function( opts ) {
       this.unbind();
       this.remove();
     },
+    events: {
+      'click .addNewCheeseButton': 'addNewCheese',
+      'click .findCheeseButton': 'findCheese'
+    },
+    findCheese: function() {
+      var linktoAccount= function(model) {
+        alert('Lets Create a new cheese for this Account.');
+      };
+
+      new SearchBox({ callback: linktoAccount }).render();
+    },
     updateTable : function () {
       var self = this;
-      $("#tbody").html("");
+      $("#tbody").html('');
 
       if(self.model.get("cheeses").length > 0){
         _.each(self.model.get("cheeses"), function(model){

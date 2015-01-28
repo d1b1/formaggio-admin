@@ -10,6 +10,8 @@ var app = require("formaggio-common")()
     , Shared        = require("../shared/resources")()
     , TplService    = require("../templates.js")();
 
+var SearchBox = require('./cheese/search');
+
 module.exports = function( opts ) {
 
   var Module = {
@@ -297,11 +299,15 @@ module.exports = function( opts ) {
       'click .addNewCheeseButton': 'addNewCheese',
       'click .findCheeseButton': 'findCheese'
     },
+    findCheese: function() {
+      var linktoMaker = function(model) {
+        alert('Lets Create a new product');
+      }
+
+      new SearchBox({ callback: linktoMaker }).render();
+    },
     addNewCheese: function(evt) {
       alert('Open Modal to Create a New Cheese');
-    },
-    findCheese: function(evt) {
-      alert('Open Modal to Find an Existing Cheese');
     },
     initialize: function() {
       this.collection = new Data.Collections.Cheeses();
